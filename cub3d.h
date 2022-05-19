@@ -11,6 +11,8 @@
 # include "libft/libft.h"
 # include "libft/vector.h"
 
+# include <stdio.h> // !!!!!
+
 typedef struct s_vec
 {
 	double	x;
@@ -44,12 +46,15 @@ typedef struct s_data
 	t_image		image;
 	t_map		map;
 	t_vec		pos;
-	t_vec		direction;
+	t_vec		dir;
 	t_vec		camera_plane;
 	void		*mlx;
 	void		*window;
-	uint64_t	last_time;
 	uint64_t	current_time;
+	uint64_t	last_time;
+	uint64_t	frame_time;
+	double		move_speed;
+	double		rot_speed;
 }				t_data;
 
 # define SCREEN_WIDTH 1920
@@ -78,5 +83,14 @@ void		ft_bzero64(void *s, size_t n);
 
 // raycast.c
 int			raycast(t_data *data);
+
+// keys.c
+void		key_w(t_data *data);
+void		key_a(t_data *data);
+void		key_s(t_data *data);
+void		key_d(t_data *data);
+
+void		key_left(t_data *data);
+void		key_right(t_data *data);
 
 #endif

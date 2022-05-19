@@ -1,5 +1,5 @@
 NAME := cub3D
-SRCFILES := main.c init.c cleanup.c run.c hooks.c input.c utils.c raycast.c
+SRCFILES := main.c init.c cleanup.c run.c hooks.c input.c utils.c raycast.c keys.c
 CC ?= cc
 LD ?= cc
 CFLAGS = -Wall -Wextra -Werror

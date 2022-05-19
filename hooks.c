@@ -19,8 +19,22 @@ static int	key_cb(int keycode, void *param)
 	t_data	*data;
 
 	data = param;
+	printf("Keycode %d\n", keycode);
 	if (keycode == 65307)
 		end_loop(param);
+	if (keycode == 119)
+		key_w(data);
+	if (keycode == 97)
+		key_a(data);
+	if (keycode == 115)
+		key_s(data);
+	if (keycode == 100)
+		key_d(data);
+	
+	if (keycode == 65361)
+		key_left(data);
+	if (keycode == 65363)
+		key_right(data);
 	return (0);
 }
 

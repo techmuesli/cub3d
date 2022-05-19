@@ -9,6 +9,7 @@ int	raycast(t_data *data)
 {
 	double	camera_x;
 	double	perp_wall_distance; // perpendicular
+	double	frame_time;
 	int		x;
 	int		hit;
 	int		draw_start;
@@ -26,8 +27,8 @@ int	raycast(t_data *data)
 	while (x < SCREEN_WIDTH)
 	{
 		camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
-		ray_direction.x = data->direction.x + data->camera_plane.x * camera_x;
-		ray_direction.y = data->direction.y + data->camera_plane.y * camera_x;
+		ray_direction.x = data->dir.x + data->camera_plane.x * camera_x;
+		ray_direction.y = data->dir.y + data->camera_plane.y * camera_x;
 		map.x = (int)data->pos.x;
 		map.y = (int)data->pos.y;
 		hit = 0;
@@ -93,6 +94,12 @@ int	raycast(t_data *data)
 		draw_vert_line(data, x, draw_start, draw_end, color);
 		x++;
 	}
+	data->last_time = data->current_time;
+	data->current_time = get_time();
+	frame_time = 1000 / (data->current_time - data->last_time); // seconds
+	printf("Frame time: %f\n", frame_time);
+	data->move_speed = (frame_time / 1000) * 5.0;
+	data->rot_speed = (frame_time / 1000) * 0.01;
 	return (0);
 }
 
