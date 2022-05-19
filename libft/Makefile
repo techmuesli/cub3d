@@ -6,7 +6,7 @@
 #    By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/26 13:44:34 by dbrandtn          #+#    #+#              #
-#    Updated: 2022/02/16 16:46:58 by dbrandtn         ###   ########.fr        #
+#    Updated: 2022/05/19 17:08:17 by dbrandtn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCS := ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c \
 	ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c ft_utoa.c \
 	ft_put_uint_fd.c ft_printf.c ft_printf_mod.c ft_printf_mod_hex.c \
-	get_next_line.c get_next_line_utils.c ft_atoi_hex.c
+	get_next_line.c get_next_line_utils.c ft_atoi_hex.c ft_iswhitespace.c \
+	ft_isnum.c ft_str_trim_end.c ft_strcmp.c
 SRCS_LIST := list.c list_cleanup.c list_add_rm.c list_get.c list_utils.c
 SRCS_VECTOR := vector.c vector_add_rm.c
 SRCS_STACK := stack.c
