@@ -6,7 +6,7 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:32:28 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/02/16 16:51:36 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/05/19 16:53:36 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 # define LIBFT_H
 
 # include <stdlib.h>
-
-# ifdef FT_DEBUG_MEMORY
-#  include "../libm/ft_debug_mem.h"
-# endif
 
 # define FD_STDIN 0
 # define FD_STDOUT 1
@@ -62,5 +58,9 @@ void	ft_put_uint_fd(unsigned int ui, int fd);
 int		ft_printf(const char *format, ...);
 char	*get_next_line(int fd);
 int		ft_atoi_hex(const char *str);
+int		ft_strcmp(const char *s1, const char *s2);
+int		is_whitespace(char c);
+void	str_trim_end(char *line);
+int		ft_isnum(char *input);
 
 #endif

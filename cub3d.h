@@ -23,11 +23,24 @@ typedef struct s_vec_i
 	int	y;
 }				t_vec_i;
 
+typedef struct s_color
+{
+	int	r;
+	int	g;
+	int	b;
+}				t_color;
+
 typedef struct s_map
 {
-	int	**data;
-	int	x;
-	int	y;
+	char	*texture_north;
+	char	*texture_east;
+	char	*texture_south;
+	char	*texture_west;
+	int		**data;
+	int		x;
+	int		y;
+	t_color	ceiling;
+	t_color	floor;
 }				t_map;
 
 typedef struct s_image
@@ -55,6 +68,17 @@ typedef struct s_data
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 
+typedef enum e_info_type
+{
+	INFO_TYPE_NO = 0,
+	INFO_TYPE_EA,
+	INFO_TYPE_SO,
+	INFO_TYPE_WE,
+	INFO_TYPE_FLOOR,
+	INFO_TYPE_CEILING,
+	INFO_TYPE_UNKNOWN,
+}				t_info_type;
+
 // init.c
 t_data		*fdf_init(int width, int height, char *title);
 
@@ -63,6 +87,12 @@ void		fdf_cleanup(t_data **data);
 
 // input.c
 int			read_input_file(t_data *data, char *filename);
+
+// input_check.c
+int			check_input(t_data *data);
+
+// input_info.c
+int			get_type_identifier(char *input);
 
 // hooks.c
 void		set_up_hooks(void *window, t_data *data);

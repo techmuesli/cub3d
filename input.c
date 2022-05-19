@@ -29,6 +29,8 @@ int	read_input_file(t_data *data, char *filename)
 		line = get_next_line(fd);
 	}
 	close(fd);
+	if (check_input(data) != 0)
+		return (-1);
 	return (0);
 }
 
