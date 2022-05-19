@@ -24,6 +24,8 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	data->last_time = get_time();
+	// int temp = mlx_do_key_autorepeaton(data->mlx);
+	// printf("key on %d\n", temp);
 	mlx_loop(data->mlx);
 	/*for (int i = 0; i < data->map.y; i++)
 	{

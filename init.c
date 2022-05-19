@@ -18,6 +18,7 @@ t_data	*fdf_init(int width, int height, char *title)
 		free(data);
 		return (NULL);
 	}
+
 	data->window = mlx_new_window(data->mlx, width, height, title);
 	if (data->window == NULL)
 	{
