@@ -109,27 +109,34 @@ int	raycast(t_data *data)
 
 		double step = 1.0 * TEXTURE_HEIGHT / line_height;
 		double tex_pos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
-		int y = draw_start - 1;
+		int y = -1;
 		int tex_y;
 		while (++y < draw_end)
 		{
-			tex_y = (int)tex_pos & (TEXTURE_HEIGHT - 1);
-			tex_pos += step;
-			if (side == 1)
+			if (y < draw_start)
+				color = create_trgb(0, data->map.floor.r, data->map.floor.g, data->map.floor.b);
+			else if (y >= draw_start && y <= draw_end)
 			{
-				if (ray_direction.y > 0)
-					color = data->tx_no.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
+				tex_y = (int)tex_pos & (TEXTURE_HEIGHT - 1);
+				tex_pos += step;
+				if (side == 1)
+				{
+					if (ray_direction.y > 0)
+						color = data->tx_no.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
+					else
+						color = data->tx_so.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
+					color = (color >> 1) & 8355711; // shadow
+				}
 				else
-					color = data->tx_so.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
-				color = (color >> 1) & 8355711; // shadow
+				{
+					if (ray_direction.x < 0)
+						color = data->tx_we.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
+					else
+						color = data->tx_ea.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
+				}
 			}
 			else
-			{
-				if (ray_direction.x < 0)
-					color = data->tx_we.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
-				else
-					color = data->tx_ea.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
-			}
+				color = create_trgb(0, data->map.ceiling.r, data->map.ceiling.g, data->map.ceiling.b);
 			cub3d_mlx_pixel_put(&data->image, x, y, color);
 		}
 

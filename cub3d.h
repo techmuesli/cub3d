@@ -144,6 +144,7 @@ void		free_c_vector(char **vector);
 void		cub3d_mlx_pixel_put(t_image *img, int x, int y, int color);
 long long	get_time(void);
 void		ft_bzero64(void *s, size_t n);
+int			create_trgb(int t, int r, int g, int b);
 
 // raycast.c
 int			raycast(t_data *data);
