@@ -88,10 +88,44 @@ int	raycast(t_data *data)
 		draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
-		color = 0xffffff; // !!!!!
-		if (side == 1)
-			color /= 2; // !!!!!
-		draw_vert_line(data, x, draw_start, draw_end, color);
+		
+		int	tex_num = data->map.data[map.x][map.y] - 1;
+		double	wall_x;
+
+		if (side == 0)
+			wall_x = data->pos.y + perp_wall_distance * ray_direction.y;
+		else
+			wall_x = data->pos.x + perp_wall_distance * ray_direction.x;
+		wall_x -= floor(wall_x);
+
+		int	tex_x;
+		tex_x = (int)(wall_x * (double)TEXTURE_WIDTH);
+		if (side == 0 && ray_direction.x > 0)
+			tex_x = TEXTURE_WIDTH - tex_x - 1;
+		if (side == 1 && ray_direction.y < 0)
+			tex_x = TEXTURE_WIDTH - tex_x - 1;
+
+	
+
+		double step = 1.0 * TEXTURE_HEIGHT / line_height;
+		double tex_pos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
+		int y = draw_start - 1;
+		int tex_y;
+		while (++y < draw_end)
+		{
+			tex_y = (int)tex_pos & (TEXTURE_HEIGHT - 1);
+			tex_pos += step;
+			color = data->tx_no.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
+			if (side == 1)
+				color = (color >> 1) & 8355711;
+			cub3d_mlx_pixel_put(&data->image, x, y, color);
+		}
+
+
+		// color = 0xffffff; // !!!!!
+		// if (side == 1)
+		// 	color /= 2; // !!!!!
+		// draw_vert_line(data, x, draw_start, draw_end, color);
 		x++;
 	}
 	data->last_time = data->current_time;

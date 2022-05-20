@@ -21,7 +21,7 @@ void	cub3d_mlx_pixel_put(t_image *img, int x, int y, int color)
 {
 	char	*dest;
 
-	dest = img->addr + (y * img->size_line + x * (img->bits_per_pixel / 8));
+	dest = img->addr + (y * img->size_line + x * (img->bpp / 8));
 	*(unsigned int *)dest = color;
 }
 

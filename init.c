@@ -41,7 +41,7 @@ static int	init_image(t_data *data, int width, int height)
 	if (data->image.img == NULL)
 		return (1);
 	data->image.addr = mlx_get_data_addr(data->image.img,
-			&data->image.bits_per_pixel, &data->image.size_line,
+			&data->image.bpp, &data->image.size_line,
 			&data->image.endian);
 	if (data->image.addr == NULL)
 		return (1);

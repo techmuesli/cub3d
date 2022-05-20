@@ -1,0 +1,32 @@
+// !!!!!
+
+#include "cub3d.h"
+
+int	parse_textures(t_data *data)
+{
+	int	tx_height;
+	int	tx_width;
+
+	tx_height = TEXTURE_HEIGHT;
+	tx_width = TEXTURE_WIDTH;
+	data->tx_no.img = mlx_xpm_file_to_image(data->mlx, \
+		data->map.tx_no, &tx_height, &tx_width);
+	data->tx_so.img = mlx_xpm_file_to_image(data->mlx, \
+		data->map.tx_so, &tx_height, &tx_width);
+	data->tx_ea.img = mlx_xpm_file_to_image(data->mlx, \
+		data->map.tx_ea, &tx_height, &tx_width);
+	data->tx_we.img = mlx_xpm_file_to_image(data->mlx, \
+		data->map.tx_we, &tx_height, &tx_width);
+	if (data->tx_no.img == NULL || data->tx_so.img == NULL \
+		|| data->tx_ea.img == NULL || data->tx_we.img == NULL)
+		return (1);
+	data->tx_no.data = (int *)mlx_get_data_addr(data->tx_no.img, \
+		&data->tx_no.bpp, &data->tx_no.size_line, &data->tx_no.endian);
+	data->tx_so.data = (int *)mlx_get_data_addr(data->tx_so.img, \
+		&data->tx_so.bpp, &data->tx_so.size_line, &data->tx_so.endian);
+	data->tx_ea.data = (int *)mlx_get_data_addr(data->tx_ea.img, \
+		&data->tx_ea.bpp, &data->tx_ea.size_line, &data->tx_ea.endian);
+	data->tx_we.data = (int *)mlx_get_data_addr(data->tx_we.img, \
+		&data->tx_we.bpp, &data->tx_we.size_line, &data->tx_we.endian);
+	return (0)
+}
