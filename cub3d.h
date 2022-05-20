@@ -34,10 +34,10 @@ typedef struct s_color
 
 typedef struct s_map
 {
-	char	*north;
-	char	*east;
-	char	*south;
-	char	*west;
+	char	*tx_no;
+	char	*tx_ea;
+	char	*tx_so;
+	char	*tx_we;
 	int		**data;
 	int		x;
 	int		y;
@@ -48,16 +48,29 @@ typedef struct s_map
 typedef struct s_image
 {
 	char	*addr;
-	int		bits_per_pixel;
+	int		bpp;
 	int		endian;
 	int		size_line;
 	void	*img;
 }				t_image;
 
+typedef struct s_texture
+{
+	void	*img;
+	int		*data;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}			t_texture;
+
 typedef struct s_data
 {
 	t_image		image;
 	t_map		map;
+	t_texture	tx_no;
+	t_texture	tx_so;
+	t_texture	tx_we;
+	t_texture	tx_ea;
 	t_vec		pos;
 	t_vec		dir;
 	t_vec		camera_plane;
@@ -72,6 +85,9 @@ typedef struct s_data
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
+
+# define TEXTURE_WIDTH 256
+# define TEXTURE_HEIGHT 256
 
 typedef enum e_info_type
 {

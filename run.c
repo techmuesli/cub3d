@@ -9,7 +9,7 @@ int	run_loop(void *param)
 
 	data = param;
 	ft_bzero64(data->image.addr, SCREEN_WIDTH * SCREEN_HEIGHT
-		* (data->image.bits_per_pixel / 8));
+		* (data->image.bpp / 8));
 
 	if (raycast(data) != 0)
 		;
