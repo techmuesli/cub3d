@@ -23,8 +23,6 @@ int	main(int argc, char *argv[])
 		fdf_cleanup(&data);
 		return (1);
 	}
-	data->last_time = get_time();
-
 	mlx_loop(data->mlx);
 	/*for (int i = 0; i < data->map.y; i++)
 	{

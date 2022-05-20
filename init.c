@@ -18,7 +18,6 @@ t_data	*fdf_init(int width, int height, char *title)
 		free(data);
 		return (NULL);
 	}
-
 	data->window = mlx_new_window(data->mlx, width, height, title);
 	if (data->window == NULL)
 	{
@@ -50,12 +49,19 @@ static int	init_image(t_data *data, int width, int height)
 
 static void	init_general_values(t_data *data)
 {
-	data->pos.x = 5; // !!!!!
-	data->pos.y = 2; // !!!!!
+	data->pos.x = 25; // !!!!!
+	data->pos.y = 3; // !!!!!
 	data->dir.x = -1;
 	data->dir.y = 0;
 	data->camera_plane.x = 0;
 	data->camera_plane.y = 0.66; // FOV = 2 * atan(data->camera_plane.y/ 1.0)
 	data->current_time = 0;
-	data->last_time = 0;
+	data->last_time = get_time();
+
+	data->map.floor.r = -1;
+	data->map.floor.g = -1;
+	data->map.floor.b = -1;
+	data->map.ceiling.r = -1;
+	data->map.ceiling.g = -1;
+	data->map.ceiling.b = -1;
 }

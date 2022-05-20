@@ -26,11 +26,20 @@ static void	free_map(t_map *map)
 {
 	int	i;
 
+	if (map->data == NULL)
+		return ;
+	if (map->north != NULL)
+		free(map->north);
+	if (map->east != NULL)
+		free(map->east);
+	if (map->south != NULL)
+		free(map->south);
+	if (map->west != NULL)
+		free(map->west);
 	i = 0;
-	while (i < map->y)
+	while (map->data[i] != NULL)
 	{
-		if (map->data[i] != NULL)
-			free(map->data[i]);
+		free(map->data[i]);
 		i++;
 	}
 	free(map->data);
