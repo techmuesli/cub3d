@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "cub3d.h"
 
-static void	draw_vert_line(t_data *data, int x, int start, int end, int color);
+// static void	draw_vert_line(t_data *data, int x, int start, int end, int color);
 
 int	raycast(t_data *data)
 {
@@ -89,7 +89,7 @@ int	raycast(t_data *data)
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
 		
-		int	tex_num = data->map.data[map.x][map.y] - 1;
+		// int	tex_num = data->map.data[map.x][map.y] - 1;
 		double	wall_x;
 
 		if (side == 0)
@@ -137,14 +137,14 @@ int	raycast(t_data *data)
 	return (0);
 }
 
-static void	draw_vert_line(t_data *data, int x, int start, int end, int color)
-{
-	int	y;
+// static void	draw_vert_line(t_data *data, int x, int start, int end, int color)
+// {
+// 	int	y;
 
-	y = start;
-	while (y < end)
-	{
-		cub3d_mlx_pixel_put(&data->image, x, y, color);
-		y++;
-	}
-}
+// 	y = start;
+// 	while (y < end)
+// 	{
+// 		cub3d_mlx_pixel_put(&data->image, x, y, color);
+// 		y++;
+// 	}
+// }

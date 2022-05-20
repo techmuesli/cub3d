@@ -28,5 +28,5 @@ int	parse_textures(t_data *data)
 		&data->tx_ea.bpp, &data->tx_ea.size_line, &data->tx_ea.endian);
 	data->tx_we.data = (int *)mlx_get_data_addr(data->tx_we.img, \
 		&data->tx_we.bpp, &data->tx_we.size_line, &data->tx_we.endian);
-	return (0)
+	return (0);
 }

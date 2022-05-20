@@ -40,13 +40,13 @@ int	get_type_info(t_map *map, char *input, int type) // !!!!! check for duplicat
 	while (*input == ' ') // !!!!! also support whitespaces
 		input++;
 	if (type == INFO_TYPE_NO)
-		map->north = ft_strdup(input);
+		map->tx_no = ft_strdup(input);
 	else if (type == INFO_TYPE_EA)
-		map->east = ft_strdup(input);
+		map->tx_ea = ft_strdup(input);
 	else if (type == INFO_TYPE_SO)
-		map->south = ft_strdup(input);
+		map->tx_so = ft_strdup(input);
 	else if (type == INFO_TYPE_WE)
-		map->west = ft_strdup(input);
+		map->tx_we = ft_strdup(input);
 	else if (type == INFO_TYPE_FLOOR)
 		return (get_color_value(&map->floor, input));
 	else if (type == INFO_TYPE_CEILING)

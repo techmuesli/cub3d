@@ -17,21 +17,13 @@ int	main(int argc, char *argv[])
 		ft_putstr_fd("Error! - init() failed!\n", FD_STDERR);
 		return (1);
 	}
-	if (read_input_file(data, argv[1]) != 0)
+	if (read_input_file(data, argv[1]) != 0 || parse_textures(data) != 0)
 	{
-		ft_putstr_fd("Error! - reading the input file failed!\n", FD_STDERR);
+		ft_putstr_fd("Error! - reading the input files failed!\n", FD_STDERR);
 		fdf_cleanup(&data);
 		return (1);
 	}
 	mlx_loop(data->mlx);
-	/*for (int i = 0; i < data->map.y; i++)
-	{
-		for (int j = 0; j < data->map.x; j++)
-		{
-			ft_printf("%d ", data->map.data[i][j]);
-		}
-		ft_printf("\n");
-	}*/
 	fdf_cleanup(&data);
 	return (0);
 }

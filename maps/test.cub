@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./textures/01bricks1.xpm
+SO ./textures/04mura.xpm
+WE ./textures/04pietrac1.xpm
+EA ./textures/04pietrac4.xpm
 
 F 220,100,0
 C 225,30,0

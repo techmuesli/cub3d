@@ -157,4 +157,7 @@ void		key_d(t_data *data);
 void		key_left(t_data *data);
 void		key_right(t_data *data);
 
+// textures.c
+int			parse_textures(t_data *data);
+
 #endif

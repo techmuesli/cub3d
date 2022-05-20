@@ -28,14 +28,14 @@ static void	free_map(t_map *map)
 
 	if (map->data == NULL)
 		return ;
-	if (map->north != NULL)
-		free(map->north);
-	if (map->east != NULL)
-		free(map->east);
-	if (map->south != NULL)
-		free(map->south);
-	if (map->west != NULL)
-		free(map->west);
+	if (map->tx_no != NULL)
+		free(map->tx_no);
+	if (map->tx_ea != NULL)
+		free(map->tx_ea);
+	if (map->tx_so != NULL)
+		free(map->tx_so);
+	if (map->tx_we != NULL)
+		free(map->tx_we);
 	i = 0;
 	while (map->data[i] != NULL)
 	{
