@@ -8,8 +8,8 @@ static int	check_map(int **map, t_vec *pos);
 
 int	check_input(t_data *data)
 {
-	if (data->map.north == NULL || data->map.east == NULL 
-		|| data->map.south == NULL || data->map.west == NULL)
+	if (data->map.tx_no == NULL || data->map.tx_ea == NULL 
+		|| data->map.tx_so == NULL || data->map.tx_we == NULL)
 		return (-1);
 	if (data->map.floor.r == -1 || data->map.floor.g == -1 
 		| data->map.floor.b == -1)
