@@ -66,13 +66,13 @@ int	raycast(t_data *data)
 			{
 				side_distance.x += delta_distance.x;
 				map.x += step.x;
-				side = 0;
+				side = 0; // East/West
 			}
 			else
 			{
 				side_distance.y += delta_distance.y;
 				map.y += step.y;
-				side = 1;
+				side = 1; // North/South
 			}
 			if (data->map.data[map.y][map.x] > 0)
 				hit = 1;
@@ -115,9 +115,21 @@ int	raycast(t_data *data)
 		{
 			tex_y = (int)tex_pos & (TEXTURE_HEIGHT - 1);
 			tex_pos += step;
-			color = data->tx_no.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
 			if (side == 1)
-				color = (color >> 1) & 8355711;
+			{
+				if (ray_direction.y > 0)
+					color = data->tx_no.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
+				else
+					color = data->tx_so.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
+				color = (color >> 1) & 8355711; // shadow
+			}
+			else
+			{
+				if (ray_direction.x < 0)
+					color = data->tx_we.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
+				else
+					color = data->tx_ea.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
+			}
 			cub3d_mlx_pixel_put(&data->image, x, y, color);
 		}
 
@@ -131,7 +143,7 @@ int	raycast(t_data *data)
 	data->last_time = data->current_time;
 	data->current_time = get_time();
 	frame_time = 1000 / (data->current_time - data->last_time); // seconds
-	//printf("Frame time: %f\n", frame_time);
+	printf("Frame time: %f\n", frame_time);
 	data->move_speed = (frame_time / 1000) * 5.0;
 	data->rot_speed = (frame_time / 1000) * 3.0;
 	return (0);
