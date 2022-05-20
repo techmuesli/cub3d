@@ -34,10 +34,10 @@ typedef struct s_color
 
 typedef struct s_map
 {
-	char	*texture_north;
-	char	*texture_east;
-	char	*texture_south;
-	char	*texture_west;
+	char	*north;
+	char	*east;
+	char	*south;
+	char	*west;
 	int		**data;
 	int		x;
 	int		y;
@@ -81,8 +81,22 @@ typedef enum e_info_type
 	INFO_TYPE_WE,
 	INFO_TYPE_FLOOR,
 	INFO_TYPE_CEILING,
-	INFO_TYPE_UNKNOWN,
+	INFO_TYPE_EMPTY,
+	INFO_TYPE_MAP,
 }				t_info_type;
+
+typedef enum e_map_type
+{
+	MAP_TYPE_UNKNOWN = -2,
+	MAP_TYPE_NOTHINGNESS = -1,
+	MAP_TYPE_EMPTY_SPACE = 0,
+	MAP_TYPE_WALL,
+	MAP_TYPE_PLAYER_N,
+	MAP_TYPE_PLAYER_E,
+	MAP_TYPE_PLAYER_S,
+	MAP_TYPE_PLAYER_W,
+	MAP_END_OF_LINE,
+}				t_map_type;
 
 // init.c
 t_data		*fdf_init(int width, int height, char *title);
@@ -98,6 +112,10 @@ int			check_input(t_data *data);
 
 // input_info.c
 int			get_type_identifier(char *input);
+int			get_type_info(t_map *map, char *input, int type);
+
+// input_map.c
+int			load_map(t_data *data, char *line, int fd);
 
 // hooks.c
 void		set_up_hooks(void *window, t_data *data);

@@ -1,6 +1,6 @@
 NAME := cub3D
 SRCFILES := main.c init.c cleanup.c run.c hooks.c input.c utils.c raycast.c keys.c \
-input_check.c input_info.c
+input_check.c input_info.c input_map.c
 	
 CC ?= cc
 LD ?= cc
@@ -13,7 +13,7 @@ ifeq ($(UNAME_S), Darwin)
 	MINILBX = libmlx.a
 endif
 ifeq ($(UNAME_S), Linux)
-	MINILBX = mlx_Linux
+	MINILBX = libmlx_Linux.a
 endif
 
 $(NAME):
