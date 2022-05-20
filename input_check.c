@@ -41,7 +41,7 @@ static int	check_map(int **map, t_vec *pos)
 				if (pos->x != 0 || pos->y != 0)
 					return (-1);
 				pos->x = x;
-				pos->y = y;
+				pos->y = y; //!!!!! modify based on NSEW here
 				map[y][x] = MAP_TYPE_EMPTY_SPACE;
 			}
 			x++;

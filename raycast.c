@@ -105,16 +105,14 @@ int	raycast(t_data *data)
 		if (side == 1 && ray_direction.y < 0)
 			tex_x = TEXTURE_WIDTH - tex_x - 1;
 
-	
-
 		double step = 1.0 * TEXTURE_HEIGHT / line_height;
 		double tex_pos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
 		int y = -1;
 		int tex_y;
-		while (++y < draw_end)
+		while (++y < SCREEN_HEIGHT)
 		{
 			if (y < draw_start)
-				color = create_trgb(0, data->map.floor.r, data->map.floor.g, data->map.floor.b);
+				color = create_trgb(0, data->map.ceiling.r, data->map.ceiling.g, data->map.ceiling.b);
 			else if (y >= draw_start && y <= draw_end)
 			{
 				tex_y = (int)tex_pos & (TEXTURE_HEIGHT - 1);
@@ -136,15 +134,9 @@ int	raycast(t_data *data)
 				}
 			}
 			else
-				color = create_trgb(0, data->map.ceiling.r, data->map.ceiling.g, data->map.ceiling.b);
+				color = create_trgb(0, data->map.floor.r, data->map.floor.g, data->map.floor.b);
 			cub3d_mlx_pixel_put(&data->image, x, y, color);
 		}
-
-
-		// color = 0xffffff; // !!!!!
-		// if (side == 1)
-		// 	color /= 2; // !!!!!
-		// draw_vert_line(data, x, draw_start, draw_end, color);
 		x++;
 	}
 	data->last_time = data->current_time;

@@ -62,4 +62,7 @@ static void	init_general_values(t_data *data)
 	data->map.ceiling.r = -1;
 	data->map.ceiling.g = -1;
 	data->map.ceiling.b = -1;
+
+	data->mouse_pos.x = SCREEN_WIDTH / 2; // starts with mouse in middle of screen
+	// mouse_pos.y not initialized as not used in prog atm
 }

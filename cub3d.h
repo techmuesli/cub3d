@@ -74,6 +74,7 @@ typedef struct s_data
 	t_vec		pos;
 	t_vec		dir;
 	t_vec		camera_plane;
+	t_vec_i		mouse_pos;
 	void		*mlx;
 	void		*window;
 	uint64_t	current_time;
