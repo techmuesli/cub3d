@@ -68,13 +68,13 @@ static int	*process_map_info(char *line, int *total)
 		else if (line[i] == '1')
 			data[i] = MAP_TYPE_WALL;
 		else if (line[i] == 'N')
-			data[i] = MAP_TYPE_PLAYER_N;
+			data[i] = MAP_TYPE_N;
 		else if (line[i] == 'E')
-			data[i] = MAP_TYPE_PLAYER_E;
+			data[i] = MAP_TYPE_E;
 		else if (line[i] == 'S')
-			data[i] = MAP_TYPE_PLAYER_S;
+			data[i] = MAP_TYPE_S;
 		else if (line[i] == 'W')
-			data[i] = MAP_TYPE_PLAYER_W;
+			data[i] = MAP_TYPE_W;
 		else
 			data[i] = MAP_TYPE_UNKNOWN;
 		i++;
