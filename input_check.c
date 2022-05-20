@@ -2,8 +2,6 @@
 
 #include "cub3d.h"
 
-// !!!!! set data->pos.x & .y
-
 static int	check_map(int **map, t_vec *pos);
 
 int	check_input(t_data *data)
@@ -19,6 +17,8 @@ int	check_input(t_data *data)
 		return (-1);
 	if (check_map(data->map.data, &data->pos) != 0)
 		return (-1);
+	if (data->pos.x == 0 || data->pos.y == 0)
+		return (-1);
 	return (0);
 }
 
@@ -33,6 +33,8 @@ static int	check_map(int **map, t_vec *pos)
 		x = 0;
 		while (map[y][x] != MAP_END_OF_LINE)
 		{
+			if (map[y][x] == MAP_TYPE_UNKNOWN)
+				return (-1);
 			if (map[y][x] == MAP_TYPE_N || map[y][x] == MAP_TYPE_E
 				|| map[y][x] == MAP_TYPE_S || map[y][x] == MAP_TYPE_W)
 			{
@@ -40,9 +42,8 @@ static int	check_map(int **map, t_vec *pos)
 					return (-1);
 				pos->x = x;
 				pos->y = y;
+				map[y][x] = MAP_TYPE_EMPTY_SPACE;
 			}
-			if (map[y][x] == MAP_TYPE_UNKNOWN)
-				return (-1);
 			x++;
 		}
 		y++;

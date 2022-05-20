@@ -3,6 +3,7 @@
 #include "cub3d.h"
 
 static void	free_map(t_map *map);
+static void	free_textures(t_data *data);
 
 void	fdf_cleanup(t_data **data)
 {
@@ -12,6 +13,7 @@ void	fdf_cleanup(t_data **data)
 	{
 		if ((*data)->image.img != NULL)
 			mlx_destroy_image((*data)->mlx, (*data)->image.img);
+		free_textures(*data);
 		if ((*data)->window != NULL)
 			mlx_destroy_window((*data)->mlx, (*data)->window);
 		mlx_destroy_display((*data)->mlx);
@@ -43,4 +45,16 @@ static void	free_map(t_map *map)
 		i++;
 	}
 	free(map->data);
+}
+
+static void	free_textures(t_data *data)
+{
+	if (data->tx_no.img != NULL)
+		mlx_destroy_image(data->mlx, data->tx_no.img);
+	if (data->tx_ea.img != NULL)
+		mlx_destroy_image(data->mlx, data->tx_ea.img);
+	if (data->tx_so.img != NULL)
+		mlx_destroy_image(data->mlx, data->tx_so.img);
+	if (data->tx_we.img != NULL)
+		mlx_destroy_image(data->mlx, data->tx_we.img);
 }
