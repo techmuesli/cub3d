@@ -97,7 +97,7 @@ int	raycast(t_data *data)
 	data->last_time = data->current_time;
 	data->current_time = get_time();
 	frame_time = 1000 / (data->current_time - data->last_time); // seconds
-	// printf("Frame time: %f\n", frame_time);
+	//printf("Frame time: %f\n", frame_time);
 	data->move_speed = (frame_time / 1000) * 5.0;
 	data->rot_speed = (frame_time / 1000) * 3.0;
 	return (0);
