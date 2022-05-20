@@ -49,8 +49,6 @@ static int	init_image(t_data *data, int width, int height)
 
 static void	init_general_values(t_data *data)
 {
-	data->pos.x = 25; // !!!!!
-	data->pos.y = 3; // !!!!!
 	data->dir.x = -1;
 	data->dir.y = 0;
 	data->camera_plane.x = 0;
