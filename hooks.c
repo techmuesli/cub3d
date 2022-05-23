@@ -46,15 +46,16 @@ int	mouse_cb(int x, int y, t_data *data)
 	(void)y;
 	if (x < data->mouse_pos.x)
 	{
+		mlx_mouse_move(data->mlx, data->window, data->mouse_pos.x, data->mouse_pos.y);
 		data->rot_speed = 0.05; // modified for "mouse sensitivity"
 		key_left(data);
 	}
 	if (x > data->mouse_pos.x)
 	{
+		mlx_mouse_move(data->mlx, data->window, data->mouse_pos.x, data->mouse_pos.y);
 		data->rot_speed = 0.05;
 		key_right(data);
 	}
-	data->mouse_pos.x = x;
 	return (0);
 }
 

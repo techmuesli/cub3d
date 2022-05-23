@@ -31,7 +31,6 @@ int	raycast(t_data *data)
 		ray_direction.y = data->dir.y + data->camera_plane.y * camera_x;
 		map.x = (int)data->pos.x;
 		map.y = (int)data->pos.y;
-		hit = 0;
 		if (ray_direction.x == 0)
 			delta_distance.x = INFINITY;
 		else
@@ -60,6 +59,7 @@ int	raycast(t_data *data)
 			step.y = 1;
 			side_distance.y = (map.y + 1.0 - data->pos.y) * delta_distance.y;
 		}
+		hit = 0;
 		while (hit == 0)
 		{
 			if (side_distance.x < side_distance.y)
