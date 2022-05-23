@@ -50,8 +50,8 @@ static int	init_image(t_data *data, int width, int height)
 
 static void	init_general_values(t_data *data)
 {
-	data->dir.x = -1;
-	data->dir.y = 0;
+	// data->dir.x = -1;
+	// data->dir.y = 0;
 	data->camera_plane.x = 0;
 	data->camera_plane.y = 0.66; // FOV = 2 * atan(data->camera_plane.y/ 1.0)
 	data->current_time = 0;
