@@ -54,6 +54,23 @@ typedef struct s_image
 	void	*img;
 }				t_image;
 
+typedef struct s_minimap
+{
+	t_image	img;
+	int		width;
+	int		height;
+}				t_minimap;
+
+typedef struct	s_rect
+{
+	int	width;
+	int	height;
+	int	x0;
+	int	y0;
+	int	color;
+}				t_rect;
+
+
 typedef struct s_texture
 {
 	void	*img;
@@ -66,6 +83,7 @@ typedef struct s_texture
 typedef struct s_data
 {
 	t_image		image;
+	t_minimap	minimap;
 	t_map		map;
 	t_texture	tx_no;
 	t_texture	tx_so;
@@ -146,6 +164,9 @@ void		cub3d_mlx_pixel_put(t_image *img, int x, int y, int color);
 long long	get_time(void);
 void		ft_bzero64(void *s, size_t n);
 int			create_trgb(int t, int r, int g, int b);
+
+// minimap.c
+int			init_minimap(t_data *data);
 
 // raycast.c
 int			raycast(t_data *data);

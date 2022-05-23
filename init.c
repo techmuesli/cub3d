@@ -45,6 +45,8 @@ static int	init_image(t_data *data, int width, int height)
 			&data->image.endian);
 	if (data->image.addr == NULL)
 		return (1);
+	if (init_minimap(data) == 1)
+		return (1);
 	return (0);
 }
 

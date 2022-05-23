@@ -1,6 +1,6 @@
 NAME := cub3D
 SRCFILES := main.c init.c cleanup.c run.c hooks.c input.c utils.c raycast.c keys.c \
-input_check.c input_info.c input_map.c textures.c
+input_check.c input_info.c input_map.c textures.c minimap.c
 	
 CC ?= cc
 LD ?= cc
