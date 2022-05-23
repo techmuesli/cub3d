@@ -2,6 +2,7 @@
 
 #include "cub3d.h"
 
+static int	check_file_info(t_map *map, int type);
 static int	get_color_value(t_color	*color, char *input);
 static int	get_next_rgb_value(char **input);
 
@@ -39,6 +40,8 @@ int	get_type_info(t_map *map, char *input, int type) // !!!!! check for duplicat
 		input++;
 	while (*input == ' ') // !!!!! also support whitespaces
 		input++;
+	if (check_file_info(map, type) != 0)
+		return (-1);
 	if (type == INFO_TYPE_NO)
 		map->tx_no = ft_strdup(input);
 	else if (type == INFO_TYPE_EA)
@@ -51,6 +54,27 @@ int	get_type_info(t_map *map, char *input, int type) // !!!!! check for duplicat
 		return (get_color_value(&map->floor, input));
 	else if (type == INFO_TYPE_CEILING)
 		return (get_color_value(&map->ceiling, input));
+	return (0);
+}
+
+static int	check_file_info(t_map *map, int type)
+{
+	if ((type == INFO_TYPE_NO && map->tx_no != NULL)
+		|| (type == INFO_TYPE_EA && map->tx_ea != NULL)
+		|| (type == INFO_TYPE_SO && map->tx_so != NULL)
+		|| (type == INFO_TYPE_WE && map->tx_we != NULL))
+		return (-1);
+	if (type == INFO_TYPE_FLOOR)
+	{
+		if (map->floor.r != -1 || map->floor.g != -1 || map->floor.b != -1)
+			return (-1);
+	}
+	else if (type == INFO_TYPE_CEILING)
+	{
+		if (map->ceiling.r != -1 || map->ceiling.g != -1
+			|| map->ceiling.b != -1)
+			return (-1);
+	}
 	return (0);
 }
 

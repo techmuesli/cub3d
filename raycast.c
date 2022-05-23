@@ -74,7 +74,7 @@ int	raycast(t_data *data)
 				map.y += step.y;
 				side = 1; // North/South
 			}
-			if (data->map.data[map.y][map.x] > 0)
+			if (data->map.data[data->map.y - map.y][map.x] > 0)
 				hit = 1;
 		}
 		if (side == 0)
