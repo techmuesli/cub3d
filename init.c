@@ -29,6 +29,7 @@ t_data	*fdf_init(int width, int height, char *title)
 		fdf_cleanup(&data);
 		return (NULL);
 	}
+	mlx_mouse_hide(data->mlx, data->window);
 	set_up_hooks(data->window, data);
 	init_general_values(data);
 	return (data);
@@ -64,5 +65,5 @@ static void	init_general_values(t_data *data)
 	data->map.ceiling.b = -1;
 
 	data->mouse_pos.x = SCREEN_WIDTH / 2; // starts with mouse in middle of screen
-	// mouse_pos.y not initialized as not used in prog atm
+	data->mouse_pos.y = SCREEN_HEIGHT / 2;
 }
