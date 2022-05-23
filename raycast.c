@@ -29,8 +29,10 @@ int	raycast(t_data *data)
 		camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
 		ray_direction.x = data->dir.x + data->camera_plane.x * camera_x;
 		ray_direction.y = data->dir.y + data->camera_plane.y * camera_x;
+		
 		map.x = (int)data->pos.x;
 		map.y = (int)data->pos.y;
+		
 		if (ray_direction.x == 0)
 			delta_distance.x = INFINITY;
 		else
@@ -74,7 +76,7 @@ int	raycast(t_data *data)
 				map.y += step.y;
 				side = 1; // North/South
 			}
-			if (data->map.data[data->map.y - map.y][map.x] > 0)
+			if (data->map.data[map.y][map.x] > 0)
 				hit = 1;
 		}
 		if (side == 0)
@@ -120,9 +122,9 @@ int	raycast(t_data *data)
 				if (side == 1)
 				{
 					if (ray_direction.y > 0)
-						color = data->tx_no.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
-					else
 						color = data->tx_so.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
+					else
+						color = data->tx_no.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
 					color = (color >> 1) & 8355711; // shadow
 				}
 				else
@@ -142,7 +144,7 @@ int	raycast(t_data *data)
 	data->last_time = data->current_time;
 	data->current_time = get_time();
 	frame_time = 1000 / (data->current_time - data->last_time); // seconds
-	printf("Frame time: %f\n", frame_time);
+	// printf("Frame time: %f\n", frame_time);
 	data->move_speed = (frame_time / 1000) * 5.0;
 	data->rot_speed = (frame_time / 1000) * 3.0;
 	return (0);
