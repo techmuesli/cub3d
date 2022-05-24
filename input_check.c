@@ -10,8 +10,8 @@ static void	set_orientation(t_data *data, int x)
 	if (x == MAP_TYPE_N)
 	{
 		data->dir.x = 0;
-		data->dir.y = 1;
-		data->camera_plane.x = -1;
+		data->dir.y = -1;
+		data->camera_plane.x = 1;
 		data->camera_plane.y = 0;
 	}
 	if (x == MAP_TYPE_E)
@@ -24,8 +24,8 @@ static void	set_orientation(t_data *data, int x)
 	if (x == MAP_TYPE_S)
 	{
 		data->dir.x = 0;
-		data->dir.y = -1;
-		data->camera_plane.x = 1;
+		data->dir.y = 1;
+		data->camera_plane.x = -1;
 		data->camera_plane.y = 0;
 	}
 	if (x == MAP_TYPE_W)
