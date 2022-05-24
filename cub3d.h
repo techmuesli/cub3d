@@ -38,7 +38,9 @@ typedef struct s_map
 	char	*tx_ea;
 	char	*tx_so;
 	char	*tx_we;
+	char	*tx_door;
 	int		**data;
+	int		**flags;
 	int		x;
 	int		y;
 	t_color	ceiling;
@@ -71,6 +73,7 @@ typedef struct s_data
 	t_texture	tx_so;
 	t_texture	tx_we;
 	t_texture	tx_ea;
+	t_texture	tx_door;
 	t_vec		pos;
 	t_vec		dir;
 	t_vec		camera_plane;
@@ -98,6 +101,7 @@ typedef enum e_info_type
 	INFO_TYPE_WE,
 	INFO_TYPE_FLOOR,
 	INFO_TYPE_CEILING,
+	INFO_TYPE_DOOR,
 	INFO_TYPE_EMPTY,
 	INFO_TYPE_MAP,
 }				t_info_type;
@@ -108,12 +112,18 @@ typedef enum e_map_type
 	MAP_TYPE_NOTHINGNESS = -1,
 	MAP_TYPE_EMPTY_SPACE = 0,
 	MAP_TYPE_WALL,
+	MAP_TYPE_DOOR,
 	MAP_TYPE_N,
 	MAP_TYPE_E,
 	MAP_TYPE_S,
 	MAP_TYPE_W,
 	MAP_END_OF_LINE,
 }				t_map_type;
+
+typedef enum e_flags
+{
+	OPEN_DOOR = 1,
+}				t_flags;
 
 // init.c
 t_data		*fdf_init(int width, int height, char *title);
@@ -155,6 +165,8 @@ void		key_w(t_data *data);
 void		key_a(t_data *data);
 void		key_s(t_data *data);
 void		key_d(t_data *data);
+
+void		key_f(t_data *data);
 
 void		key_left(t_data *data);
 void		key_right(t_data *data);

@@ -17,8 +17,11 @@ int	parse_textures(t_data *data)
 		data->map.tx_ea, &tx_height, &tx_width);
 	data->tx_we.img = mlx_xpm_file_to_image(data->mlx, \
 		data->map.tx_we, &tx_height, &tx_width);
-	if (data->tx_no.img == NULL || data->tx_so.img == NULL \
-		|| data->tx_ea.img == NULL || data->tx_we.img == NULL)
+	data->tx_door.img = mlx_xpm_file_to_image(data->mlx, \
+		data->map.tx_door, &tx_height, &tx_width);
+	if (data->tx_no.img == NULL || data->tx_so.img == NULL
+		|| data->tx_ea.img == NULL || data->tx_we.img == NULL
+		|| data->tx_door.img == NULL)
 		return (1);
 	data->tx_no.data = (int *)mlx_get_data_addr(data->tx_no.img, \
 		&data->tx_no.bpp, &data->tx_no.size_line, &data->tx_no.endian);
@@ -28,5 +31,7 @@ int	parse_textures(t_data *data)
 		&data->tx_ea.bpp, &data->tx_ea.size_line, &data->tx_ea.endian);
 	data->tx_we.data = (int *)mlx_get_data_addr(data->tx_we.img, \
 		&data->tx_we.bpp, &data->tx_we.size_line, &data->tx_we.endian);
+	data->tx_door.data = (int *)mlx_get_data_addr(data->tx_door.img, \
+		&data->tx_door.bpp, &data->tx_door.size_line, &data->tx_door.endian);
 	return (0);
 }

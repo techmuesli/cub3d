@@ -73,8 +73,8 @@ static int	check_map(t_data *data, int **map, t_vec *pos)
 			{
 				if (pos->x != 0 || pos->y != 0)
 					return (-1);
-				pos->x = x;
-				pos->y = y;
+				pos->x = x + 0.5;
+				pos->y = y + 0.5;
 				set_orientation(data, map[y][x]);
 				map[y][x] = MAP_TYPE_EMPTY_SPACE;
 			}

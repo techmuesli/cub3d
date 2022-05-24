@@ -17,7 +17,7 @@ int	raycast(t_data *data)
 	int		line_height;
 	int		side;
 	int		color;
-	t_vec	ray_direction;
+	t_vec	ray_dir;
 	t_vec	side_distance;
 	t_vec	delta_distance;
 	t_vec_i	step;
@@ -27,21 +27,21 @@ int	raycast(t_data *data)
 	while (x < SCREEN_WIDTH)
 	{
 		camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
-		ray_direction.x = data->dir.x + data->camera_plane.x * camera_x;
-		ray_direction.y = data->dir.y + data->camera_plane.y * camera_x;
+		ray_dir.x = data->dir.x + data->camera_plane.x * camera_x;
+		ray_dir.y = data->dir.y + data->camera_plane.y * camera_x;
 		
 		map.x = (int)data->pos.x;
 		map.y = (int)data->pos.y;
 		
-		if (ray_direction.x == 0)
+		if (ray_dir.x == 0)
 			delta_distance.x = INFINITY;
 		else
-			delta_distance.x = fabs(1/ ray_direction.x);
-		if (ray_direction.y == 0)
+			delta_distance.x = fabs(1/ ray_dir.x); // sqrt(1 + (ray_dir.y * ray_dir.y) / (ray_dir.x * ray_dir.x))
+		if (ray_dir.y == 0)
 			delta_distance.y = INFINITY;
 		else
-			delta_distance.y = fabs(1/ ray_direction.y);
-		if (ray_direction.x < 0)
+			delta_distance.y = fabs(1/ ray_dir.y); // sqrt(1 + (ray_dir.x * ray_dir.x) / (ray_dir.y * ray_dir.y))
+		if (ray_dir.x < 0)
 		{
 			step.x = -1;
 			side_distance.x = (data->pos.x - map.x) * delta_distance.x;
@@ -51,7 +51,7 @@ int	raycast(t_data *data)
 			step.x = 1;
 			side_distance.x = (map.x + 1.0 - data->pos.x) * delta_distance.x;
 		}
-		if (ray_direction.y < 0)
+		if (ray_dir.y < 0)
 		{
 			step.y = -1;
 			side_distance.y = (data->pos.y - map.y) * delta_distance.y;
@@ -77,7 +77,15 @@ int	raycast(t_data *data)
 				side = 1; // North/South
 			}
 			if (data->map.data[map.y][map.x] > 0)
-				hit = 1;
+			{
+				if (data->map.data[map.y][map.x] == MAP_TYPE_DOOR)
+				{
+					if ((data->map.flags[map.y][map.x] & OPEN_DOOR) == 0)
+						hit = 1;
+				}
+				else
+					hit = 1;
+			}
 		}
 		if (side == 0)
 			perp_wall_distance = side_distance.x - delta_distance.x;
@@ -95,16 +103,16 @@ int	raycast(t_data *data)
 		double	wall_x;
 
 		if (side == 0)
-			wall_x = data->pos.y + perp_wall_distance * ray_direction.y;
+			wall_x = data->pos.y + perp_wall_distance * ray_dir.y;
 		else
-			wall_x = data->pos.x + perp_wall_distance * ray_direction.x;
+			wall_x = data->pos.x + perp_wall_distance * ray_dir.x;
 		wall_x -= floor(wall_x);
 
 		int	tex_x;
 		tex_x = (int)(wall_x * (double)TEXTURE_WIDTH);
-		if (side == 0 && ray_direction.x > 0)
+		if (side == 0 && ray_dir.x > 0)
 			tex_x = TEXTURE_WIDTH - tex_x - 1;
-		if (side == 1 && ray_direction.y < 0)
+		if (side == 1 && ray_dir.y < 0)
 			tex_x = TEXTURE_WIDTH - tex_x - 1;
 
 		double step = 1.0 * TEXTURE_HEIGHT / line_height;
@@ -121,7 +129,9 @@ int	raycast(t_data *data)
 				tex_pos += step;
 				if (side == 1)
 				{
-					if (ray_direction.y > 0)
+					if (data->map.data[map.y][map.x] == MAP_TYPE_DOOR && (data->map.flags[map.y][map.x] & OPEN_DOOR) == 0)
+						color = data->tx_door.data[TEXTURE_HEIGHT * tex_y + tex_x];
+					else if (ray_dir.y > 0)
 						color = data->tx_so.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
 					else
 						color = data->tx_no.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
@@ -129,7 +139,9 @@ int	raycast(t_data *data)
 				}
 				else
 				{
-					if (ray_direction.x < 0)
+					if (data->map.data[map.y][map.x] == MAP_TYPE_DOOR && (data->map.flags[map.y][map.x] & OPEN_DOOR) == 0)
+						color = data->tx_door.data[TEXTURE_HEIGHT * tex_y + tex_x];
+					else if (ray_dir.x < 0)
 						color = data->tx_we.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
 					else
 						color = data->tx_ea.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!

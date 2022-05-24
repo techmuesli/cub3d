@@ -4,7 +4,7 @@
 
 static void	trim_line_end(char *line);
 static int	*process_map_info(char *line, int *width);
-static int	**init_map_data(t_vector *vec, int width);
+static int	**init_map_data(t_data *data, t_vector *vec, int width);
 
 int	load_map(t_data *data, char *line, int fd)
 {
@@ -32,7 +32,7 @@ int	load_map(t_data *data, char *line, int fd)
 	}
 	data->map.x = max_width;
 	data->map.y = vec->total;
-	data->map.data = init_map_data(vec, max_width); // !!!!! check for fail
+	data->map.data = init_map_data(data, vec, max_width); // !!!!! check for fail
 	vector_cleanup(vec);
 	return (0);
 }
@@ -75,6 +75,8 @@ static int	*process_map_info(char *line, int *total)
 			data[i] = MAP_TYPE_S;
 		else if (line[i] == 'W')
 			data[i] = MAP_TYPE_W;
+		else if (line[i] == 'D')
+			data[i] = MAP_TYPE_DOOR;
 		else
 			data[i] = MAP_TYPE_UNKNOWN;
 		i++;
@@ -83,18 +85,27 @@ static int	*process_map_info(char *line, int *total)
 	return (data);
 }
 
-static int	**init_map_data(t_vector *vec, int width)
+static int	**init_map_data(t_data *data, t_vector *vec, int width)
 {
 	int	i;
 	int	**map;
 
-	map = ft_calloc(vec->total + 1, width * sizeof(int));
+	map = ft_calloc(vec->total + 1, sizeof(int *));
 	if (map == NULL)
 		return (NULL);
+	data->map.flags = ft_calloc(vec->total + 1, sizeof(int *));
+	if (data->map.flags == NULL)
+	{
+		free(map);
+		return (NULL);
+	}
 	i = 0;
 	while (i < (int)vec->total)
 	{
 		map[i] = vector_get(vec, i);
+		data->map.flags[i] = ft_calloc(width, sizeof(int));
+		if (data->map.flags[i] == NULL)
+			return (NULL); // !!!!!
 		i++;
 	}
 	map[i] = NULL;

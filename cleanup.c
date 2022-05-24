@@ -38,13 +38,18 @@ static void	free_map(t_map *map)
 		free(map->tx_so);
 	if (map->tx_we != NULL)
 		free(map->tx_we);
+	if (map->tx_door != NULL)
+		free(map->tx_door);
 	i = 0;
-	while (map->data[i] != NULL)
+	while (map->data[i] != NULL) // !!!!!? && map->flags[i] != NULL
 	{
 		free(map->data[i]);
+		free(map->flags[i]);
 		i++;
 	}
+	i = 0;
 	free(map->data);
+	free(map->flags);
 }
 
 static void	free_textures(t_data *data)
@@ -57,4 +62,6 @@ static void	free_textures(t_data *data)
 		mlx_destroy_image(data->mlx, data->tx_so.img);
 	if (data->tx_we.img != NULL)
 		mlx_destroy_image(data->mlx, data->tx_we.img);
+	if (data->tx_door.img != NULL)
+		mlx_destroy_image(data->mlx, data->tx_door.img);
 }
