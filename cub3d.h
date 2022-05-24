@@ -83,6 +83,7 @@ typedef struct s_texture
 typedef struct s_data
 {
 	t_image		image;
+	// t_image		minimap;
 	t_minimap	minimap;
 	t_map		map;
 	t_texture	tx_no;
@@ -102,8 +103,8 @@ typedef struct s_data
 	double		rot_speed;
 }				t_data;
 
-# define SCREEN_WIDTH 1920
-# define SCREEN_HEIGHT 1080
+# define SCREEN_WIDTH 640
+# define SCREEN_HEIGHT 480
 
 # define TEXTURE_WIDTH 256
 # define TEXTURE_HEIGHT 256

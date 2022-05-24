@@ -113,6 +113,14 @@ int	raycast(t_data *data)
 		int tex_y;
 		while (++y < SCREEN_HEIGHT)
 		{
+			// check if inside minimap range
+			if (x > (SCREEN_WIDTH - data->minimap.width - 10) && x < SCREEN_WIDTH - 10
+				&& y > 10 && y < data->minimap.height + 10)
+			{
+				if (y >= draw_start && y <= draw_end)
+					tex_pos += step;
+				continue;
+			}
 			if (y < draw_start)
 				color = create_trgb(0, data->map.ceiling.r, data->map.ceiling.g, data->map.ceiling.b);
 			else if (y >= draw_start && y <= draw_end)

@@ -11,11 +11,17 @@ int	run_loop(void *param)
 	ft_bzero64(data->image.addr, SCREEN_WIDTH * SCREEN_HEIGHT
 		* (data->image.bpp / 8));
 
-	if (raycast(data) != 0)
-		;
 	// TODO !!!!!
-	mlx_put_image_to_window(data->mlx, data->window, data->image.img, 0, 0);
+	// if (raycast(data) != 0)
+		// ;
+
+	raycast(data);
 	
+	mlx_put_image_to_window(data->mlx, data->window, data->image.img, 0, 0);
+	// !!!!! flickering
+	mlx_put_image_to_window(data->mlx, data->window, data->minimap.img.img,
+		SCREEN_WIDTH - data->minimap.width - 10, 10);
+
 	// data->current_time = get_time();
 	// frames++;
 	// if (data->current_time - data->last_time >= 1000)

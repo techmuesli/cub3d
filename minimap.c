@@ -18,36 +18,38 @@ static int render_rect(t_image *img, t_rect rect)
 
 int	init_minimap(t_data *data)
 {
-	t_minimap	mm;
 	int			**map;
 	t_rect		temp;
-
-	mm = data->minimap;
-	map = data->map.data;
-
-	mm.width = SCREEN_WIDTH / 10;
-	mm.height = SCREEN_HEIGHT / 10;
-	mm.img.img = mlx_new_image(data->mlx, mm.width, mm.height);
-	if (mm.img.img == NULL)
-		return (1);
-	mm.img.addr = mlx_get_data_addr(mm.img.img, &mm.img.bpp, 
-		&mm.img.size_line, &mm.img.endian);
-	if (mm.img.addr == NULL)
-		return (1);
+	int	width, height;
 
 	int sqw;
 	int	sqh;
 
-	sqw = mm.width / data->map.x;
-	sqh = mm.height / data->map.y;
+	map = data->map.data;
+	width = SCREEN_WIDTH / 4;
+	height = SCREEN_HEIGHT / 4;
 
-	int xp = 0;
-	int yp = 0;
+	sqw = width / data->map.x;
+	sqh = height / data->map.y;
+	data->minimap.width = sqw * data->map.x;
+	data->minimap.height = sqh * data->map.y;
+
+	data->minimap.img.img = mlx_new_image(data->mlx, data->minimap.width, data->minimap.height);
+	if (data->minimap.img.img == NULL)
+		return (1);
+	data->minimap.img.addr = mlx_get_data_addr(data->minimap.img.img, &data->minimap.img.bpp,
+		&data->minimap.img.size_line, &data->minimap.img.endian);
+	if (data->minimap.img.addr == NULL)
+		return (1);
+
+
+	int xp, yp = 0;
 
 	int x,y = 0;
 	while (map[y] != NULL)
 	{
 		x = 0;
+		xp = 0;
 		while (map[y][x] != MAP_END_OF_LINE)
 		{
 			if (map[y][x] == MAP_TYPE_WALL)
@@ -56,8 +58,8 @@ int	init_minimap(t_data *data)
 				temp.height = sqh;
 				temp.x0 = xp;
 				temp.y0 = yp;
-				temp.color = 0x0;
-				render_rect(mm.img.img, temp);
+				temp.color = 0xFFFFFFF;
+				render_rect(&data->minimap.img, temp);
 			}
 			xp += sqw;
 			x++;
