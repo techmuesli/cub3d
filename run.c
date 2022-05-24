@@ -18,9 +18,6 @@ int	run_loop(void *param)
 	raycast(data);
 	
 	mlx_put_image_to_window(data->mlx, data->window, data->image.img, 0, 0);
-	// !!!!! flickering
-	mlx_put_image_to_window(data->mlx, data->window, data->minimap.img.img,
-		SCREEN_WIDTH - data->minimap.width - 10, 10);
 
 	// data->current_time = get_time();
 	// frames++;

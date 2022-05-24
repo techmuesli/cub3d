@@ -23,7 +23,6 @@ int	main(int argc, char *argv[])
 		fdf_cleanup(&data);
 		return (1);
 	}
-	init_minimap(data);
 	mlx_loop(data->mlx);
 	fdf_cleanup(&data);
 	return (0);

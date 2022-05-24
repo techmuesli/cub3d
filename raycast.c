@@ -90,8 +90,7 @@ int	raycast(t_data *data)
 		draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
 		if (draw_end >= SCREEN_HEIGHT)
 			draw_end = SCREEN_HEIGHT - 1;
-		
-		// int	tex_num = data->map.data[map.x][map.y] - 1;
+
 		double	wall_x;
 
 		if (side == 0)
@@ -114,8 +113,8 @@ int	raycast(t_data *data)
 		while (++y < SCREEN_HEIGHT)
 		{
 			// check if inside minimap range
-			if (x > (SCREEN_WIDTH - data->minimap.width - 10) && x < SCREEN_WIDTH - 10
-				&& y > 10 && y < data->minimap.height + 10)
+			if (x > (SCREEN_WIDTH - data->minimap.width) && x < SCREEN_WIDTH
+				&& y > 0 && y < data->minimap.height)
 			{
 				if (y >= draw_start && y <= draw_end)
 					tex_pos += step;
@@ -149,6 +148,9 @@ int	raycast(t_data *data)
 		}
 		x++;
 	}
+	printf("Dir x:%f\tDir y:%f\n", data->dir.x, data->dir.y);
+	render_minimap(data);
+
 	data->last_time = data->current_time;
 	data->current_time = get_time();
 	frame_time = 1000 / (data->current_time - data->last_time); // seconds

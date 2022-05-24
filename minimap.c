@@ -16,7 +16,7 @@ static int render_rect(t_image *img, t_rect rect)
 	return (0);
 }
 
-int	init_minimap(t_data *data)
+int	render_minimap(t_data *data)
 {
 	int			**map;
 	t_rect		temp;
@@ -34,17 +34,7 @@ int	init_minimap(t_data *data)
 	data->minimap.width = sqw * data->map.x;
 	data->minimap.height = sqh * data->map.y;
 
-	data->minimap.img.img = mlx_new_image(data->mlx, data->minimap.width, data->minimap.height);
-	if (data->minimap.img.img == NULL)
-		return (1);
-	data->minimap.img.addr = mlx_get_data_addr(data->minimap.img.img, &data->minimap.img.bpp,
-		&data->minimap.img.size_line, &data->minimap.img.endian);
-	if (data->minimap.img.addr == NULL)
-		return (1);
-
-
 	int xp, yp = 0;
-
 	int x,y = 0;
 	while (map[y] != NULL)
 	{
@@ -56,10 +46,10 @@ int	init_minimap(t_data *data)
 			{
 				temp.width = sqw;
 				temp.height = sqh;
-				temp.x0 = xp;
+				temp.x0 = xp + (SCREEN_WIDTH - data->minimap.width);
 				temp.y0 = yp;
 				temp.color = 0xFFFFFFF;
-				render_rect(&data->minimap.img, temp);
+				render_rect(&data->image, temp);
 			}
 			xp += sqw;
 			x++;
@@ -67,5 +57,13 @@ int	init_minimap(t_data *data)
 		yp += sqh;
 		y++;
 	}
+	temp.width = sqw / 3;
+	temp.height = sqh / 3;
+	temp.x0 = sqw * data->pos.x + (SCREEN_WIDTH - data->minimap.width);
+	temp.y0 = sqh * data->pos.y;
+	temp.color = 0xFF0000;
+	render_rect(&data->image, temp);
+
+	
 	return (0);
 }
