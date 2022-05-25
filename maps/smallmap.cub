@@ -3,6 +3,8 @@ SO ./textures/04mura.xpm
 WE ./textures/04pietrac1.xpm
 EA ./textures/04pietrac4.xpm
 
+DOOR ./textures/01bricks1.xpm
+
 F 51,204,51
 C 204,51,255
 

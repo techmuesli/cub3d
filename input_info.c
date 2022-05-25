@@ -57,7 +57,7 @@ int	get_type_info(t_map *map, char *input, int type) // !!!!! check for duplicat
 	else if (type == INFO_TYPE_DOOR)
 		map->tx_door = ft_strdup(input);
 	else if (type == INFO_TYPE_FLOOR)
-		return (get_color_value(&map->floor, input));
+		return (get_color_value(&map->flr, input));
 	else if (type == INFO_TYPE_CEILING)
 		return (get_color_value(&map->ceiling, input));
 	return (0);
@@ -73,7 +73,7 @@ static int	check_file_info(t_map *map, int type)
 		return (-1);
 	if (type == INFO_TYPE_FLOOR)
 	{
-		if (map->floor.r != -1 || map->floor.g != -1 || map->floor.b != -1)
+		if (map->flr.r != -1 || map->flr.g != -1 || map->flr.b != -1)
 			return (-1);
 	}
 	else if (type == INFO_TYPE_CEILING)

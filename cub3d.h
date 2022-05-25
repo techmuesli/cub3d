@@ -44,7 +44,7 @@ typedef struct s_map
 	int		x;
 	int		y;
 	t_color	ceiling;
-	t_color	floor;
+	t_color	flr;
 }				t_map;
 
 typedef struct s_image
@@ -141,6 +141,7 @@ typedef enum e_map_type
 typedef enum e_flags
 {
 	OPEN_DOOR = 1,
+	VISIBLE = 2,
 }				t_flags;
 
 // init.c
@@ -177,6 +178,7 @@ int			create_trgb(int t, int r, int g, int b);
 
 // minimap.c
 int			render_minimap(t_data *data);
+void		update_map(t_data *data);
 
 // raycast.c
 int			raycast(t_data *data);
