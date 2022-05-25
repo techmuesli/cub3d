@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include "cub3d.h"
 
-// static void	draw_vert_line(t_data *data, int x, int start, int end, int color);
-
 int	raycast(t_data *data)
 {
 	double	camera_x;
@@ -17,6 +15,7 @@ int	raycast(t_data *data)
 	int		line_height;
 	int		side;
 	int		color;
+	int		frame;
 	t_vec	ray_dir;
 	t_vec	side_distance;
 	t_vec	delta_distance;
@@ -29,18 +28,17 @@ int	raycast(t_data *data)
 		camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
 		ray_dir.x = data->dir.x + data->camera_plane.x * camera_x;
 		ray_dir.y = data->dir.y + data->camera_plane.y * camera_x;
-		
 		map.x = (int)data->pos.x;
 		map.y = (int)data->pos.y;
 		
 		if (ray_dir.x == 0)
 			delta_distance.x = INFINITY;
 		else
-			delta_distance.x = fabs(1/ ray_dir.x); // sqrt(1 + (ray_dir.y * ray_dir.y) / (ray_dir.x * ray_dir.x))
+			delta_distance.x = fabs(1/ ray_dir.x);
 		if (ray_dir.y == 0)
 			delta_distance.y = INFINITY;
 		else
-			delta_distance.y = fabs(1/ ray_dir.y); // sqrt(1 + (ray_dir.x * ray_dir.x) / (ray_dir.y * ray_dir.y))
+			delta_distance.y = fabs(1/ ray_dir.y);
 		if (ray_dir.x < 0)
 		{
 			step.x = -1;
@@ -80,7 +78,7 @@ int	raycast(t_data *data)
 			{
 				if (data->map.data[map.y][map.x] == MAP_TYPE_DOOR)
 				{
-					if ((data->map.flags[map.y][map.x] & OPEN_DOOR) == 0)
+					if (data->map.info[map.y][map.x].open_door == 0)
 						hit = 1;
 				}
 				else
@@ -108,13 +106,13 @@ int	raycast(t_data *data)
 		wall_x -= floor(wall_x);
 
 		int	tex_x;
-		tex_x = (int)(wall_x * (double)TEXTURE_WIDTH);
+		tex_x = (int)(wall_x * (double)TEX_WIDTH);
 		if (side == 0 && ray_dir.x > 0)
-			tex_x = TEXTURE_WIDTH - tex_x - 1;
+			tex_x = TEX_WIDTH - tex_x - 1;
 		if (side == 1 && ray_dir.y < 0)
-			tex_x = TEXTURE_WIDTH - tex_x - 1;
+			tex_x = TEX_WIDTH - tex_x - 1;
 
-		double step = 1.0 * TEXTURE_HEIGHT / line_height;
+		double step = 1.0 * TEX_HEIGHT / line_height;
 		double tex_pos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
 		int y = -1;
 		int tex_y;
@@ -126,32 +124,42 @@ int	raycast(t_data *data)
 			{
 				if (y >= draw_start && y <= draw_end)
 					tex_pos += step;
-				continue;
+				continue ;
 			}
 			if (y < draw_start)
 				color = create_trgb(0, data->map.ceiling.r, data->map.ceiling.g, data->map.ceiling.b);
 			else if (y >= draw_start && y <= draw_end)
 			{
-				tex_y = (int)tex_pos & (TEXTURE_HEIGHT - 1);
+				tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
 				tex_pos += step;
-				if (side == 1)
+				if (data->map.data[map.y][map.x] == MAP_TYPE_DOOR
+					&& data->map.info[map.y][map.x].open_door == 0)
 				{
-					if (data->map.data[map.y][map.x] == MAP_TYPE_DOOR && (data->map.flags[map.y][map.x] & OPEN_DOOR) == 0)
-						color = data->tx_door.data[TEXTURE_HEIGHT * tex_y + tex_x];
-					else if (ray_dir.y > 0)
-						color = data->tx_so.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
-					else
-						color = data->tx_no.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
-					color = (color >> 1) & 8355711; // shadow
+					color = data->tx_door.data[TEX_HEIGHT * tex_y + tex_x];
 				}
 				else
 				{
-					if (data->map.data[map.y][map.x] == MAP_TYPE_DOOR && (data->map.flags[map.y][map.x] & OPEN_DOOR) == 0)
-						color = data->tx_door.data[TEXTURE_HEIGHT * tex_y + tex_x];
-					else if (ray_dir.x < 0)
-						color = data->tx_we.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
+					if (side == 1)
+					{					
+						if (ray_dir.y > 0)
+							color = data->tx_so.data[TEX_HEIGHT * tex_y + tex_x];
+						else
+							color = data->tx_no.data[TEX_HEIGHT * tex_y + tex_x];
+						color = (color >> 1) & 8355711; // shadow
+					}
 					else
-						color = data->tx_ea.data[TEXTURE_HEIGHT * tex_y + tex_x]; // !!!!!
+					{
+						if (ray_dir.x < 0)
+							color = data->tx_we.data[TEX_HEIGHT * tex_y + tex_x];
+						else
+							color = data->tx_ea.data[TEX_HEIGHT * tex_y + tex_x];
+					}
+				}
+				if (data->map.data[map.y][map.x] == MAP_TYPE_WALL_SPRITE)
+				{
+					frame = data->map.info[map.y][map.x].frame_num;
+					if (data->tx_sprite[frame].data[TEX_HEIGHT * tex_y + tex_x] != 0)
+						color = data->tx_sprite[frame].data[TEX_HEIGHT * tex_y + tex_x];
 				}
 			}
 			else
@@ -160,7 +168,7 @@ int	raycast(t_data *data)
 		}
 		x++;
 	}
-	printf("Dir x:%f\tDir y:%f\n", data->dir.x, data->dir.y);
+	//printf("Dir x:%f\tDir y:%f\n", data->dir.x, data->dir.y);
 	render_minimap(data);
 
 	data->last_time = data->current_time;
@@ -171,15 +179,3 @@ int	raycast(t_data *data)
 	data->rot_speed = (frame_time / 1000) * 3.0;
 	return (0);
 }
-
-// static void	draw_vert_line(t_data *data, int x, int start, int end, int color)
-// {
-// 	int	y;
-
-// 	y = start;
-// 	while (y < end)
-// 	{
-// 		cub3d_mlx_pixel_put(&data->image, x, y, color);
-// 		y++;
-// 	}
-// }

@@ -55,7 +55,7 @@ static void	init_general_values(t_data *data)
 	//data->camera_plane.x = 1;
 	//data->camera_plane.y = 0; // FOV = 2 * atan(data->camera_plane.y/ 1.0)
 	data->current_time = 0;
-	data->last_time = get_time();
+	data->initial_time = get_time();
 
 	data->map.floor.r = -1;
 	data->map.floor.g = -1;

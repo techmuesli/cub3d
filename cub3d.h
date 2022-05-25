@@ -13,6 +13,46 @@
 
 # include <stdio.h> // !!!!!
 
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
+
+# define TEX_WIDTH 256
+# define TEX_HEIGHT 256
+
+# define SPRITE_COUNT 4
+
+typedef enum e_info_type
+{
+	INFO_TYPE_NO = 0,
+	INFO_TYPE_EA,
+	INFO_TYPE_SO,
+	INFO_TYPE_WE,
+	INFO_TYPE_FLOOR,
+	INFO_TYPE_CEILING,
+	INFO_TYPE_DOOR,
+	INFO_TYPE_SPRITE1,
+	INFO_TYPE_SPRITE2,
+	INFO_TYPE_SPRITE3,
+	INFO_TYPE_SPRITE4,
+	INFO_TYPE_EMPTY,
+	INFO_TYPE_MAP,
+}				t_info_type;
+
+typedef enum e_map_type
+{
+	MAP_TYPE_UNKNOWN = -2,
+	MAP_TYPE_NOTHINGNESS = -1,
+	MAP_TYPE_EMPTY_SPACE = 0,
+	MAP_TYPE_WALL,
+	MAP_TYPE_WALL_SPRITE,
+	MAP_TYPE_DOOR,
+	MAP_TYPE_N,
+	MAP_TYPE_E,
+	MAP_TYPE_S,
+	MAP_TYPE_W,
+	MAP_END_OF_LINE,
+}				t_map_type;
+
 typedef struct s_vec
 {
 	double	x;
@@ -32,6 +72,14 @@ typedef struct s_color
 	int	b;
 }				t_color;
 
+typedef struct s_map_info
+{
+	int			open_door;
+	int			visible;
+	int			frame_num;
+	uint64_t	sprite_time;
+}				t_map_info;
+
 typedef struct s_map
 {
 	char	*tx_no;
@@ -39,8 +87,9 @@ typedef struct s_map
 	char	*tx_so;
 	char	*tx_we;
 	char	*tx_door;
+	char	*tx_sprite[SPRITE_COUNT];
 	int		**data;
-	int		**flags;
+	t_map_info	**info;
 	int		x;
 	int		y;
 	t_color	ceiling;
@@ -63,7 +112,7 @@ typedef struct s_minimap
 	int		height;
 }				t_minimap;
 
-typedef struct	s_rect
+typedef struct s_rect
 {
 	int	width;
 	int	height;
@@ -71,7 +120,6 @@ typedef struct	s_rect
 	int	y0;
 	int	color;
 }				t_rect;
-
 
 typedef struct s_texture
 {
@@ -92,56 +140,20 @@ typedef struct s_data
 	t_texture	tx_we;
 	t_texture	tx_ea;
 	t_texture	tx_door;
+	t_texture	tx_sprite[SPRITE_COUNT];
 	t_vec		pos;
 	t_vec		dir;
 	t_vec		camera_plane;
 	t_vec_i		mouse_pos;
 	void		*mlx;
 	void		*window;
+	uint64_t	initial_time;
 	uint64_t	current_time;
 	uint64_t	last_time;
 	uint64_t	frame_time;
 	double		move_speed;
 	double		rot_speed;
 }				t_data;
-
-# define SCREEN_WIDTH 1920
-# define SCREEN_HEIGHT 1080
-
-# define TEXTURE_WIDTH 256
-# define TEXTURE_HEIGHT 256
-
-typedef enum e_info_type
-{
-	INFO_TYPE_NO = 0,
-	INFO_TYPE_EA,
-	INFO_TYPE_SO,
-	INFO_TYPE_WE,
-	INFO_TYPE_FLOOR,
-	INFO_TYPE_CEILING,
-	INFO_TYPE_DOOR,
-	INFO_TYPE_EMPTY,
-	INFO_TYPE_MAP,
-}				t_info_type;
-
-typedef enum e_map_type
-{
-	MAP_TYPE_UNKNOWN = -2,
-	MAP_TYPE_NOTHINGNESS = -1,
-	MAP_TYPE_EMPTY_SPACE = 0,
-	MAP_TYPE_WALL,
-	MAP_TYPE_DOOR,
-	MAP_TYPE_N,
-	MAP_TYPE_E,
-	MAP_TYPE_S,
-	MAP_TYPE_W,
-	MAP_END_OF_LINE,
-}				t_map_type;
-
-typedef enum e_flags
-{
-	OPEN_DOOR = 1,
-}				t_flags;
 
 // init.c
 t_data		*fdf_init(int width, int height, char *title);

@@ -57,8 +57,8 @@ int	check_input(t_data *data)
 
 static int	check_map(t_data *data, int **map, t_vec *pos)
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
 
 	y = 0;
 	while (map[y] != NULL)
@@ -77,6 +77,10 @@ static int	check_map(t_data *data, int **map, t_vec *pos)
 				pos->y = y + 0.5;
 				set_orientation(data, map[y][x]);
 				map[y][x] = MAP_TYPE_EMPTY_SPACE;
+			}
+			else if (map[y][x] == MAP_TYPE_WALL_SPRITE)
+			{
+				data->map.info[y][x].frame_num = (y + x) % 4;
 			}
 			if (check_for_walls(map, x, y) != 0)
 				return (-1);

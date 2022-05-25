@@ -67,6 +67,8 @@ static int	*process_map_info(char *line, int *total)
 			data[i] = MAP_TYPE_EMPTY_SPACE;
 		else if (line[i] == '1')
 			data[i] = MAP_TYPE_WALL;
+		else if (line[i] == '2')
+			data[i] = MAP_TYPE_WALL_SPRITE;
 		else if (line[i] == 'N')
 			data[i] = MAP_TYPE_N;
 		else if (line[i] == 'E')
@@ -93,8 +95,8 @@ static int	**init_map_data(t_data *data, t_vector *vec, int width)
 	map = ft_calloc(vec->total + 1, sizeof(int *));
 	if (map == NULL)
 		return (NULL);
-	data->map.flags = ft_calloc(vec->total + 1, sizeof(int *));
-	if (data->map.flags == NULL)
+	data->map.info = ft_calloc(vec->total + 1, sizeof(void *));
+	if (data->map.info == NULL)
 	{
 		free(map);
 		return (NULL);
@@ -103,8 +105,8 @@ static int	**init_map_data(t_data *data, t_vector *vec, int width)
 	while (i < (int)vec->total)
 	{
 		map[i] = vector_get(vec, i);
-		data->map.flags[i] = ft_calloc(width, sizeof(int));
-		if (data->map.flags[i] == NULL)
+		data->map.info[i] = ft_calloc(width, sizeof(t_map_info));
+		if (data->map.info[i] == NULL)
 			return (NULL); // !!!!!
 		i++;
 	}
