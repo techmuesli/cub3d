@@ -57,9 +57,9 @@ static void	init_general_values(t_data *data)
 	data->current_time = 0;
 	data->initial_time = get_time();
 
-	data->map.floor.r = -1;
-	data->map.floor.g = -1;
-	data->map.floor.b = -1;
+	data->map.flr.r = -1;
+	data->map.flr.g = -1;
+	data->map.flr.b = -1;
 	data->map.ceiling.r = -1;
 	data->map.ceiling.g = -1;
 	data->map.ceiling.b = -1;

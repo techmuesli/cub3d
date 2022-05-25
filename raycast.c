@@ -163,12 +163,12 @@ int	raycast(t_data *data)
 				}
 			}
 			else
-				color = create_trgb(0, data->map.floor.r, data->map.floor.g, data->map.floor.b);
+				color = create_trgb(0, data->map.flr.r, data->map.flr.g, data->map.flr.b);
 			cub3d_mlx_pixel_put(&data->image, x, y, color);
 		}
 		x++;
 	}
-	//printf("Dir x:%f\tDir y:%f\n", data->dir.x, data->dir.y);
+	update_map(data);
 	render_minimap(data);
 
 	data->last_time = data->current_time;
