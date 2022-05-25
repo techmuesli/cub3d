@@ -76,7 +76,7 @@ int	render_minimap(t_data *data)
 		pix_pos.x = 0;
 		while (data->map.data[map_pos.y][map_pos.x] != MAP_END_OF_LINE)
 		{
-			if ((data->map.flags[map_pos.y][map_pos.x] & VISIBLE) == 2)
+			if (data->map.info[map_pos.y][map_pos.x].visible == 1)
 			{
 				if (data->map.data[map_pos.y][map_pos.x] == MAP_TYPE_EMPTY_SPACE)
 					color_rect(data, pix_pos, create_trgb(0, data->map.flr.r, \
@@ -117,10 +117,7 @@ void	update_map(t_data *data)
 		while (i.x <= end.x)
 		{
 			if (i.x >= 0 && i.y >= 0 && i.x <= limit.x && i.y <= limit.y)
-			{
-				if ((data->map.flags[i.y][i.x] & VISIBLE) == 0)
-					data->map.flags[i.y][i.x] += VISIBLE;
-			}
+				data->map.info[i.y][i.x].visible = 1;
 			i.x++;
 		}
 		i.y++;
