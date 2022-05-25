@@ -10,14 +10,16 @@ void	key_w(t_data *data)
 	y = (int)data->pos.y;
 	x = (int)(data->pos.x + data->dir.x * data->move_speed);
 	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
-		|| (data->map.data[y][x] == MAP_TYPE_DOOR && data->map.info[y][x].open_door == 1))
+		|| (data->map.data[y][x] == MAP_TYPE_DOOR
+		&& data->map.info[y][x].open_door == 1))
 	{
 		data->pos.x += data->dir.x * data->move_speed;
 	}
 	y = (int)(data->pos.y + data->dir.y * data->move_speed);
 	x = (int)data->pos.x;
 	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
-		|| (data->map.data[y][x] == MAP_TYPE_DOOR && data->map.info[y][x].open_door == 1))
+		|| (data->map.data[y][x] == MAP_TYPE_DOOR
+		&& data->map.info[y][x].open_door == 1))
 	{
 		data->pos.y += data->dir.y * data->move_speed;
 	}
@@ -25,26 +27,71 @@ void	key_w(t_data *data)
 
 void	key_a(t_data *data)
 {
-	if (data->map.data[(int)data->pos.y][(int)(data->pos.x - data->camera_plane.x * data->move_speed)] == 0)
+	int	y;
+	int	x;
+
+	y = (int)data->pos.y;
+	x = (int)(int)(data->pos.x - data->camera_plane.x * data->move_speed);
+	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
+		|| (data->map.data[y][x] == MAP_TYPE_DOOR
+		&& data->map.info[y][x].open_door == 1))
+	{
 		data->pos.x -= data->camera_plane.x * data->move_speed;
-	if (data->map.data[(int)(data->pos.y - data->camera_plane.y * data->move_speed)][(int)data->pos.x] == 0)
+	}
+	y = (int)(data->pos.y - data->camera_plane.y * data->move_speed);
+	x = (int)data->pos.x;
+	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
+		|| (data->map.data[y][x] == MAP_TYPE_DOOR
+		&& data->map.info[y][x].open_door == 1))
+	{
 		data->pos.y -= data->camera_plane.y * data->move_speed;
+	}
 }
 
 void	key_d(t_data *data)
 {
-	if (data->map.data[(int)data->pos.y][(int)(data->pos.x + data->camera_plane.x * data->move_speed)] == 0)
+	int	y;
+	int	x;
+
+	y = (int)data->pos.y;
+	x = (int)(data->pos.x + data->camera_plane.x * data->move_speed);
+	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
+		|| (data->map.data[y][x] == MAP_TYPE_DOOR
+		&& data->map.info[y][x].open_door == 1))
+	{
 		data->pos.x += data->camera_plane.x * data->move_speed;
-	if (data->map.data[(int)(data->pos.y + data->camera_plane.y * data->move_speed)][(int)data->pos.x] == 0)
+	}
+	y = (int)(data->pos.y + data->camera_plane.y * data->move_speed);
+	x = (int)data->pos.x;
+	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
+		|| (data->map.data[y][x] == MAP_TYPE_DOOR
+		&& data->map.info[y][x].open_door == 1))
+	{
 		data->pos.y += data->camera_plane.y * data->move_speed;
+	}
 }
 
 void	key_s(t_data *data)
 {
-	if (data->map.data[(int)data->pos.y][(int)(data->pos.x - data->dir.x * data->move_speed)] == 0)
+	int	y;
+	int	x;
+
+	y = (int)data->pos.y;
+	x = (int)(data->pos.x - data->dir.x * data->move_speed);
+	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
+		|| (data->map.data[y][x] == MAP_TYPE_DOOR
+		&& data->map.info[y][x].open_door == 1))
+	{
 		data->pos.x -= data->dir.x * data->move_speed;
-	if (data->map.data[(int)(data->pos.y - data->dir.y * data->move_speed)][(int)data->pos.x] == 0)
+	}
+	y = (int)(data->pos.y - data->dir.y * data->move_speed);
+	x = (int)data->pos.x;
+	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
+		|| (data->map.data[y][x] == MAP_TYPE_DOOR
+		&& data->map.info[y][x].open_door == 1))
+	{
 		data->pos.y -= data->dir.y * data->move_speed;
+	}
 }
 
 void	key_f(t_data *data)

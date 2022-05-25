@@ -136,6 +136,8 @@ int	raycast(t_data *data)
 					&& data->map.info[map.y][map.x].open_door == 0)
 				{
 					color = data->tx_door.data[TEX_HEIGHT * tex_y + tex_x];
+					if (side == 1)
+						color = (color >> 1) & 8355711;
 				}
 				else
 				{
