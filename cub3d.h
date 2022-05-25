@@ -82,18 +82,18 @@ typedef struct s_map_info
 
 typedef struct s_map
 {
-	char	*tx_no;
-	char	*tx_ea;
-	char	*tx_so;
-	char	*tx_we;
-	char	*tx_door;
-	char	*tx_sprite[SPRITE_COUNT];
-	int		**data;
+	char		*tx_no;
+	char		*tx_ea;
+	char		*tx_so;
+	char		*tx_we;
+	char		*tx_door;
+	char		*tx_sprite[SPRITE_COUNT];
+	int			**data;
 	t_map_info	**info;
-	int		x;
-	int		y;
-	t_color	ceiling;
-	t_color	flr;
+	int			x;
+	int			y;
+	t_color		ceiling;
+	t_color		flr;
 }				t_map;
 
 typedef struct s_image
@@ -129,6 +129,24 @@ typedef struct s_texture
 	int		size_line;
 	int		endian;
 }			t_texture;
+
+typedef struct s_rc
+{
+	t_vec	ray_dir;
+	t_vec	delta_dist;
+	t_vec	side_dist;
+	t_vec_i	px;
+	t_vec_i	map;
+	t_vec_i	step;
+	t_vec_i	tex;
+	int		side;
+	int		draw_start;
+	int		draw_end;
+	int		line_height;
+	int		color;
+	double	tex_step;
+	double	tex_pos;
+}		t_rc;
 
 typedef struct s_data
 {
@@ -188,11 +206,18 @@ void		ft_bzero64(void *s, size_t n);
 int			create_trgb(int t, int r, int g, int b);
 
 // minimap.c
-int			render_minimap(t_data *data);
 void		update_map(t_data *data);
+
+// minimap_utils.c
+void		select_square_color(t_data *data, t_vec_i map, t_vec_i pix_pos);
+int			render_rect(t_image *img, t_rect rect);
 
 // raycast.c
 int			raycast(t_data *data);
+
+// raycast_utils.c
+void		calc_vert_color(t_data *data, t_rc *rc);
+void		calc_move_speeds(t_data *data);
 
 // keys.c
 void		key_w(t_data *data);

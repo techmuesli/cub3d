@@ -1,175 +1,139 @@
-// !!!!!
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alistair <alistair@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/26 01:37:32 by alistair          #+#    #+#             */
+/*   Updated: 2022/05/26 01:40:28 by alistair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
 #include "cub3d.h"
+
+static void	init_values(t_data *data, t_rc *rc)
+{
+	double	camera_x;
+
+	camera_x = 2 * rc->px.x / (double)SCREEN_WIDTH - 1;
+	rc->ray_dir.x = data->dir.x + data->camera_plane.x * camera_x;
+	rc->ray_dir.y = data->dir.y + data->camera_plane.y * camera_x;
+	rc->map.x = (int)data->pos.x;
+	rc->map.y = (int)data->pos.y;
+	if (rc->ray_dir.x == 0)
+		rc->delta_dist.x = INFINITY;
+	else
+		rc->delta_dist.x = fabs(1 / rc->ray_dir.x);
+	if (rc->ray_dir.y == 0)
+		rc->delta_dist.y = INFINITY;
+	else
+		rc->delta_dist.y = fabs(1 / rc->ray_dir.y);
+}
+
+static void	calc_side_dist(t_data *data, t_rc *rc)
+{
+	if (rc->ray_dir.x < 0)
+	{
+		rc->step.x = -1;
+		rc->side_dist.x = (data->pos.x - rc->map.x) * rc->delta_dist.x;
+	}
+	else
+	{
+		rc->step.x = 1;
+		rc->side_dist.x = (rc->map.x + 1.0 - data->pos.x) * rc->delta_dist.x;
+	}
+	if (rc->ray_dir.y < 0)
+	{
+		rc->step.y = -1;
+		rc->side_dist.y = (data->pos.y - rc->map.y) * rc->delta_dist.y;
+	}
+	else
+	{
+		rc->step.y = 1;
+		rc->side_dist.y = (rc->map.y + 1.0 - data->pos.y) * rc->delta_dist.y;
+	}
+}
+
+static void	calc_hit(t_data *data, t_rc *rc)
+{
+	// instead of using hit, function just returns when hit is found
+	while (1)
+	{
+		if (rc->side_dist.x < rc->side_dist.y)
+		{
+			rc->side_dist.x += rc->delta_dist.x;
+			rc->map.x += rc->step.x;
+			rc->side = 0;
+		}
+		else
+		{
+			rc->side_dist.y += rc->delta_dist.y;
+			rc->map.y += rc->step.y;
+			rc->side = 1;
+		}
+		if (data->map.data[rc->map.y][rc->map.x] > 0)
+		{
+			if (data->map.data[rc->map.y][rc->map.x] == MAP_TYPE_DOOR)
+			{
+				if (data->map.info[rc->map.y][rc->map.x].open_door == 0)
+					return ;
+			}
+			return ;
+		}
+	}
+}
+
+static void	calc_tex_x(t_data *data, t_rc *rc)
+{
+	double	perp_wall_distance;
+	double	wall_x;
+
+	if (rc->side == 0)
+		perp_wall_distance = rc->side_dist.x - rc->delta_dist.x;
+	else
+		perp_wall_distance = rc->side_dist.y - rc->delta_dist.y;
+	rc->line_height = (int)(SCREEN_HEIGHT / perp_wall_distance);
+	rc->draw_start = -rc->line_height / 2 + SCREEN_HEIGHT / 2;
+	if (rc->draw_start < 0)
+		rc->draw_start = 0;
+	rc->draw_end = rc->line_height / 2 + SCREEN_HEIGHT / 2;
+	if (rc->draw_end >= SCREEN_HEIGHT)
+		rc->draw_end = SCREEN_HEIGHT - 1;
+	if (rc->side == 0)
+		wall_x = data->pos.y + perp_wall_distance * rc->ray_dir.y;
+	else
+		wall_x = data->pos.x + perp_wall_distance * rc->ray_dir.x;
+	wall_x -= floor(wall_x);
+	rc->tex.x = (int)(wall_x * (double)TEX_WIDTH);
+	if (rc->side == 0 && rc->ray_dir.x > 0)
+		rc->tex.x = TEX_WIDTH - rc->tex.x - 1;
+	if (rc->side == 1 && rc->ray_dir.y < 0)
+		rc->tex.x = TEX_WIDTH - rc->tex.x - 1;
+}
 
 int	raycast(t_data *data)
 {
-	double	camera_x;
-	double	perp_wall_distance; // perpendicular
-	double	frame_time;
-	int		x;
-	int		hit;
-	int		draw_start;
-	int		draw_end;
-	int		line_height;
-	int		side;
-	int		color;
-	int		frame;
-	t_vec	ray_dir;
-	t_vec	side_distance;
-	t_vec	delta_distance;
-	t_vec_i	step;
-	t_vec_i	map;
+	t_rc	rc;
 
-	x = 0;
-	while (x < SCREEN_WIDTH)
+	rc.px.x = -1;
+	while (++rc.px.x < SCREEN_WIDTH)
 	{
-		camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
-		ray_dir.x = data->dir.x + data->camera_plane.x * camera_x;
-		ray_dir.y = data->dir.y + data->camera_plane.y * camera_x;
-		map.x = (int)data->pos.x;
-		map.y = (int)data->pos.y;
-		
-		if (ray_dir.x == 0)
-			delta_distance.x = INFINITY;
-		else
-			delta_distance.x = fabs(1/ ray_dir.x);
-		if (ray_dir.y == 0)
-			delta_distance.y = INFINITY;
-		else
-			delta_distance.y = fabs(1/ ray_dir.y);
-		if (ray_dir.x < 0)
+		init_values(data, &rc);
+		calc_side_dist(data, &rc);
+		calc_hit(data, &rc);
+		calc_tex_x(data, &rc);
+		rc.tex_step = 1.0 * TEX_HEIGHT / rc.line_height;
+		rc.tex_pos = (rc.draw_start - SCREEN_HEIGHT / 2 + rc.line_height / 2) \
+			* rc.tex_step;
+		rc.px.y = -1;
+		while (++rc.px.y < SCREEN_HEIGHT)
 		{
-			step.x = -1;
-			side_distance.x = (data->pos.x - map.x) * delta_distance.x;
+			calc_vert_color(data, &rc);
+			cub3d_mlx_pixel_put(&data->image, rc.px.x, rc.px.y, rc.color);
 		}
-		else
-		{
-			step.x = 1;
-			side_distance.x = (map.x + 1.0 - data->pos.x) * delta_distance.x;
-		}
-		if (ray_dir.y < 0)
-		{
-			step.y = -1;
-			side_distance.y = (data->pos.y - map.y) * delta_distance.y;
-		}
-		else
-		{
-			step.y = 1;
-			side_distance.y = (map.y + 1.0 - data->pos.y) * delta_distance.y;
-		}
-		hit = 0;
-		while (hit == 0)
-		{
-			if (side_distance.x < side_distance.y)
-			{
-				side_distance.x += delta_distance.x;
-				map.x += step.x;
-				side = 0; // East/West
-			}
-			else
-			{
-				side_distance.y += delta_distance.y;
-				map.y += step.y;
-				side = 1; // North/South
-			}
-			if (data->map.data[map.y][map.x] > 0)
-			{
-				if (data->map.data[map.y][map.x] == MAP_TYPE_DOOR)
-				{
-					if (data->map.info[map.y][map.x].open_door == 0)
-						hit = 1;
-				}
-				else
-					hit = 1;
-			}
-		}
-		if (side == 0)
-			perp_wall_distance = side_distance.x - delta_distance.x;
-		else
-			perp_wall_distance = side_distance.y - delta_distance.y;
-		line_height = (int)(SCREEN_HEIGHT / perp_wall_distance);
-		draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
-		if (draw_start < 0)
-			draw_start = 0;
-		draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
-		if (draw_end >= SCREEN_HEIGHT)
-			draw_end = SCREEN_HEIGHT - 1;
-
-		double	wall_x;
-
-		if (side == 0)
-			wall_x = data->pos.y + perp_wall_distance * ray_dir.y;
-		else
-			wall_x = data->pos.x + perp_wall_distance * ray_dir.x;
-		wall_x -= floor(wall_x);
-
-		int	tex_x;
-		tex_x = (int)(wall_x * (double)TEX_WIDTH);
-		if (side == 0 && ray_dir.x > 0)
-			tex_x = TEX_WIDTH - tex_x - 1;
-		if (side == 1 && ray_dir.y < 0)
-			tex_x = TEX_WIDTH - tex_x - 1;
-
-		double step = 1.0 * TEX_HEIGHT / line_height;
-		double tex_pos = (draw_start - SCREEN_HEIGHT / 2 + line_height / 2) * step;
-		int y = -1;
-		int tex_y;
-		while (++y < SCREEN_HEIGHT)
-		{
-			if (y < draw_start)
-				color = create_trgb(0, data->map.ceiling.r, data->map.ceiling.g, data->map.ceiling.b);
-			else if (y >= draw_start && y <= draw_end)
-			{
-				tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
-				tex_pos += step;
-				if (data->map.data[map.y][map.x] == MAP_TYPE_DOOR
-					&& data->map.info[map.y][map.x].open_door == 0)
-				{
-					color = data->tx_door.data[TEX_HEIGHT * tex_y + tex_x];
-					if (side == 1)
-						color = (color >> 1) & 8355711;
-				}
-				else
-				{
-					if (side == 1)
-					{					
-						if (ray_dir.y > 0)
-							color = data->tx_so.data[TEX_HEIGHT * tex_y + tex_x];
-						else
-							color = data->tx_no.data[TEX_HEIGHT * tex_y + tex_x];
-						color = (color >> 1) & 8355711; // shadow
-					}
-					else
-					{
-						if (ray_dir.x < 0)
-							color = data->tx_we.data[TEX_HEIGHT * tex_y + tex_x];
-						else
-							color = data->tx_ea.data[TEX_HEIGHT * tex_y + tex_x];
-					}
-				}
-				if (data->map.data[map.y][map.x] == MAP_TYPE_WALL_SPRITE)
-				{
-					frame = data->map.info[map.y][map.x].frame_num;
-					if (data->tx_sprite[frame].data[TEX_HEIGHT * tex_y + tex_x] != 0)
-						color = data->tx_sprite[frame].data[TEX_HEIGHT * tex_y + tex_x];
-				}
-			}
-			else
-				color = create_trgb(0, data->map.flr.r, data->map.flr.g, data->map.flr.b);
-			cub3d_mlx_pixel_put(&data->image, x, y, color);
-		}
-		x++;
 	}
 	update_map(data);
-	render_minimap(data);
-
-	data->last_time = data->current_time;
-	data->current_time = get_time();
-	frame_time = 1000 / (data->current_time - data->last_time); // seconds
-	// printf("Frame time: %f\n", frame_time);
-	data->move_speed = (frame_time / 1000) * 5.0;
-	data->rot_speed = (frame_time / 1000) * 3.0;
+	calc_move_speeds(data);
 	return (0);
 }
