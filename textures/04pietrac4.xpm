@@ -215,7 +215,7 @@ static char *result[] = {
 "8X c #DBD9D4",
 "9X c #D8D7D8",
 "0X c #DBDBDA",
-"qX c #DEDFDF",
+"qX c #DEDcub3d",
 "wX c #E0D7D2",
 "eX c #E2DBD4",
 "rX c #E1DDDB",
@@ -233,7 +233,7 @@ static char *result[] = {
 "jX c #F0EEF0",
 "kX c #F4F3F2",
 "lX c #FBF8F4",
-"zX c #FDFCFC",
+"zX c #cub3dCFC",
 /* pixels */
 "G V t 0 ] M M G j y 5 9 y y G Q  .| ( h q u N } 6.0.d.b.A.M.h.h.M.W.D.p. .H M z N I >.j.7.2.| ' #.F.*XU.).=X6X5X:X9X*X(.J.h.6.6.g.(.-X.X6X].=X4X*X:X%X(.[.;X;X;X;X4X9X:X;X*X:X:X6X2X<XOXp.%.6.1.-.' 0. .*.8.~ X._ A D f D.t._ P m Q W m R 6.5.~ E A P s n W ( ' P D x x B Z G ! A n u l X...W.K.[.$X[.$XT.[.b.b.J.$X'.'.&X4X6X5X*X(.D.D ~ f.D.:X:X*XqXpXT.&X0XD.(.XXK.w. .G b a B L I B / t.P.P.N.+.G / 9.^ m ~ X.i.q.! A f ^ +X`.+XOX[.2X@XN.!.=XQ.D.~ C ! W < 5 3 3 < % 0 C ' ,.p.4.d.M.c.I K z.z.=._ Q B h n U _ ^ ' =. .B 0 ",
 "Q p < . # + # # % < q q A 2.K.U.(.;X6X6X5X6X0XyX:X;X:X9X4X9X9X9X6X(.).(.| #.2.z.g.c.P.t.M.2.=.=.=.7.a.).*X.X.Xh.c.(.OXU.2.2.<.a.g.z..X(.).Y.Q.W.^.%X.XU.K.W.[.).(.p.D.*XU.).%X*X*X9XsX-X@XM.R.).z.9.3.*.=.*.] I *.D M N | r.r.] y m l m 4.D.u.~ { 1.4.1.A q t y w z p 0 9 9 : , y W #.h.p.g.K.(.:X;X/.K.b.M.s.K.h.f.'.'.~.'.~.D.J.J.f.X.u.K.(..X(.).F.).kXzXkXG.p._.K.Z.K.d.n.G.`.N.&.G p 7 2 $ O O 7 s z E #.A.f.6.f.1.} G g 7 y M +.+.] 3.w.] (  .h.X.{ 1.h.p.q.%.*.2.] V q : # t 9 0 2 : = < 0 7 w 0 j A [ 8.U.W.F.p.1.K._.c.",

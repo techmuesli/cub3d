@@ -46,6 +46,7 @@ typedef enum e_map_type
 	MAP_TYPE_WALL,
 	MAP_TYPE_WALL_SPRITE,
 	MAP_TYPE_DOOR,
+	MAP_TYPE_PORTAL,
 	MAP_TYPE_N,
 	MAP_TYPE_E,
 	MAP_TYPE_S,
@@ -162,6 +163,7 @@ typedef struct s_data
 	t_vec		pos;
 	t_vec		dir;
 	t_vec		camera_plane;
+	t_vec_i		old_pos;
 	t_vec_i		mouse_pos;
 	void		*mlx;
 	void		*window;
@@ -174,10 +176,10 @@ typedef struct s_data
 }				t_data;
 
 // init.c
-t_data		*fdf_init(int width, int height, char *title);
+t_data		*cub3d_init(int width, int height, char *title);
 
 // cleanup.c
-void		fdf_cleanup(t_data **data);
+void		cub3d_cleanup(t_data **data);
 
 // input.c
 int			read_input_file(t_data *data, char *filename);
@@ -207,6 +209,7 @@ int			create_trgb(int t, int r, int g, int b);
 
 // minimap.c
 void		update_map(t_data *data);
+void		render_minimap(t_data *data);
 
 // minimap_utils.c
 void		select_square_color(t_data *data, t_vec_i map, t_vec_i pix_pos);
@@ -216,7 +219,7 @@ int			render_rect(t_image *img, t_rect rect);
 int			raycast(t_data *data);
 
 // raycast_utils.c
-void		calc_vert_color(t_data *data, t_rc *rc);
+void		loop_vert_axis(t_data *data, t_rc *rc);
 void		calc_move_speeds(t_data *data);
 
 // keys.c
@@ -232,5 +235,9 @@ void		key_right(t_data *data);
 
 // textures.c
 int			parse_textures(t_data *data);
+
+
+long long	get_time_usec(void);
+
 
 #endif

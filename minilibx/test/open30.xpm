@@ -553,7 +553,7 @@ static char * open30_2_xpm[] = {
 "Y$	c #42505A",
 "Z$	c #CACCCE",
 "`$	c #F9F9F9",
-" %	c #FDFDFD",
+" %	c #cub3dDFD",
 ".%	c #BCBEC0",
 "+%	c #5C7689",
 "@%	c #8DB9D3",

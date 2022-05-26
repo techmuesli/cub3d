@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alistair <alistair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 01:38:27 by alistair          #+#    #+#             */
-/*   Updated: 2022/05/26 01:44:26 by alistair         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:13:12 by alkane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,33 @@ static void	calc_sprite_frame(t_data *data, t_rc *rc)
 	}
 }
 
-void	calc_vert_color(t_data *data, t_rc *rc)
+void	loop_vert_axis(t_data *data, t_rc *rc)
 {
-	if (rc->px.y < rc->draw_start)
-		rc->color = create_trgb(0, data->map.ceiling.r, data->map.ceiling.g, \
-			data->map.ceiling.b);
-	else if (rc->px.y >= rc->draw_start && rc->px.y <= rc->draw_end)
+	while (++rc->px.y < SCREEN_HEIGHT)
 	{
-		rc->tex.y = (int)rc->tex_pos & (TEX_HEIGHT - 1);
-		rc->tex_pos += rc->tex_step;
-		if (data->map.data[rc->map.y][rc->map.x] == MAP_TYPE_DOOR
-			&& data->map.info[rc->map.y][rc->map.x].open_door == 0)
+		if (rc->px.y < rc->draw_start)
+			rc->color = create_trgb(0, data->map.ceiling.r, data->map.ceiling.g, \
+				data->map.ceiling.b);
+		else if (rc->px.y >= rc->draw_start && rc->px.y <= rc->draw_end)
 		{
-			rc->color = data->tx_door.data[TEX_HEIGHT * rc->tex.y + rc->tex.x];
-			if (rc->side == 1)
-				rc->color = (rc->color >> 1) & 8355711;
+			rc->tex.y = (int)rc->tex_pos & (TEX_HEIGHT - 1);
+			rc->tex_pos += rc->tex_step;
+			if (data->map.data[rc->map.y][rc->map.x] == MAP_TYPE_DOOR
+				&& data->map.info[rc->map.y][rc->map.x].open_door == 0)
+			{
+				rc->color = data->tx_door.data[TEX_HEIGHT * rc->tex.y + rc->tex.x];
+				if (rc->side == 1)
+					rc->color = (rc->color >> 1) & 8355711;
+			}
+			else
+				select_tx_color(data, rc);
+			calc_sprite_frame(data, rc);
 		}
 		else
-			select_tx_color(data, rc);
-		calc_sprite_frame(data, rc);
+			rc->color = create_trgb(0, data->map.flr.r, data->map.flr.g, \
+				data->map.flr.b);
+		cub3d_mlx_pixel_put(&data->image, rc->px.x, rc->px.y, rc->color);
 	}
-	else
-		rc->color = create_trgb(0, data->map.flr.r, data->map.flr.g, \
-			data->map.flr.b);
 }
 
 void	calc_move_speeds(t_data *data)

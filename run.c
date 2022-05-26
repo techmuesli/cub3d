@@ -29,7 +29,7 @@ int	run_loop(void *param)
 		while (data->map.data[y][x] != MAP_END_OF_LINE)
 		{
 			if (data->map.data[y][x] == MAP_TYPE_WALL_SPRITE)
-				change_sprite_frames(data, x, y);
+				(void)change_sprite_frames(data, x, y);
 			x++;
 		}
 		y++;
