@@ -19,8 +19,7 @@
 # define TEX_WIDTH 256
 # define TEX_HEIGHT 256
 
-# define TORCH_COUNT 4
-# define PORTAL_COUNT 5
+# define SPRITE_COUNT 5
 
 typedef enum e_info_type
 {
@@ -153,8 +152,8 @@ typedef struct s_data
 	t_texture	tx_we;
 	t_texture	tx_ea;
 	t_texture	tx_door;
-	t_texture	tx_torch[TORCH_COUNT];
-	t_texture	tx_portal[PORTAL_COUNT];
+	t_texture	tx_torch[SPRITE_COUNT];
+	t_texture	tx_portal[SPRITE_COUNT];
 	t_vec		pos;
 	t_vec		dir;
 	t_vec		camera_plane;

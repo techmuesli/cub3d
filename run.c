@@ -28,8 +28,9 @@ int	run_loop(void *param)
 		x = 0;
 		while (data->map.data[y][x] != MAP_END_OF_LINE)
 		{
-			if (data->map.data[y][x] == MAP_TYPE_WALL_SPRITE)
-				(void)change_sprite_frames(data, x, y);
+			if (data->map.data[y][x] == MAP_TYPE_WALL_SPRITE
+				|| data->map.data[y][x] == MAP_TYPE_PORTAL)
+				change_sprite_frames(data, x, y);
 			x++;
 		}
 		y++;
@@ -40,9 +41,9 @@ int	run_loop(void *param)
 
 static void	change_sprite_frames(t_data *data, int x, int y)
 {
-	if (data->current_time - data->map.info[y][x].sprite_time > 250)
+	if (data->current_time - data->map.info[y][x].sprite_time > 200)
 	{
-		if (data->map.info[y][x].frame_num == 3)
+		if (data->map.info[y][x].frame_num == 4)
 			data->map.info[y][x].frame_num = 0;
 		else
 			data->map.info[y][x].frame_num++;
