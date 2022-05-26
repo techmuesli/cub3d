@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alistair <alistair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 01:51:01 by alistair          #+#    #+#             */
-/*   Updated: 2022/05/26 01:54:05 by alistair         ###   ########.fr       */
+/*   Updated: 2022/05/26 15:14:28 by alkane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	update_player_pos(t_data *data, t_vec_i square)
 	render_rect(&data->image, temp);
 }
 
-static void	render_minimap(t_data *data)
+void	render_minimap(t_data *data)
 {
 	t_vec_i	square;
 	t_vec_i	pix_pos;
@@ -82,5 +82,4 @@ void	update_map(t_data *data)
 		}
 		i.y++;
 	}
-	render_minimap(data);
 }

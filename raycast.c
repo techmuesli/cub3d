@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alistair <alistair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 01:37:32 by alistair          #+#    #+#             */
-/*   Updated: 2022/05/26 01:40:28 by alistair         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:13:44 by alkane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ static void	init_values(t_data *data, t_rc *rc)
 	rc->ray_dir.y = data->dir.y + data->camera_plane.y * camera_x;
 	rc->map.x = (int)data->pos.x;
 	rc->map.y = (int)data->pos.y;
+	if (rc->map.x != data->old_pos.x || (int)data->pos.y != data->old_pos.y)
+	{
+		update_map(data);
+		data->old_pos.x = rc->map.x;
+		data->old_pos.y = rc->map.y;
+	}
 	if (rc->ray_dir.x == 0)
 		rc->delta_dist.x = INFINITY;
 	else
@@ -57,8 +63,10 @@ static void	calc_side_dist(t_data *data, t_rc *rc)
 
 static void	calc_hit(t_data *data, t_rc *rc)
 {
-	// instead of using hit, function just returns when hit is found
-	while (1)
+	int	hit;
+	
+	hit = 0;
+	while (hit == 0)
 	{
 		if (rc->side_dist.x < rc->side_dist.y)
 		{
@@ -77,9 +85,10 @@ static void	calc_hit(t_data *data, t_rc *rc)
 			if (data->map.data[rc->map.y][rc->map.x] == MAP_TYPE_DOOR)
 			{
 				if (data->map.info[rc->map.y][rc->map.x].open_door == 0)
-					return ;
+					hit = 1;
 			}
-			return ;
+			else
+				hit = 1;
 		}
 	}
 }
@@ -127,13 +136,9 @@ int	raycast(t_data *data)
 		rc.tex_pos = (rc.draw_start - SCREEN_HEIGHT / 2 + rc.line_height / 2) \
 			* rc.tex_step;
 		rc.px.y = -1;
-		while (++rc.px.y < SCREEN_HEIGHT)
-		{
-			calc_vert_color(data, &rc);
-			cub3d_mlx_pixel_put(&data->image, rc.px.x, rc.px.y, rc.color);
-		}
+		loop_vert_axis(data, &rc);
 	}
-	update_map(data);
+	render_minimap(data);
 	calc_move_speeds(data);
 	return (0);
 }

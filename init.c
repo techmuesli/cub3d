@@ -5,7 +5,7 @@
 static int	init_image(t_data *data, int width, int height);
 static void	init_general_values(t_data *data);
 
-t_data	*fdf_init(int width, int height, char *title)
+t_data	*cub3d_init(int width, int height, char *title)
 {
 	t_data	*data;
 
@@ -21,12 +21,12 @@ t_data	*fdf_init(int width, int height, char *title)
 	data->window = mlx_new_window(data->mlx, width, height, title);
 	if (data->window == NULL)
 	{
-		fdf_cleanup(&data);
+		cub3d_cleanup(&data);
 		return (NULL);
 	}
 	if (init_image(data, width, height) != 0)
 	{
-		fdf_cleanup(&data);
+		cub3d_cleanup(&data);
 		return (NULL);
 	}
 	mlx_mouse_hide(data->mlx, data->window);
@@ -50,20 +50,16 @@ static int	init_image(t_data *data, int width, int height)
 
 static void	init_general_values(t_data *data)
 {
-	// data->dir.x = -1;
-	// data->dir.y = 0;
-	//data->camera_plane.x = 1;
-	//data->camera_plane.y = 0; // FOV = 2 * atan(data->camera_plane.y/ 1.0)
+	data->old_pos.x = -1;
+	data->old_pos.y = -1;
 	data->current_time = 0;
 	data->initial_time = get_time();
-
 	data->map.flr.r = -1;
 	data->map.flr.g = -1;
 	data->map.flr.b = -1;
 	data->map.ceiling.r = -1;
 	data->map.ceiling.g = -1;
 	data->map.ceiling.b = -1;
-
-	data->mouse_pos.x = SCREEN_WIDTH / 2; // starts with mouse in middle of screen
+	data->mouse_pos.x = SCREEN_WIDTH / 2;
 	data->mouse_pos.y = SCREEN_HEIGHT / 2;
 }

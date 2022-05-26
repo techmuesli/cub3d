@@ -5,7 +5,7 @@
 static void	free_map(t_map *map);
 static void	free_textures(t_data *data);
 
-void	fdf_cleanup(t_data **data)
+void	cub3d_cleanup(t_data **data)
 {
 	if (*data == NULL)
 		return ;
