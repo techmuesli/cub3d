@@ -231,11 +231,12 @@ void		key_w(t_data *data);
 void		key_a(t_data *data);
 void		key_s(t_data *data);
 void		key_d(t_data *data);
-
 void		key_f(t_data *data);
 
+// rotate.c
 void		key_left(t_data *data);
 void		key_right(t_data *data);
+void		check_door(t_data *data, int x, int y);
 
 // textures.c
 int			parse_textures(t_data *data);
