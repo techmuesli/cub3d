@@ -71,6 +71,8 @@ static int	*process_map_info(char *line, int *total)
 			data[i] = MAP_TYPE_WALL_SPRITE;
 		else if (line[i] == 'P')
 			data[i] = MAP_TYPE_PORTAL;
+		else if (line[i] == 'X')
+			data[i] = MAP_TYPE_EXIT;
 		else if (line[i] == 'N')
 			data[i] = MAP_TYPE_N;
 		else if (line[i] == 'E')

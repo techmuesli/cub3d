@@ -64,6 +64,8 @@ static void	free_textures(t_data *data)
 		mlx_destroy_image(data->mlx, data->tx_we.img);
 	if (data->tx_door.img != NULL)
 		mlx_destroy_image(data->mlx, data->tx_door.img);
+	if (data->tx_exit.img != NULL)
+		mlx_destroy_image(data->mlx, data->tx_exit.img);
 	i = -1;
 	while (++i < SPRITE_COUNT)
 	{

@@ -46,6 +46,7 @@ typedef enum e_map_type
 	MAP_TYPE_WALL,
 	MAP_TYPE_WALL_SPRITE,
 	MAP_TYPE_PORTAL,
+	MAP_TYPE_EXIT,
 	MAP_TYPE_DOOR,
 	MAP_TYPE_N,
 	MAP_TYPE_E,
@@ -158,6 +159,7 @@ typedef struct s_data
 	t_texture	tx_we;
 	t_texture	tx_ea;
 	t_texture	tx_door;
+	t_texture	tx_exit;
 	t_texture	tx_torch[SPRITE_COUNT];
 	t_texture	tx_portal[SPRITE_COUNT];
 	t_vec		pos;
@@ -174,6 +176,7 @@ typedef struct s_data
 	double		move_speed;
 	double		rot_speed;
 	int			new_level;
+	int			exit;
 	int			frames;
 }				t_data;
 

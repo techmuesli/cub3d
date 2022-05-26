@@ -12,6 +12,11 @@ int	run_loop(void *param)
 	t_data			*data;
 
 	data = param;
+	if (data->exit == 1)
+	{
+		end_loop(data);
+		return (0);
+	}
 	if (data->new_level == 1)
 	{
 		if (load_new_map(data) == 1)
