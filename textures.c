@@ -16,7 +16,7 @@ int	parse_textures(t_data *data)
 	if (load_wall_textures(data, tx_width, tx_height) != 0)
 		return (-1);
 	data->tx_door.img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/01bricks1.xpm", &tx_height, &tx_width);
+			"./textures/door_blue.xpm", &tx_height, &tx_width);
 	if (data->tx_door.img == NULL)
 		return (1);
 	data->tx_door.data = (int *)mlx_get_data_addr(data->tx_door.img,

@@ -1,10 +1,10 @@
-NO ./textures/01bricks1.xpm
-SO ./textures/04mura.xpm
-WE ./textures/04pietrac1.xpm
-EA ./textures/04pietrac4.xpm
+NO ./textures/tex1.xpm
+SO ./textures/tex2.xpm
+WE ./textures/tex3.xpm
+EA ./textures/tex4.xpm
 
-F 51,204,51
-C 204,51,255
+F 0,0,0
+C 204,204,255
 
         1111111111111222222222111
         1000000000110000000000001
