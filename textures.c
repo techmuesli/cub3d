@@ -65,11 +65,14 @@ static int	load_torch_sprites(t_data *data, int width, int height)
 			"./textures/torch_frame3.xpm", &height, &width);
 	data->tx_torch[3].img = mlx_xpm_file_to_image(data->mlx,
 			"./textures/torch_frame4.xpm", &height, &width);
+	data->tx_torch[4].img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/torch_frame5.xpm", &height, &width);
 	if (data->tx_torch[0].img == NULL || data->tx_torch[1].img == NULL
-		|| data->tx_torch[2].img == NULL || data->tx_torch[3].img == NULL)
+		|| data->tx_torch[2].img == NULL || data->tx_torch[3].img == NULL
+		|| data->tx_torch[4].img == NULL)
 		return (-1);
 	i = 0;
-	while (i < TORCH_COUNT)
+	while (i < SPRITE_COUNT)
 	{
 		data->tx_torch[i].data = (int *)mlx_get_data_addr(
 				data->tx_torch[i].img, &data->tx_torch[i].bpp,
@@ -98,7 +101,7 @@ static int	load_portal_sprites(t_data *data, int width, int height)
 		|| data->tx_portal[4].img == NULL)
 		return (-1);
 	i = 0;
-	while (i < PORTAL_COUNT)
+	while (i < SPRITE_COUNT)
 	{
 		data->tx_portal[i].data = (int *)mlx_get_data_addr(
 				data->tx_portal[i].img, &data->tx_portal[i].bpp,

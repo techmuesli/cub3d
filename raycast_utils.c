@@ -32,6 +32,13 @@ static void	calc_sprite_frame(t_data *data, t_rc *rc)
 			rc->color = data->tx_torch[fr].data[TEX_HEIGHT \
 				* rc->tex.y + rc->tex.x];
 	}
+	else if (data->map.data[rc->map.y][rc->map.x] == MAP_TYPE_PORTAL)
+	{
+		fr = data->map.info[rc->map.y][rc->map.x].frame_num;
+		if (data->tx_portal[fr].data[TEX_HEIGHT * rc->tex.y + rc->tex.x] != 0)
+			rc->color = data->tx_portal[fr].data[TEX_HEIGHT \
+				* rc->tex.y + rc->tex.x];
+	}
 }
 
 void	loop_vert_axis(t_data *data, t_rc *rc)
