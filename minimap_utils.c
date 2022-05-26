@@ -6,7 +6,7 @@
 /*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 01:47:20 by alistair          #+#    #+#             */
-/*   Updated: 2022/05/26 19:36:39 by alkane           ###   ########.fr       */
+/*   Updated: 2022/05/26 19:50:32 by alkane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ void	select_square_color(t_data *data, t_vec_i map, t_vec_i pix_pos)
 			color_rect(data, pix_pos, 0xCC6600);
 		if (data->map.data[map.y][map.x] == MAP_TYPE_PORTAL)
 			color_rect(data, pix_pos, 0x00FF00);
+		if (data->map.data[map.y][map.x] == MAP_TYPE_EXIT)
+			color_rect(data, pix_pos, 0x800000);
 	}
 }
