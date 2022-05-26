@@ -2,6 +2,8 @@
 
 #include "cub3d.h"
 
+static void	check_special_tiles(t_data *data, int x, int y);
+
 void	key_w(t_data *data)
 {
 	int	y;
@@ -15,8 +17,8 @@ void	key_w(t_data *data)
 	{
 		data->pos.x += data->dir.x * data->move_speed;
 	}
-	else if (data->map.data[y][x] == MAP_TYPE_PORTAL)
-		data->new_level = 1;
+	else
+		check_special_tiles(data, x, y);
 	y = (int)(data->pos.y + data->dir.y * data->move_speed);
 	x = (int)data->pos.x;
 	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
@@ -25,8 +27,8 @@ void	key_w(t_data *data)
 	{
 		data->pos.y += data->dir.y * data->move_speed;
 	}
-	else if (data->map.data[y][x] == MAP_TYPE_PORTAL)
-		data->new_level = 1;
+	else
+		check_special_tiles(data, x, y);
 }
 
 void	key_a(t_data *data)
@@ -35,15 +37,15 @@ void	key_a(t_data *data)
 	int	x;
 
 	y = (int)data->pos.y;
-	x = (int)(int)(data->pos.x - data->camera_plane.x * data->move_speed);
+	x = (int)(data->pos.x - data->camera_plane.x * data->move_speed);
 	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
 		|| (data->map.data[y][x] == MAP_TYPE_DOOR
 		&& data->map.info[y][x].open_door == 1))
 	{
 		data->pos.x -= data->camera_plane.x * data->move_speed;
 	}
-	else if (data->map.data[y][x] == MAP_TYPE_PORTAL)
-		data->new_level = 1;
+	else
+		check_special_tiles(data, x, y);
 	y = (int)(data->pos.y - data->camera_plane.y * data->move_speed);
 	x = (int)data->pos.x;
 	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
@@ -52,8 +54,8 @@ void	key_a(t_data *data)
 	{
 		data->pos.y -= data->camera_plane.y * data->move_speed;
 	}
-	else if (data->map.data[y][x] == MAP_TYPE_PORTAL)
-		data->new_level = 1;
+	else
+		check_special_tiles(data, x, y);
 }
 
 void	key_d(t_data *data)
@@ -69,8 +71,8 @@ void	key_d(t_data *data)
 	{
 		data->pos.x += data->camera_plane.x * data->move_speed;
 	}
-	else if (data->map.data[y][x] == MAP_TYPE_PORTAL)
-		data->new_level = 1;
+	else
+		check_special_tiles(data, x, y);
 	y = (int)(data->pos.y + data->camera_plane.y * data->move_speed);
 	x = (int)data->pos.x;
 	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
@@ -79,8 +81,8 @@ void	key_d(t_data *data)
 	{
 		data->pos.y += data->camera_plane.y * data->move_speed;
 	}
-	else if (data->map.data[y][x] == MAP_TYPE_PORTAL)
-		data->new_level = 1;
+	else
+		check_special_tiles(data, x, y);
 }
 
 void	key_s(t_data *data)
@@ -96,8 +98,8 @@ void	key_s(t_data *data)
 	{
 		data->pos.x -= data->dir.x * data->move_speed;
 	}
-	else if (data->map.data[y][x] == MAP_TYPE_PORTAL)
-		data->new_level = 1;
+	else
+		check_special_tiles(data, x, y);
 	y = (int)(data->pos.y - data->dir.y * data->move_speed);
 	x = (int)data->pos.x;
 	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
@@ -106,23 +108,14 @@ void	key_s(t_data *data)
 	{
 		data->pos.y -= data->dir.y * data->move_speed;
 	}
-	else if (data->map.data[y][x] == MAP_TYPE_PORTAL)
-		data->new_level = 1;
+	else
+		check_special_tiles(data, x, y);
 }
 
-void	key_f(t_data *data)
+static void	check_special_tiles(t_data *data, int x, int y)
 {
-	int	x;
-	int	y;
-
-	x = (int)data->pos.x;
-	y = (int)data->pos.y;
-	if (data->map.data[y][x + 1] == MAP_TYPE_DOOR)
-		check_door(data, y, x + 1);
-	else if (data->map.data[y][x - 1] == MAP_TYPE_DOOR)
-		check_door(data, y, x - 1);
-	else if (data->map.data[y + 1][x] == MAP_TYPE_DOOR)
-		check_door(data, y + 1, x);
-	else if (data->map.data[y - 1][x] == MAP_TYPE_DOOR)
-		check_door(data, y - 1, x);
+	if (data->map.data[y][x] == MAP_TYPE_PORTAL)
+		data->new_level = 1;
+	else if (data->map.data[y][x] == MAP_TYPE_EXIT)
+		data->exit = 1;
 }
