@@ -167,6 +167,7 @@ typedef struct s_data
 	uint64_t	frame_time;
 	double		move_speed;
 	double		rot_speed;
+	int			new_level;
 }				t_data;
 
 // init.c
@@ -174,6 +175,7 @@ t_data		*cub3d_init(int width, int height, char *title);
 
 // cleanup.c
 void		cub3d_cleanup(t_data **data);
+void		free_map(t_data *data);
 
 // input.c
 int			read_input_file(t_data *data, char *filename);
@@ -190,6 +192,7 @@ int			load_map(t_data *data, char *line, int fd);
 
 // hooks.c
 void		set_up_hooks(void *window, t_data *data);
+int			end_loop(void *param);
 
 // run.c
 int			run_loop(void *param);

@@ -4,7 +4,6 @@
 
 static int	key_cb(int keycode, void *param);
 int			mouse_cb(int x, int y, t_data *data);
-static int	end_loop(void *param);
 
 // 17 = ON_DESTROY
 void	set_up_hooks(void *window, t_data *data)
@@ -60,8 +59,7 @@ int	mouse_cb(int x, int y, t_data *data)
 	return (0);
 }
 
-
-static int	end_loop(void *param)
+int	end_loop(void *param)
 {
 	t_data	*data;
 

@@ -2,7 +2,6 @@
 
 #include "cub3d.h"
 
-static void	free_map(t_map *map);
 static void	free_textures(t_data *data);
 
 void	cub3d_cleanup(t_data **data)
@@ -13,21 +12,23 @@ void	cub3d_cleanup(t_data **data)
 	{
 		if ((*data)->image.img != NULL)
 			mlx_destroy_image((*data)->mlx, (*data)->image.img);
-		free_textures(*data);
 		if ((*data)->window != NULL)
 			mlx_destroy_window((*data)->mlx, (*data)->window);
 		mlx_destroy_display((*data)->mlx);
 		free((*data)->mlx);
 	}
-	free_map(&(*data)->map);
+	free_map(*data);
 	free(*data);
 	*data = NULL;
 }
 
-static void	free_map(t_map *map)
+void	free_map(t_data *data)
 {
+	t_map *map;
 	int	i;
 
+	map = &data->map;
+	free_textures(data);
 	if (map->data == NULL)
 		return ;
 	if (map->tx_no != NULL)
@@ -45,9 +46,20 @@ static void	free_map(t_map *map)
 		free(map->info[i]);
 		i++;
 	}
-	i = 0;
 	free(map->data);
 	free(map->info);
+	ft_bzero(map, sizeof(t_map));
+	ft_bzero(&data->tx_no, sizeof(t_texture));
+	ft_bzero(&data->tx_so, sizeof(t_texture));
+	ft_bzero(&data->tx_we, sizeof(t_texture));
+	ft_bzero(&data->tx_ea, sizeof(t_texture));
+	ft_bzero(&data->tx_door, sizeof(t_texture));
+	i = -1;
+	while (++i < SPRITE_COUNT)
+	{
+		ft_bzero(&data->tx_torch[i], sizeof(t_texture));
+		ft_bzero(&data->tx_portal[i], sizeof(t_texture));
+	}
 }
 
 static void	free_textures(t_data *data)

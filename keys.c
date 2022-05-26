@@ -17,6 +17,7 @@ void	key_w(t_data *data)
 	}
 	if (data->map.data[y][x] == MAP_TYPE_PORTAL)
 	{
+		data->new_level = 1;
 		printf("ACTIVATE PORTAL CODE HERE\n");
 	}
 	y = (int)(data->pos.y + data->dir.y * data->move_speed);
@@ -29,6 +30,7 @@ void	key_w(t_data *data)
 	}
 	if (data->map.data[y][x] == MAP_TYPE_PORTAL)
 	{
+		data->new_level = 1;
 		printf("ACTIVATE PORTAL CODE HERE\n");
 	}
 }
@@ -46,6 +48,11 @@ void	key_a(t_data *data)
 	{
 		data->pos.x -= data->camera_plane.x * data->move_speed;
 	}
+	if (data->map.data[y][x] == MAP_TYPE_PORTAL)
+	{
+		data->new_level = 1;
+		printf("ACTIVATE PORTAL CODE HERE\n");
+	}
 	y = (int)(data->pos.y - data->camera_plane.y * data->move_speed);
 	x = (int)data->pos.x;
 	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
@@ -56,7 +63,7 @@ void	key_a(t_data *data)
 	}
 	if (data->map.data[y][x] == MAP_TYPE_PORTAL)
 	{
-		data->pos.y += data->camera_plane.y * data->move_speed;
+		data->new_level = 1;
 		printf("ACTIVATE PORTAL CODE HERE\n");
 	}
 }
@@ -76,7 +83,7 @@ void	key_d(t_data *data)
 	}
 	if (data->map.data[y][x] == MAP_TYPE_PORTAL)
 	{
-		data->pos.x += data->camera_plane.x * data->move_speed;
+		data->new_level = 1;
 		printf("ACTIVATE PORTAL CODE HERE\n");
 	}
 	y = (int)(data->pos.y + data->camera_plane.y * data->move_speed);
@@ -89,7 +96,7 @@ void	key_d(t_data *data)
 	}
 	if (data->map.data[y][x] == MAP_TYPE_PORTAL)
 	{
-		data->pos.y += data->camera_plane.y * data->move_speed;
+		data->new_level = 1;
 		printf("ACTIVATE PORTAL CODE HERE\n");
 	}
 }
@@ -107,6 +114,11 @@ void	key_s(t_data *data)
 	{
 		data->pos.x -= data->dir.x * data->move_speed;
 	}
+	if (data->map.data[y][x] == MAP_TYPE_PORTAL)
+	{
+		data->new_level = 1;
+		printf("ACTIVATE PORTAL CODE HERE\n");
+	}
 	y = (int)(data->pos.y - data->dir.y * data->move_speed);
 	x = (int)data->pos.x;
 	if (data->map.data[y][x] == MAP_TYPE_EMPTY_SPACE
@@ -117,7 +129,7 @@ void	key_s(t_data *data)
 	}
 	if (data->map.data[y][x] == MAP_TYPE_PORTAL)
 	{
-		data->pos.y += data->camera_plane.y * data->move_speed;
+		data->new_level = 1;
 		printf("ACTIVATE PORTAL CODE HERE\n");
 	}
 }
