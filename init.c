@@ -62,4 +62,5 @@ static void	general_init(t_data *data)
 	data->map.ceiling.b = -1;
 	data->mouse_pos.x = SCREEN_WIDTH / 2;
 	data->mouse_pos.y = SCREEN_HEIGHT / 2;
+	data->level = LEVEL_1;
 }

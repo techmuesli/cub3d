@@ -42,7 +42,11 @@ static int	load_new_map(t_data *data)
 	data->map.ceiling.r = -1;
 	data->map.ceiling.g = -1;
 	data->map.ceiling.b = -1;
-	if (read_input_file(data, "./maps/smallmap.cub") != 0
+	if (ft_strcmp(data->level, LEVEL_1) == 0)
+		data->level = LEVEL_2;
+	else
+		data->level = LEVEL_3;
+	if (read_input_file(data, data->level) != 0
 		|| parse_textures(data) != 0)
 	{
 		ft_putstr_fd("Error! - loading new map!\n", FD_STDERR);

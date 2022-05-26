@@ -21,6 +21,11 @@
 
 # define SPRITE_COUNT 5
 
+# define LEVEL_1 "./maps/level1.cub"
+# define LEVEL_2 "./maps/level2.cub"
+# define LEVEL_3 "./maps/level3.cub"
+# define BONUS_LEVEL "./maps/bonus_level.cub"
+
 typedef enum e_info_type
 {
 	INFO_TYPE_NO = 0,
@@ -144,6 +149,7 @@ typedef struct s_rc
 
 typedef struct s_data
 {
+	char		*level;
 	t_image		image;
 	t_minimap	minimap;
 	t_map		map;
