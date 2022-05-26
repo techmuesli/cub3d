@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alistair <alistair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 01:38:27 by alistair          #+#    #+#             */
-/*   Updated: 2022/05/26 01:44:26 by alistair         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:25:31 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static void	calc_sprite_frame(t_data *data, t_rc *rc)
 	if (data->map.data[rc->map.y][rc->map.x] == MAP_TYPE_WALL_SPRITE)
 	{
 		fr = data->map.info[rc->map.y][rc->map.x].frame_num;
-		if (data->tx_sprite[fr].data[TEX_HEIGHT * rc->tex.y + rc->tex.x] != 0)
-			rc->color = data->tx_sprite[fr].data[TEX_HEIGHT \
+		if (data->tx_torch[fr].data[TEX_HEIGHT * rc->tex.y + rc->tex.x] != 0)
+			rc->color = data->tx_torch[fr].data[TEX_HEIGHT \
 				* rc->tex.y + rc->tex.x];
 	}
 }

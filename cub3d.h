@@ -19,7 +19,8 @@
 # define TEX_WIDTH 256
 # define TEX_HEIGHT 256
 
-# define SPRITE_COUNT 4
+# define TORCH_COUNT 4
+# define PORTAL_COUNT 5
 
 typedef enum e_info_type
 {
@@ -29,11 +30,6 @@ typedef enum e_info_type
 	INFO_TYPE_WE,
 	INFO_TYPE_FLOOR,
 	INFO_TYPE_CEILING,
-	INFO_TYPE_DOOR,
-	INFO_TYPE_SPRITE1,
-	INFO_TYPE_SPRITE2,
-	INFO_TYPE_SPRITE3,
-	INFO_TYPE_SPRITE4,
 	INFO_TYPE_EMPTY,
 	INFO_TYPE_MAP,
 }				t_info_type;
@@ -45,6 +41,7 @@ typedef enum e_map_type
 	MAP_TYPE_EMPTY_SPACE = 0,
 	MAP_TYPE_WALL,
 	MAP_TYPE_WALL_SPRITE,
+	MAP_TYPE_PORTAL,
 	MAP_TYPE_DOOR,
 	MAP_TYPE_N,
 	MAP_TYPE_E,
@@ -86,8 +83,6 @@ typedef struct s_map
 	char		*tx_ea;
 	char		*tx_so;
 	char		*tx_we;
-	char		*tx_door;
-	char		*tx_sprite[SPRITE_COUNT];
 	int			**data;
 	t_map_info	**info;
 	int			x;
@@ -158,7 +153,8 @@ typedef struct s_data
 	t_texture	tx_we;
 	t_texture	tx_ea;
 	t_texture	tx_door;
-	t_texture	tx_sprite[SPRITE_COUNT];
+	t_texture	tx_torch[TORCH_COUNT];
+	t_texture	tx_portal[PORTAL_COUNT];
 	t_vec		pos;
 	t_vec		dir;
 	t_vec		camera_plane;

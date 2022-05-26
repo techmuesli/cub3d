@@ -3,19 +3,13 @@ SO ./textures/04mura.xpm
 WE ./textures/04pietrac1.xpm
 EA ./textures/04pietrac4.xpm
 
-DOOR ./textures/01bricks1.xpm
-SPRITE1 ./textures/torch_frame1.xpm
-SPRITE2 ./textures/torch_frame2.xpm
-SPRITE3 ./textures/torch_frame3.xpm
-SPRITE4 ./textures/torch_frame4.xpm
-
 F 51,204,51
 C 204,51,255
 
         1111111111111222222222111
         1000000000110000000000001
         1010000001110000000000001
-        10010000000D000N000000001
+        10010000000D000N00000000P
         1011000001110000000000001
         10010000000D0000000000001
 111111111011000001110000000000001

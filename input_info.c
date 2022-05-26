@@ -20,16 +20,6 @@ int	get_type_identifier(char *input)
 		return (INFO_TYPE_FLOOR);
 	if (ft_strncmp(input, "C ", 2) == 0)
 		return (INFO_TYPE_CEILING);
-	if (ft_strncmp(input, "DOOR ", 5) == 0)
-		return (INFO_TYPE_DOOR);
-	if (ft_strncmp(input, "SPRITE1 ", 8) == 0)
-		return (INFO_TYPE_SPRITE1);
-	if (ft_strncmp(input, "SPRITE2 ", 8) == 0)
-		return (INFO_TYPE_SPRITE2);
-	if (ft_strncmp(input, "SPRITE3 ", 8) == 0)
-		return (INFO_TYPE_SPRITE3);
-	if (ft_strncmp(input, "SPRITE4 ", 8) == 0)
-		return (INFO_TYPE_SPRITE4);
 	while (*input != '\0' && *input != '\n')
 	{
 		if (is_whitespace(*input) == 0)
@@ -48,11 +38,6 @@ int	get_type_info(t_map *map, char *input, int type) // !!!!! check for duplicat
 		input += 2;
 	else if (type == INFO_TYPE_FLOOR || type == INFO_TYPE_CEILING)
 		input++;
-	else if (type == INFO_TYPE_DOOR)
-		input += 4;
-	else if (type == INFO_TYPE_SPRITE1 || type == INFO_TYPE_SPRITE2
-		|| type == INFO_TYPE_SPRITE3 || type == INFO_TYPE_SPRITE4)
-		input += 7;
 	while (*input == ' ') // !!!!! also support whitespaces
 		input++;
 	if (check_file_info(map, type) != 0)
@@ -65,16 +50,6 @@ int	get_type_info(t_map *map, char *input, int type) // !!!!! check for duplicat
 		map->tx_so = ft_strdup(input);
 	else if (type == INFO_TYPE_WE)
 		map->tx_we = ft_strdup(input);
-	else if (type == INFO_TYPE_DOOR)
-		map->tx_door = ft_strdup(input);
-	else if (type == INFO_TYPE_SPRITE1)
-		map->tx_sprite[0] = ft_strdup(input);
-	else if (type == INFO_TYPE_SPRITE2)
-		map->tx_sprite[1] = ft_strdup(input);
-	else if (type == INFO_TYPE_SPRITE3)
-		map->tx_sprite[2] = ft_strdup(input);
-	else if (type == INFO_TYPE_SPRITE4)
-		map->tx_sprite[3] = ft_strdup(input);
 	else if (type == INFO_TYPE_FLOOR)
 		return (get_color_value(&map->flr, input));
 	else if (type == INFO_TYPE_CEILING)
@@ -87,12 +62,7 @@ static int	check_file_info(t_map *map, int type)
 	if ((type == INFO_TYPE_NO && map->tx_no != NULL)
 		|| (type == INFO_TYPE_EA && map->tx_ea != NULL)
 		|| (type == INFO_TYPE_SO && map->tx_so != NULL)
-		|| (type == INFO_TYPE_WE && map->tx_we != NULL)
-		|| (type == INFO_TYPE_DOOR && map->tx_door != NULL)
-		|| (type == INFO_TYPE_SPRITE1 && map->tx_sprite[0] != NULL)
-		|| (type == INFO_TYPE_SPRITE2 && map->tx_sprite[1] != NULL)
-		|| (type == INFO_TYPE_SPRITE3 && map->tx_sprite[2] != NULL)
-		|| (type == INFO_TYPE_SPRITE4 && map->tx_sprite[3] != NULL))
+		|| (type == INFO_TYPE_WE && map->tx_we != NULL))
 		return (-1);
 	if (type == INFO_TYPE_FLOOR)
 	{
