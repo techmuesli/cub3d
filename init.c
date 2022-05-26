@@ -3,7 +3,7 @@
 #include "cub3d.h"
 
 static int	init_image(t_data *data, int width, int height);
-static void	init_general_values(t_data *data);
+static void	general_init(t_data *data);
 
 t_data	*cub3d_init(int width, int height, char *title)
 {
@@ -30,8 +30,7 @@ t_data	*cub3d_init(int width, int height, char *title)
 		return (NULL);
 	}
 	mlx_mouse_hide(data->mlx, data->window);
-	set_up_hooks(data->window, data);
-	init_general_values(data);
+	general_init(data);
 	return (data);
 }
 
@@ -48,8 +47,9 @@ static int	init_image(t_data *data, int width, int height)
 	return (0);
 }
 
-static void	init_general_values(t_data *data)
+static void	general_init(t_data *data)
 {
+	set_up_hooks(data->window, data);
 	data->old_pos.x = -1;
 	data->old_pos.y = -1;
 	data->current_time = 0;

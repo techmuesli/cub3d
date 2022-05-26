@@ -168,6 +168,7 @@ typedef struct s_data
 	double		move_speed;
 	double		rot_speed;
 	int			new_level;
+	int			frames;
 }				t_data;
 
 // init.c
@@ -232,9 +233,5 @@ void		key_right(t_data *data);
 
 // textures.c
 int			parse_textures(t_data *data);
-
-
-long long	get_time_usec(void);
-
 
 #endif

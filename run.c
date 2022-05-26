@@ -2,7 +2,32 @@
 
 #include "cub3d.h"
 
+static int	load_new_map(t_data *data);
 static void	change_sprite_frames(t_data *data, int x, int y);
+static void	update_sprites(t_data *data);
+static void	update_fps(t_data *data);
+
+int	run_loop(void *param)
+{
+	t_data			*data;
+
+	data = param;
+	if (data->new_level == 1)
+	{
+		if (load_new_map(data) == 1)
+		{
+			end_loop(data);
+			return (0);
+		}
+	}
+	ft_bzero64(data->image.addr, SCREEN_WIDTH * SCREEN_HEIGHT
+		* (data->image.bpp / 8));
+	raycast(data);
+	update_fps(data);
+	update_sprites(data);
+	mlx_put_image_to_window(data->mlx, data->window, data->image.img, 0, 0);
+	return (0);
+}
 
 static int	load_new_map(t_data *data)
 {
@@ -17,7 +42,8 @@ static int	load_new_map(t_data *data)
 	data->map.ceiling.r = -1;
 	data->map.ceiling.g = -1;
 	data->map.ceiling.b = -1;
-	if (read_input_file(data, "./maps/smallmap.cub") != 0 || parse_textures(data) != 0)
+	if (read_input_file(data, "./maps/smallmap.cub") != 0
+		|| parse_textures(data) != 0)
 	{
 		ft_putstr_fd("Error! - loading new map!\n", FD_STDERR);
 		return (1);
@@ -26,32 +52,23 @@ static int	load_new_map(t_data *data)
 	return (0);
 }
 
-int	run_loop(void *param)
+static void	change_sprite_frames(t_data *data, int x, int y)
+{
+	if (data->current_time - data->map.info[y][x].sprite_time > 100)
+	{
+		if (data->map.info[y][x].frame_num == 4)
+			data->map.info[y][x].frame_num = 0;
+		else
+			data->map.info[y][x].frame_num++;
+		data->map.info[y][x].sprite_time = get_time();
+	}
+}
+
+static void	update_sprites(t_data *data)
 {
 	int				x;
 	int				y;
-	t_data			*data;
-	static int		frames; // !!!!!
 
-	data = param;
-	if (data->new_level == 1)
-	{
-		if (load_new_map(data) == 1)
-		{
-			end_loop(data);
-			return (0);
-		}
-	}
-	ft_bzero64(data->image.addr, SCREEN_WIDTH * SCREEN_HEIGHT
-		* (data->image.bpp / 8));
-	raycast(data);
-	frames++;
-	if (data->current_time - data->initial_time >= 1000)
-	{
-		ft_printf("%d\n", (frames));
-		frames = 0;
-		data->initial_time += 1000;
-	}
 	y = 0;
 	while (data->map.data[y] != NULL)
 	{
@@ -65,18 +82,15 @@ int	run_loop(void *param)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx, data->window, data->image.img, 0, 0);
-	return (0);
 }
 
-static void	change_sprite_frames(t_data *data, int x, int y)
+static void	update_fps(t_data *data)
 {
-	if (data->current_time - data->map.info[y][x].sprite_time > 200)
+	data->frames++;
+	if (data->current_time - data->initial_time >= 1000)
 	{
-		if (data->map.info[y][x].frame_num == 4)
-			data->map.info[y][x].frame_num = 0;
-		else
-			data->map.info[y][x].frame_num++;
-		data->map.info[y][x].sprite_time = get_time();
+		ft_printf("%d\n", (data->frames));
+		data->frames = 0;
+		data->initial_time += 1000;
 	}
 }

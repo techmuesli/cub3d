@@ -35,16 +35,6 @@ long long	get_time(void)
 	return (milliseconds);
 }
 
-long long	get_time_usec(void)
-{
-	struct timeval	tv;
-	long long		usec;
-
-	gettimeofday(&tv, NULL);
-	usec = tv.tv_sec * 1000LL * 1000LL + tv.tv_usec;
-	return (usec);
-}
-
 void	ft_bzero64(void *s, size_t n)
 {
 	uint64_t	*data;

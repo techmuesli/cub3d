@@ -24,7 +24,6 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	mlx_loop(data->mlx);
-	
 	cub3d_cleanup(&data);
 	return (0);
 }

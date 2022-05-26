@@ -9,7 +9,6 @@ int			mouse_cb(int x, int y, t_data *data);
 void	set_up_hooks(void *window, t_data *data)
 {
 	mlx_hook(window, 2, 1, key_cb, data);
-
 	mlx_hook(window, 6, (1L << 6), mouse_cb, data);
 	mlx_hook(window, 17, 0, end_loop, data);
 	mlx_loop_hook(data->mlx, run_loop, data);
@@ -23,36 +22,38 @@ static int	key_cb(int keycode, void *param)
 	data = param;
 	if (keycode == 65307)
 		end_loop(param);
-	if (keycode == 65361)
+	else if (keycode == 65361)
 		key_left(data);
-	if (keycode == 65363)
+	else if (keycode == 65363)
 		key_right(data);
-
-	if (keycode == 119)
+	else if (keycode == 119)
 		key_w(data);
-	if (keycode == 97)
+	else if (keycode == 97)
 		key_a(data);
-	if (keycode == 115)
+	else if (keycode == 115)
 		key_s(data);
-	if (keycode == 100)
+	else if (keycode == 100)
 		key_d(data);
-	if (keycode == 102)
+	else if (keycode == 102)
 		key_f(data);
 	return (0);
 }
 
+// data->rot_speed = 0.05 -> modified for "mouse sensitivity"
 int	mouse_cb(int x, int y, t_data *data)
 {
 	(void)y;
 	if (x < data->mouse_pos.x)
 	{
-		mlx_mouse_move(data->mlx, data->window, data->mouse_pos.x, data->mouse_pos.y);
-		data->rot_speed = 0.05; // modified for "mouse sensitivity"
+		mlx_mouse_move(data->mlx, data->window, data->mouse_pos.x,
+			data->mouse_pos.y);
+		data->rot_speed = 0.05;
 		key_left(data);
 	}
 	if (x > data->mouse_pos.x)
 	{
-		mlx_mouse_move(data->mlx, data->window, data->mouse_pos.x, data->mouse_pos.y);
+		mlx_mouse_move(data->mlx, data->window, data->mouse_pos.x,
+			data->mouse_pos.y);
 		data->rot_speed = 0.05;
 		key_right(data);
 	}

@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 01:51:01 by alistair          #+#    #+#             */
-/*   Updated: 2022/05/26 15:14:28 by alkane           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+// !!!!!
 
 #include "cub3d.h"
 
@@ -70,10 +60,10 @@ void	update_map(t_data *data)
 	end.x = pos.x + 2;
 	end.y = pos.y + 2;
 	i.y = pos.y - 2;
-	while (i.y <= end.y)
+	while (i.y < end.y)
 	{
 		i.x = pos.x - 2;
-		while (i.x <= end.x)
+		while (i.x < end.x)
 		{
 			if (i.x >= 0 && i.y >= 0 && i.x <= data->map.x && \
 				i.y <= data->map.y)
