@@ -59,6 +59,8 @@ void	loop_vert_axis(t_data *data, t_rc *rc)
 				if (rc->side == 1)
 					rc->color = (rc->color >> 1) & 8355711;
 			}
+			else if (data->map.data[rc->map.y][rc->map.x] == MAP_TYPE_EXIT)
+				rc->color = data->tx_exit.data[TEX_HEIGHT * rc->tex.y + rc->tex.x];
 			else
 				select_tx_color(data, rc);
 			calc_sprite_frame(data, rc);
