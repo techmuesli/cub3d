@@ -184,7 +184,6 @@ typedef struct s_data
 	uint64_t	current_time;
 	uint64_t	last_time;
 	uint64_t	frame_time;
-	uint64_t	start_time;
 	double		move_speed;
 	double		rot_speed;
 	int			new_level;

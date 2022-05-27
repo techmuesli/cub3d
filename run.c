@@ -14,6 +14,9 @@ int	run_loop(void *param)
 	data = param;
 	if (data->exit == 1)
 	{
+		//mlx_set_font(data->mlx, data->window, char *name);
+		//mlx_string_put(data->mlx, data->window, 50, 50, 0, "test output");
+		//printf("Your time: %lld.%llds\n", (get_time() - data->start.start_time) / 1000, (get_time() - data->start.start_time) % 1000);
 		end_loop(data);
 		return (0);
 	}

@@ -103,6 +103,8 @@ static int	get_next_rgb_value(char **input)
 
 	if (**input == ',')
 		(*input)++;
+	if (**input == '\0')
+		return (-1);
 	value = 0;
 	while (**input != '\0' && **input != ',')
 	{

@@ -18,6 +18,8 @@ int	check_input(t_data *data)
 	if (data->map.ceiling.r == -1 || data->map.ceiling.g == -1
 		|| data->map.ceiling.b == -1)
 		return (-1);
+	if (data->map.x == 0 || data->map.y == 0)
+		return (-1);
 	if (check_map(data, data->map.data, &data->pos) != 0)
 		return (-1);
 	if (data->pos.x == 0 || data->pos.y == 0)
@@ -68,7 +70,7 @@ static int	check_for_walls(int **map, int x, int y)
 {
 	if (map[y][x] == MAP_TYPE_EMPTY_SPACE || map[y][x] == MAP_TYPE_N
 		|| map[y][x] == MAP_TYPE_E || map[y][x] == MAP_TYPE_S
-		|| map[y][x] == MAP_TYPE_W)
+		|| map[y][x] == MAP_TYPE_W || map[y][x] == MAP_TYPE_DOOR)
 	{
 		if (y == 0 || x == 0)
 			return (-1);
