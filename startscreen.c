@@ -17,7 +17,7 @@ void	render_startscreen(t_data *data)
 			screen.x = (SCREEN_WIDTH / 2) - (START_WIDTH / 2);
 			while (screen.x < (SCREEN_WIDTH / 2) + (START_WIDTH / 2))
 			{
-				if (start.start.data[tx.y * START_WIDTH + tx.x] != 0x0F0F0F)
+				if (start.start.data[tx.y * START_WIDTH + tx.x] != 0x0000FF)
 					cub3d_mlx_pixel_put(&data->image, screen.x, screen.y, \
 						start.start.data[tx.y * START_WIDTH + tx.x]);
 				tx.x++;
