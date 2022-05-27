@@ -6,7 +6,7 @@
 /*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 01:47:20 by alistair          #+#    #+#             */
-/*   Updated: 2022/05/26 19:50:32 by alkane           ###   ########.fr       */
+/*   Updated: 2022/05/27 20:50:58 by alkane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ static void	color_rect(t_data *data, t_vec_i pix_pos, int color)
 	t_vec_i	square;
 	t_rect	temp;
 
-	square.x = (SCREEN_WIDTH / 4) / data->map.x;
-	square.y = (SCREEN_HEIGHT / 4) / data->map.y;
+	square = calc_square(data);
 	temp.width = square.x;
 	temp.height = square.y;
 	temp.x0 = pix_pos.x + (SCREEN_WIDTH - data->minimap.width) - 20;
-	temp.y0 = pix_pos.y + 20;
+	temp.y0 = pix_pos.y;
 	temp.color = color;
 	render_rect(&data->image, temp);
 }
@@ -41,6 +40,19 @@ int	render_rect(t_image *img, t_rect rect)
 		++i;
 	}
 	return (0);
+}
+
+t_vec_i	calc_square(t_data *data)
+{
+	t_vec_i	square;
+
+	square.x = (SCREEN_WIDTH / 4) / data->map.x;
+	square.y = (SCREEN_WIDTH / 4) / data->map.y;
+	if (data->map.x < data->map.y)
+		square.y = square.x;
+	else
+		square.x = square.y;
+	return (square);
 }
 
 void	select_square_color(t_data *data, t_vec_i map, t_vec_i pix_pos)

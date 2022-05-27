@@ -13,8 +13,8 @@
 
 # include <stdio.h> // !!!!!
 
-# define SCREEN_WIDTH 1280
-# define SCREEN_HEIGHT 720
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 
 # define TEX_WIDTH 256
 # define TEX_HEIGHT 256
@@ -233,6 +233,7 @@ void		render_minimap(t_data *data);
 // minimap_utils.c
 void		select_square_color(t_data *data, t_vec_i map, t_vec_i pix_pos);
 int			render_rect(t_image *img, t_rect rect);
+t_vec_i		calc_square(t_data *data);
 
 // raycast.c
 int			raycast(t_data *data);

@@ -10,16 +10,16 @@ static void	update_player_pos(t_data *data, t_vec_i square)
 	temp.height = square.y / 3;
 	temp.x0 = square.x * data->pos.x + \
 		(SCREEN_WIDTH - data->minimap.width) - 20;
-	temp.y0 = square.y * data->pos.y + 20;
+	temp.y0 = square.y * data->pos.y;
 	temp.color = 0xFF0000;
 	render_rect(&data->image, temp);
 	temp.x0 = square.x * (data->pos.x + (data->dir.x / 4)) + \
 		(SCREEN_WIDTH - data->minimap.width) - 20;
-	temp.y0 = square.y * (data->pos.y + (data->dir.y / 4)) + 20;
+	temp.y0 = square.y * (data->pos.y + (data->dir.y / 4));
 	render_rect(&data->image, temp);
 	temp.x0 = square.x * (data->pos.x + (data->dir.x / 2)) + \
 		(SCREEN_WIDTH - data->minimap.width) - 20;
-	temp.y0 = square.y * (data->pos.y + (data->dir.y / 2)) + 20;
+	temp.y0 = square.y * (data->pos.y + (data->dir.y / 2));
 	render_rect(&data->image, temp);
 }
 
@@ -29,11 +29,10 @@ void	render_minimap(t_data *data)
 	t_vec_i	pix_pos;
 	t_vec_i	map;
 
-	square.x = (SCREEN_WIDTH / 4) / data->map.x;
-	square.y = (SCREEN_HEIGHT / 4) / data->map.y;
+	square = calc_square(data);
 	data->minimap.width = square.x * data->map.x;
 	data->minimap.height = square.y * data->map.y;
-	pix_pos.y = 0;
+	pix_pos.y = 20;
 	map.y = -1;
 	while (data->map.data[++map.y] != NULL)
 	{
