@@ -79,6 +79,8 @@ static void	update_sprites(t_data *data)
 	int				y;
 
 	y = 0;
+	if (get_time() - data->start.start_time > 3000)
+		data->start.start_flag = 0;
 	while (data->map.data[y] != NULL)
 	{
 		x = 0;

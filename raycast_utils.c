@@ -94,6 +94,6 @@ void	calc_move_speeds(t_data *data)
 	data->last_time = data->current_time;
 	data->current_time = get_time();
 	frame_time = 1000 / (data->current_time - data->last_time);
-	data->move_speed = (frame_time / 1000) * 5.0;
+	data->move_speed = (frame_time / 1000) * 6.0;
 	data->rot_speed = (frame_time / 1000) * 3.0;
 }

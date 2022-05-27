@@ -1,7 +1,7 @@
-NO ./textures/tex1.xpm
-SO ./textures/tex2.xpm
-WE ./textures/tex3.xpm
-EA ./textures/tex4.xpm
+NO ./textures/xpms/red_bricks.xpm
+SO ./textures/xpms/red_bricks.xpm
+WE ./textures/xpms/red_bricks.xpm
+EA ./textures/xpms/red_bricks.xpm
 
 F 0,0,0
 C 204,204,255

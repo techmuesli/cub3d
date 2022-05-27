@@ -1,7 +1,7 @@
-NO ./textures/01bricks1.xpm
-SO ./textures/04mura.xpm
-WE ./textures/04pietrac1.xpm
-EA ./textures/04pietrac4.xpm
+NO ./textures/xpms/blue_bricks.xpm
+SO ./textures/xpms/blue_bricks.xpm
+WE ./textures/xpms/blue_bricks.xpm
+EA ./textures/xpms/blue_bricks.xpm
 
 F 51,204,51
 C 204,51,255

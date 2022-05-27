@@ -13,12 +13,14 @@
 
 # include <stdio.h> // !!!!!
 
-# define SCREEN_WIDTH 1920
-# define SCREEN_HEIGHT 1080
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
 
 # define TEX_WIDTH 256
 # define TEX_HEIGHT 256
 
+# define START_WIDTH 1000
+# define START_HEIGHT 600
 # define SPRITE_COUNT 5
 
 # define LEVEL_1 "./maps/level1.cub"
@@ -130,6 +132,13 @@ typedef struct s_texture
 	int		endian;
 }			t_texture;
 
+typedef struct s_start
+{
+	t_texture	start;
+	uint64_t	start_time;
+	int			start_flag;
+}				t_start;
+
 typedef struct s_rc
 {
 	t_vec	ray_dir;
@@ -155,6 +164,7 @@ typedef struct s_data
 	t_image		image;
 	t_minimap	minimap;
 	t_map		map;
+	t_start		start;
 	t_texture	tx_no;
 	t_texture	tx_so;
 	t_texture	tx_we;
@@ -174,6 +184,7 @@ typedef struct s_data
 	uint64_t	current_time;
 	uint64_t	last_time;
 	uint64_t	frame_time;
+	uint64_t	start_time;
 	double		move_speed;
 	double		rot_speed;
 	int			new_level;
@@ -244,5 +255,8 @@ void		check_door(t_data *data, int x, int y);
 
 // textures.c
 int			parse_textures(t_data *data);
+
+// startscreen.c
+void		render_startscreen(t_data *data);
 
 #endif

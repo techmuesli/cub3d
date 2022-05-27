@@ -47,6 +47,24 @@ static int	init_image(t_data *data, int width, int height)
 	return (0);
 }
 
+static void	init_startscreen(t_data *data)
+{
+	t_vec_i	size;
+
+	size.x = START_WIDTH;
+	size.y = START_HEIGHT;
+	data->start.start_flag = 1;
+	data->start.start_time = get_time();
+	data->start.start.img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/start_screen.xpm", &size.x, &size.y);
+	if (data->start.start.img == NULL)
+		data->start.start_flag = 0;
+	data->start.start.data = \
+		(int *)mlx_get_data_addr(data->start.start.img,
+			&data->start.start.bpp, &data->start.start.size_line,
+			&data->start.start.endian);
+}
+
 static void	general_init(t_data *data)
 {
 	set_up_hooks(data->window, data);
@@ -63,4 +81,5 @@ static void	general_init(t_data *data)
 	data->mouse_pos.x = SCREEN_WIDTH / 2;
 	data->mouse_pos.y = SCREEN_HEIGHT / 2;
 	data->level = LEVEL_1;
+	init_startscreen(data);
 }

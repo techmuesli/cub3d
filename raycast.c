@@ -70,8 +70,10 @@ static void	calc_hit(t_data *data, t_rc *rc)
 		if (data->map.data[rc->map.y][rc->map.x] > 0)
 		{
 			if (data->map.data[rc->map.y][rc->map.x] == MAP_TYPE_DOOR)
+			{
 				if (data->map.info[rc->map.y][rc->map.x].open_door == 0)
 					rc->hit = 1;
+			}
 			else
 				rc->hit = 1;
 		}
@@ -110,12 +112,12 @@ int	raycast(t_data *data)
 {
 	t_rc	rc;
 
-	rc.hit = 0;
 	rc.px.x = -1;
 	while (++rc.px.x < SCREEN_WIDTH)
 	{
 		init_values(data, &rc);
 		calc_side_dist(data, &rc);
+		rc.hit = 0;
 		calc_hit(data, &rc);
 		calc_tex_x(data, &rc);
 		rc.tex_step = 1.0 * TEX_HEIGHT / rc.line_height;
@@ -125,6 +127,7 @@ int	raycast(t_data *data)
 		loop_vert_axis(data, &rc);
 	}
 	render_minimap(data);
+	render_startscreen(data);
 	calc_move_speeds(data);
 	return (0);
 }
