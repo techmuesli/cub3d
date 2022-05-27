@@ -10,16 +10,16 @@ static void	update_player_pos(t_data *data, t_vec_i square)
 	temp.height = square.y / 3;
 	temp.x0 = square.x * data->pos.x + \
 		(SCREEN_WIDTH - data->minimap.width) - 20;
-	temp.y0 = square.y * data->pos.y;
+	temp.y0 = (square.y * data->pos.y) + 20;
 	temp.color = 0xFF0000;
 	render_rect(&data->image, temp);
 	temp.x0 = square.x * (data->pos.x + (data->dir.x / 4)) + \
 		(SCREEN_WIDTH - data->minimap.width) - 20;
-	temp.y0 = square.y * (data->pos.y + (data->dir.y / 4));
+	temp.y0 = (square.y * (data->pos.y + (data->dir.y / 4))) + 20;
 	render_rect(&data->image, temp);
 	temp.x0 = square.x * (data->pos.x + (data->dir.x / 2)) + \
 		(SCREEN_WIDTH - data->minimap.width) - 20;
-	temp.y0 = square.y * (data->pos.y + (data->dir.y / 2));
+	temp.y0 = (square.y * (data->pos.y + (data->dir.y / 2))) + 20;
 	render_rect(&data->image, temp);
 }
 
