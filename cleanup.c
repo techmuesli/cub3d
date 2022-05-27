@@ -19,6 +19,8 @@ void	cub3d_cleanup(t_data **data)
 		mlx_destroy_display((*data)->mlx);
 		free((*data)->mlx);
 	}
+	if ((*data)->start.start.img != NULL)
+		mlx_destroy_image((*data)->mlx, (*data)->start.start.img);
 	free_map(*data);
 	free(*data);
 	*data = NULL;
