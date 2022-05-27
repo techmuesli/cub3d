@@ -144,6 +144,7 @@ typedef struct s_rc
 	int		draw_end;
 	int		line_height;
 	int		color;
+	int		hit;
 	double	tex_step;
 	double	tex_pos;
 }		t_rc;

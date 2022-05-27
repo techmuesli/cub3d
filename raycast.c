@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   raycast.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 01:37:32 by alistair          #+#    #+#             */
-/*   Updated: 2022/05/26 16:13:44 by alkane           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+// !!!!!!
 
 #include "cub3d.h"
 
@@ -63,10 +53,7 @@ static void	calc_side_dist(t_data *data, t_rc *rc)
 
 static void	calc_hit(t_data *data, t_rc *rc)
 {
-	int	hit;
-	
-	hit = 0;
-	while (hit == 0)
+	while (rc->hit == 0)
 	{
 		if (rc->side_dist.x < rc->side_dist.y)
 		{
@@ -83,12 +70,10 @@ static void	calc_hit(t_data *data, t_rc *rc)
 		if (data->map.data[rc->map.y][rc->map.x] > 0)
 		{
 			if (data->map.data[rc->map.y][rc->map.x] == MAP_TYPE_DOOR)
-			{
 				if (data->map.info[rc->map.y][rc->map.x].open_door == 0)
-					hit = 1;
-			}
+					rc->hit = 1;
 			else
-				hit = 1;
+				rc->hit = 1;
 		}
 	}
 }
@@ -125,6 +110,7 @@ int	raycast(t_data *data)
 {
 	t_rc	rc;
 
+	rc.hit = 0;
 	rc.px.x = -1;
 	while (++rc.px.x < SCREEN_WIDTH)
 	{

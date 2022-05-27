@@ -3,6 +3,7 @@
 #include "cub3d.h"
 
 static void	free_textures(t_data *data);
+static void	free_sprites(t_data *data);
 static void	bzero_textures(t_data *data);
 
 void	cub3d_cleanup(t_data **data)
@@ -52,8 +53,6 @@ void	free_map(t_data *data)
 
 static void	free_textures(t_data *data)
 {
-	int	i;
-
 	if (data->tx_no.img != NULL)
 		mlx_destroy_image(data->mlx, data->tx_no.img);
 	if (data->tx_ea.img != NULL)
@@ -66,19 +65,28 @@ static void	free_textures(t_data *data)
 		mlx_destroy_image(data->mlx, data->tx_door.img);
 	if (data->tx_exit.img != NULL)
 		mlx_destroy_image(data->mlx, data->tx_exit.img);
-	i = -1;
-	while (++i < SPRITE_COUNT)
+	free_sprites(data);
+	bzero_textures(data);
+}
+
+static void	free_sprites(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < SPRITE_COUNT)
 	{
 		if (data->tx_torch[i].img != NULL)
 			mlx_destroy_image(data->mlx, data->tx_torch[i].img);
+		i++;
 	}
-	i = -1;
-	while (++i < SPRITE_COUNT)
+	i = 0;
+	while (i < SPRITE_COUNT)
 	{
 		if (data->tx_portal[i].img != NULL)
 			mlx_destroy_image(data->mlx, data->tx_portal[i].img);
+		i++;
 	}
-	bzero_textures(data);
 }
 
 static void	bzero_textures(t_data *data)

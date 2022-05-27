@@ -29,7 +29,8 @@ int	get_type_identifier(char *input)
 	return (INFO_TYPE_EMPTY);
 }
 
-int	get_type_info(t_map *map, char *input, int type) // !!!!! check for duplications
+// !!!!! TODO? also support skipping whitespaces?
+int	get_type_info(t_map *map, char *input, int type)
 {
 	if (input[0] != '\0' && input[ft_strlen(input) - 1] == '\n')
 		input[ft_strlen(input) - 1] = '\0';
@@ -38,7 +39,7 @@ int	get_type_info(t_map *map, char *input, int type) // !!!!! check for duplicat
 		input += 2;
 	else if (type == INFO_TYPE_FLOOR || type == INFO_TYPE_CEILING)
 		input++;
-	while (*input == ' ') // !!!!! also support whitespaces
+	while (*input == ' ')
 		input++;
 	if (check_file_info(map, type) != 0)
 		return (-1);

@@ -60,13 +60,13 @@ void	update_map(t_data *data)
 	end.x = pos.x + 2;
 	end.y = pos.y + 2;
 	i.y = pos.y - 2;
-	while (i.y < end.y)
+	while (i.y <= end.y)
 	{
 		i.x = pos.x - 2;
-		while (i.x < end.x)
+		while (i.x <= end.x)
 		{
-			if (i.x >= 0 && i.y >= 0 && i.x <= data->map.x && \
-				i.y <= data->map.y)
+			if (i.x >= 0 && i.y >= 0 && i.x < data->map.x && \
+				i.y < data->map.y)
 				data->map.info[i.y][i.x].visible = 1;
 			i.x++;
 		}

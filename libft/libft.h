@@ -6,7 +6,7 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:32:28 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/05/19 16:53:36 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/05/27 12:51:05 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ int		ft_strcmp(const char *s1, const char *s2);
 int		is_whitespace(char c);
 void	str_trim_end(char *line);
 int		ft_isnum(char *input);
+int		ft_strrcmp(const char *s1, const char *s2);
 
 #endif

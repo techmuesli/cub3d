@@ -27,7 +27,7 @@ static int	open_input_file(char *filename)
 {
 	int	fd;
 
-	if (ft_strnstr(filename, ".cub", ft_strlen(filename)) == NULL) // !!!!! TODO
+	if (ft_strrcmp(filename, ".cub") != 0)
 		return (-1);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -49,7 +49,10 @@ static int	process_file_content(t_data *data, int fd)
 			if (type == INFO_TYPE_MAP)
 			{
 				if (load_map(data, line, fd) != 0)
+				{
+					free(line);
 					return (-1);
+				}
 				return (0);
 			}
 			if (get_type_info(&data->map, line, type) != 0)
