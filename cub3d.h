@@ -83,6 +83,7 @@ typedef struct s_client_data
 typedef struct s_server_data
 {
 	int				num_of_games;
+	int				rank;
 	t_client_data	top[10];
 }				t_server_data;
 
@@ -297,6 +298,6 @@ int			recv_data(t_data *datastruct, t_network *network);
 
 // result.c
 void		server_fetch(t_data *data);
-void		render_scoreboard(t_data *data);
+void		render_scoreboard(t_data *data, t_server_data *server, t_client_data *client);
 
 #endif
