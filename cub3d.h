@@ -294,7 +294,7 @@ t_network	*network_init(char *domain_name);
 void		network_cleanup(t_network *network);
 int			connect_to_server(t_network *network);
 int			send_data(t_network *network, char *data, size_t size);
-int			recv_data(t_data *datastruct, t_network *network);
+int			recv_data(t_data *datastruct, t_network *network, t_client_data *client);
 
 // result.c
 void		server_fetch(t_data *data);

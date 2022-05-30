@@ -66,7 +66,6 @@ int	recv_data(t_data *data, t_network *network, t_client_data *client)
 	i = 0;
 	while (i < server->num_of_games && i < 10)
 	{
-		// place | name | time
 		printf("%d. %s - %llu\n", i + 1, server->top[i].user_name, server->top[i].time);
 		i++;
 	}

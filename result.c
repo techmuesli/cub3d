@@ -4,34 +4,29 @@
 
 void	render_scoreboard(t_data *data, t_server_data *server, t_client_data *client)
 {
-	char	*info;
 	int		y_pos;
 	int		i;
-	char	*time;
+	char	time[1024];
 
 	mlx_set_font(data->mlx, data->window, "lucidasanstypewriter-bold-24");
-	info = "Please enter your name >_";
-	// start at the top of the screen
 	y_pos = 50;
-	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) - 27, y_pos, 0xFFFFFF, \
-		"Top 10 Maze Runners");
-
+	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) - 27, y_pos,
+		0xFFFFFF, "Top 10 Maze jners");
+	y_pos += 50;
 	i = 0;
 	while (i < server->num_of_games && i < 10)
 	{
-		mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) - 100, y_pos, 0xFFFFFF, \
-		server->top[i].rank);
-		mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2), y_pos, 0xFFFFFF, \
-		server->top[i].user_name);
-		time = sprintf("%llu", server->top[i].time);
-		mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) + 100, y_pos, 0xFFFFFF, \
-		time);
-		free(time);
-		// place | name | time
+		mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2), y_pos,
+			0xFFFFFF, server->top[i].user_name);
+		sprintf(time, "%llu.%llus", server->top[i].time / 1000, server->top[i].time % 1000);
+		mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) + 100, y_pos,
+			0xFFFFFF, time);
 		i++;
 		y_pos += 20;
 	}
-
+	sprintf(time, "Your time & rank %llu - %d", client->time, server->rank);
+	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) - 100, y_pos,
+		0xFFFFFF, time);
 }
 
 void	server_fetch(t_data *data)
@@ -51,7 +46,7 @@ void	server_fetch(t_data *data)
 		else
 			ft_strlcpy(client.user_name, data->user_name, MAX_LEN);
 		send_data(network, (char *)&client, sizeof(t_client_data));
-		recv_data(data, network, client);
+		recv_data(data, network, &client);
 	}
 	network_cleanup(network);
 }

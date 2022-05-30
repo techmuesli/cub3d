@@ -117,5 +117,5 @@ static void	check_special_tiles(t_data *data, int x, int y)
 	if (data->map.data[y][x] == MAP_TYPE_PORTAL)
 		data->new_level = 1;
 	else if (data->map.data[y][x] == MAP_TYPE_EXIT)
-		data->exit = 1;
+		data->exit++;
 }
