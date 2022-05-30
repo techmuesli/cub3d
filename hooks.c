@@ -43,6 +43,8 @@ static int	key_cb(int keycode, void *param)
 int	mouse_cb(int x, int y, t_data *data)
 {
 	(void)y;
+	if (data->exit > 0)
+		return (0);
 	if (x < data->mouse_pos.x)
 	{
 		mlx_mouse_move(data->mlx, data->window, data->mouse_pos.x,
