@@ -58,23 +58,17 @@ int	recv_data(t_network *network)
 	int				size;
 	t_server_data	*data;
 
-	while (size != 0)
+	size = recv(network->socket, buf, BUFSIZE, 0);
+	if (size <= 0)
+		return (-1);
+	data = (t_server_data *)buf;
+	printf("Number of total games: %d\n", data->num_of_games);
+	i = 0;
+	while (i < data->num_of_games && i < 10)
 	{
-		size = recv(network->socket, buf, BUFSIZE, 0);
-		if (size < 0)
-			return (-1);
-		if (size == 0)
-			continue ;
-		data = (t_server_data *)buf;
-		i = 0;
-		(void)i;
-		printf("%d, size: %d\n", data->num_of_games, size);
-	}
-	/*while (i < data->num_of_games)
-	{
-		printf("%d. %s - %ld\n", i + 1, data->top[i].user_name, data->top[i].time);
+		printf("%d. %s - %llu\n", i + 1, data->top[i].user_name, data->top[i].time);
 		i++;
-	}*/
+	}
 	return (0);
 }
 
