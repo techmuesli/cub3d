@@ -59,10 +59,11 @@ static void	init_startscreen(t_data *data)
 			"./textures/start_screen.xpm", &size.x, &size.y);
 	if (data->start.start.img == NULL)
 		data->start.start_flag = 0;
-	data->start.start.data = \
-		(int *)mlx_get_data_addr(data->start.start.img,
-			&data->start.start.bpp, &data->start.start.size_line,
-			&data->start.start.endian);
+	else
+		data->start.start.data = \
+			(int *)mlx_get_data_addr(data->start.start.img,
+				&data->start.start.bpp, &data->start.start.size_line,
+				&data->start.start.endian);
 }
 
 static void	general_init(t_data *data)

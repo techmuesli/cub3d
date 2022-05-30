@@ -21,6 +21,8 @@ void	cub3d_cleanup(t_data **data)
 	}
 	if ((*data)->start.start.img != NULL)
 		mlx_destroy_image((*data)->mlx, (*data)->start.start.img);
+	if ((*data)->user_name != NULL)
+		free((*data)->user_name);
 	free_map(*data);
 	free(*data);
 	*data = NULL;

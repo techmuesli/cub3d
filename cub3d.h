@@ -7,14 +7,21 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <stdint.h>
+# include <stdio.h>
+// !!!!! check for printfs -> change to ft_printf
+
+# include <sys/types.h>
+# include <sys/socket.h>
+# include <netinet/in.h>
+# include <netdb.h>
+# include <arpa/inet.h>
+
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
 # include "libft/vector.h"
 
-# include <stdio.h> // !!!!!
-
-# define SCREEN_WIDTH 1920
-# define SCREEN_HEIGHT 1080
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
 
 # define TEX_WIDTH 256
 # define TEX_HEIGHT 256
@@ -27,6 +34,10 @@
 # define LEVEL_2 "./maps/level2.cub"
 # define LEVEL_3 "./maps/level3.cub"
 # define BONUS_LEVEL "./maps/bonus_level.cub"
+
+# define PORT 4242
+# define BUFSIZE 8192
+# define MAX_LEN 32
 
 typedef enum e_info_type
 {
@@ -56,6 +67,24 @@ typedef enum e_map_type
 	MAP_TYPE_W,
 	MAP_END_OF_LINE,
 }				t_map_type;
+
+typedef struct s_network
+{
+	struct sockaddr_in	server;
+	int					socket;
+}				t_network;
+
+typedef struct s_client_data
+{
+	uint64_t	time;
+	char		user_name[MAX_LEN];
+}				t_client_data;
+
+typedef struct s_server_data
+{
+	int				num_of_games;
+	t_client_data	top[10];
+}				t_server_data;
 
 typedef struct s_vec
 {
@@ -161,6 +190,7 @@ typedef struct s_rc
 typedef struct s_data
 {
 	char		*level;
+	char		*user_name;
 	t_image		image;
 	t_minimap	minimap;
 	t_map		map;
@@ -258,5 +288,15 @@ int			parse_textures(t_data *data);
 
 // startscreen.c
 void		render_startscreen(t_data *data);
+
+// network.c
+t_network	*network_init(char *domain_name);
+void		network_cleanup(t_network *network);
+int			connect_to_server(t_network *network);
+int			send_data(t_network *network, char *data, size_t size);
+int			recv_data(t_network *network);
+
+// result.c
+void		display_result(t_data *data);
 
 #endif
