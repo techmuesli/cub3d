@@ -206,7 +206,6 @@ typedef struct s_data
 	t_vec		pos;
 	t_vec		dir;
 	t_vec		camera_plane;
-	t_vec_i		old_pos;
 	t_vec_i		mouse_pos;
 	void		*mlx;
 	void		*window;
@@ -222,7 +221,7 @@ typedef struct s_data
 }				t_data;
 
 // init.c
-t_data		*cub3d_init(int width, int height, char *title);
+t_data		*cub3d_init(int width, int height, char *title, char *user_name);
 
 // cleanup.c
 void		cub3d_cleanup(t_data **data);
@@ -294,9 +293,10 @@ t_network	*network_init(char *domain_name);
 void		network_cleanup(t_network *network);
 int			connect_to_server(t_network *network);
 int			send_data(t_network *network, char *data, size_t size);
-int			recv_data(t_network *network);
+int			recv_data(t_data *datastruct, t_network *network);
 
 // result.c
-void		display_result(t_data *data);
+void		server_fetch(t_data *data);
+void		render_scoreboard(t_data *data);
 
 #endif

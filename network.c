@@ -51,7 +51,7 @@ int	send_data(t_network *network, char *data, size_t size)
 	return (0);
 }
 
-int	recv_data(t_network *network)
+int	recv_data(t_data *datastruct, t_network *network)
 {
 	char			buf[BUFSIZE];
 	int				i;
@@ -66,9 +66,11 @@ int	recv_data(t_network *network)
 	i = 0;
 	while (i < data->num_of_games && i < 10)
 	{
+		// place | name | time
 		printf("%d. %s - %llu\n", i + 1, data->top[i].user_name, data->top[i].time);
 		i++;
 	}
+	render_scoreboard(datastruct);
 	return (0);
 }
 

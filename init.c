@@ -3,9 +3,9 @@
 #include "cub3d.h"
 
 static int	init_image(t_data *data, int width, int height);
-static void	general_init(t_data *data);
+static void	general_init(t_data *data, char *user_name);
 
-t_data	*cub3d_init(int width, int height, char *title)
+t_data	*cub3d_init(int width, int height, char *title, char *user_name)
 {
 	t_data	*data;
 
@@ -30,7 +30,7 @@ t_data	*cub3d_init(int width, int height, char *title)
 		return (NULL);
 	}
 	mlx_mouse_hide(data->mlx, data->window);
-	general_init(data);
+	general_init(data, user_name);
 	return (data);
 }
 
@@ -66,11 +66,14 @@ static void	init_startscreen(t_data *data)
 				&data->start.start.endian);
 }
 
-static void	general_init(t_data *data)
+static void	general_init(t_data *data, char *user_name)
 {
+	if (user_name != NULL)
+	{
+		user_name[MAX_LEN - 1] = '\0';
+		data->user_name = ft_strdup(user_name);
+	}
 	set_up_hooks(data->window, data);
-	data->old_pos.x = -1;
-	data->old_pos.y = -1;
 	data->current_time = 0;
 	data->initial_time = get_time();
 	data->map.flr.r = -1;

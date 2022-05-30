@@ -34,7 +34,7 @@ void	render_minimap(t_data *data)
 	data->minimap.height = square.y * data->map.y;
 	pix_pos.y = 20;
 	map.y = -1;
-	while (data->map.data[++map.y] != NULL)
+	while (data->map.data[++map.y] != NULL && data->exit == 0)
 	{
 		map.x = -1;
 		pix_pos.x = 0;
@@ -48,27 +48,3 @@ void	render_minimap(t_data *data)
 	update_player_pos(data, square);
 }
 
-void	update_map(t_data *data)
-{
-	t_vec_i	pos;
-	t_vec_i	i;
-	t_vec_i	end;
-
-	pos.x = (int)data->pos.x;
-	pos.y = (int)data->pos.y;
-	end.x = pos.x + 2;
-	end.y = pos.y + 2;
-	i.y = pos.y - 2;
-	while (i.y <= end.y)
-	{
-		i.x = pos.x - 2;
-		while (i.x <= end.x)
-		{
-			if (i.x >= 0 && i.y >= 0 && i.x < data->map.x && \
-				i.y < data->map.y)
-				data->map.info[i.y][i.x].visible = 1;
-			i.x++;
-		}
-		i.y++;
-	}
-}

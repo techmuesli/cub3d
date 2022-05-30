@@ -11,12 +11,7 @@ static void	init_values(t_data *data, t_rc *rc)
 	rc->ray_dir.y = data->dir.y + data->camera_plane.y * camera_x;
 	rc->map.x = (int)data->pos.x;
 	rc->map.y = (int)data->pos.y;
-	if (rc->map.x != data->old_pos.x || (int)data->pos.y != data->old_pos.y)
-	{
-		update_map(data);
-		data->old_pos.x = rc->map.x;
-		data->old_pos.y = rc->map.y;
-	}
+	data->map.info[rc->map.y][rc->map.x].visible = 1;
 	if (rc->ray_dir.x == 0)
 		rc->delta_dist.x = INFINITY;
 	else
@@ -67,6 +62,7 @@ static void	calc_hit(t_data *data, t_rc *rc)
 			rc->map.y += rc->step.y;
 			rc->side = 1;
 		}
+		data->map.info[rc->map.y][rc->map.x].visible = 1;
 		if (data->map.data[rc->map.y][rc->map.x] > 0)
 		{
 			if (data->map.data[rc->map.y][rc->map.x] == MAP_TYPE_DOOR)

@@ -12,12 +12,7 @@ int	run_loop(void *param)
 	t_data			*data;
 
 	data = param;
-	if (data->exit == 1)
-	{
-		display_result(data);
-		end_loop(data);
-		return (0);
-	}
+
 	if (data->new_level == 1)
 	{
 		if (load_new_map(data) == 1)
@@ -26,12 +21,23 @@ int	run_loop(void *param)
 			return (0);
 		}
 	}
-	ft_bzero64(data->image.addr, SCREEN_WIDTH * SCREEN_HEIGHT
+	if (data->exit == 1)
+	{
+		ft_bzero64(data->image.addr, SCREEN_WIDTH * SCREEN_HEIGHT
 		* (data->image.bpp / 8));
-	raycast(data);
-	update_fps(data);
-	update_sprites(data);
-	mlx_put_image_to_window(data->mlx, data->window, data->image.img, 0, 0);
+		mlx_put_image_to_window(data->mlx, data->window, data->image.img, 0, 0);
+		server_fetch(data);
+		data->exit++;
+	}
+	else if (data->exit == 0)
+	{
+		ft_bzero64(data->image.addr, SCREEN_WIDTH * SCREEN_HEIGHT
+		* (data->image.bpp / 8));
+		raycast(data);
+		update_fps(data);
+		update_sprites(data);
+		mlx_put_image_to_window(data->mlx, data->window, data->image.img, 0, 0);
+	}
 	return (0);
 }
 

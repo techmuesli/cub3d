@@ -6,12 +6,12 @@ int	main(int argc, char *argv[])
 {
 	t_data	*data;
 
-	if (argc != 2)
+	if (argc < 2 || argc > 3)
 	{
 		ft_putstr_fd("Error! - wrong amount of arguments!\n", FD_STDERR);
 		return (1);
 	}
-	data = cub3d_init(SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
+	data = cub3d_init(SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D", argv[2]);
 	if (data == NULL)
 	{
 		ft_putstr_fd("Error! - init() failed!\n", FD_STDERR);
