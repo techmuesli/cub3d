@@ -66,10 +66,7 @@ static void	calc_hit(t_data *data, t_rc *rc)
 		if (data->map.data[rc->map.y][rc->map.x] > 0)
 		{
 			if (data->map.data[rc->map.y][rc->map.x] == MAP_TYPE_DOOR)
-			{
-				if (data->map.info[rc->map.y][rc->map.x].open_door == 0)
-					rc->hit = 1;
-			}
+				check_open_door(data, rc);
 			else
 				rc->hit = 1;
 		}

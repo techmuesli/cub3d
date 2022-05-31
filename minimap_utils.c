@@ -35,8 +35,8 @@ t_vec_i	calc_square(t_data *data)
 {
 	t_vec_i	square;
 
-	square.x = (SCREEN_WIDTH / 4) / data->map.x;
-	square.y = (SCREEN_HEIGHT / 4) / data->map.y;
+	square.x = (SCREEN_WIDTH / 3) / data->map.x;
+	square.y = (SCREEN_HEIGHT / 3) / data->map.y;
 	if (data->map.x < data->map.y)
 		square.y = square.x;
 	else
@@ -65,13 +65,11 @@ void	select_square_color(t_data *data, t_vec_i map, t_vec_i pix_pos)
 
 void	render_time(t_data *data)
 {
-	char	temp[MAX_LEN];
+	char		temp[MAX_LEN];
 	u_int64_t	time;
 
 	time = get_time() - data->start.start_time;
 	sprintf(temp, "%llu.%llus", time / 1000, time % 1000);
-	// printf("%s\n",temp);
-	
 	mlx_set_font(data->mlx, data->window, "lucidasanstypewriter-bold-24");
 	mlx_string_put(data->mlx, data->window, 50, 50, 0xFFFFFF, temp);
 }

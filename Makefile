@@ -1,7 +1,7 @@
 NAME := cub3D
 SRCFILES := main.c init.c cleanup.c run.c hooks.c input.c utils.c raycast.c keys.c \
 input_check.c input_info.c input_map.c textures.c minimap.c raycast_utils.c \
-minimap_utils.c keys_2.c startscreen.c network.c result.c
+minimap_utils.c keys_2.c startscreen.c network.c result.c raycast_utils_2.c
 
 CC ?= cc
 LD ?= cc

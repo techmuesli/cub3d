@@ -47,7 +47,6 @@ void	loop_vert_axis(t_data *data, t_rc *rc)
 {
 	while (++rc->px.y < SCREEN_HEIGHT)
 	{
-		// timer exclusion
 		if (rc->px.x > 38 && rc->px.x < 160 && rc->px.y > 28 && rc->px.y < 58)
 		{
 			if (rc->px.y >= rc->draw_start && rc->px.y <= rc->draw_end)

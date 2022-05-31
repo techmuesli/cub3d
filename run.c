@@ -12,7 +12,6 @@ int	run_loop(void *param)
 	t_data			*data;
 
 	data = param;
-
 	if (data->new_level == 1)
 	{
 		if (load_new_map(data) == 1)
@@ -22,17 +21,11 @@ int	run_loop(void *param)
 		}
 	}
 	if (data->exit == 1)
-	{
-		ft_bzero64(data->image.addr, SCREEN_WIDTH * SCREEN_HEIGHT
-		* (data->image.bpp / 8));
-		mlx_put_image_to_window(data->mlx, data->window, data->image.img, 0, 0);
-		server_fetch(data);
-		data->exit++;
-	}
+		finish_game(data);
 	else if (data->exit == 0)
 	{
 		ft_bzero64(data->image.addr, SCREEN_WIDTH * SCREEN_HEIGHT
-		* (data->image.bpp / 8));
+			* (data->image.bpp / 8));
 		raycast(data);
 		update_fps(data);
 		update_sprites(data);
