@@ -6,7 +6,7 @@
 /*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 01:47:20 by alistair          #+#    #+#             */
-/*   Updated: 2022/05/31 14:53:12 by alkane           ###   ########.fr       */
+/*   Updated: 2022/05/31 17:13:33 by alkane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,12 @@ void	render_time(t_data *data)
 	u_int64_t	time;
 
 	time = get_time() - data->start.start_time;
-	sprintf(temp, "%lu.%lus", time / 1000, time % 1000);
-	printf("%s\n",temp);
-	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2 ),
-		0xFF0000, temp);
+	sprintf(temp, "%llu.%llus", time / 1000, time % 1000);
+	// printf("%s\n",temp);
+	
+	mlx_set_font(data->mlx, data->window, "lucidasanstypewriter-bold-24");
+	mlx_string_put(data->mlx, data->window, 50, 50, 0x000000, temp);
+
+	mlx_set_font(data->mlx, data->window, "lucidasanstypewriter-bold-18");
+	mlx_string_put(data->mlx, data->window, 51, 48, 0xFFFFFF, temp);
 }

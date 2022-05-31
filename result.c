@@ -12,7 +12,7 @@ static void	insert_top_score(t_data *data, t_server_data *server, int y_pos, int
 	sprintf(temp, "%.20s", server->top[i].user_name);
 	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) - 50, y_pos,
 		0xFFFFFF, temp);
-	sprintf(temp, "%lu.%lus", server->top[i].time / 1000, server->top[i].time % 1000);
+	sprintf(temp, "%llu.%llus", server->top[i].time / 1000, server->top[i].time % 1000);
 	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) + 250, y_pos,
 		0xFFFFFF, temp);
 }
@@ -27,7 +27,7 @@ static int	insert_current_score(t_data *data, t_server_data *server, t_client_da
 	sprintf(temp, "%.20s", client->user_name);
 	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) - 50, y_pos,
 		0xFF0000, temp);
-	sprintf(temp, "%lu.%lus", client->time / 1000, client->time % 1000);
+	sprintf(temp, "%llu.%llus", client->time / 1000, client->time % 1000);
 	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) + 250, y_pos,
 		0xFF0000, temp);
 	return (1);
@@ -39,9 +39,10 @@ void	render_scoreboard(t_data *data, t_server_data *server, t_client_data *clien
 	int		y_pos;
 	int		i;
 
+	mlx_set_font(data->mlx, data->window, "lucidasanstypewriter-bold-24");
+	// mlx_set_font(data->mlx, data->window, "r24");
+	
 	mlx_mouse_show(data->mlx, data->window);
-	// mlx_set_font(data->mlx, data->window, "lucidasanstypewriter-bold-24");
-	mlx_set_font(data->mlx, data->window, "r24");
 	y_pos = 50;
 	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) - 100, y_pos,
 		0xFFFFFF, "Top 10 Maze Runners");
