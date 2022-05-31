@@ -6,7 +6,7 @@
 /*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 01:47:20 by alistair          #+#    #+#             */
-/*   Updated: 2022/05/27 20:50:58 by alkane           ###   ########.fr       */
+/*   Updated: 2022/05/31 14:53:12 by alkane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,16 @@ void	select_square_color(t_data *data, t_vec_i map, t_vec_i pix_pos)
 		if (data->map.data[map.y][map.x] == MAP_TYPE_EXIT)
 			color_rect(data, pix_pos, 0x800000);
 	}
+}
+
+void	render_time(t_data *data)
+{
+	char	temp[MAX_LEN];
+	u_int64_t	time;
+
+	time = get_time() - data->start.start_time;
+	sprintf(temp, "%lu.%lus", time / 1000, time % 1000);
+	printf("%s\n",temp);
+	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2 ),
+		0xFF0000, temp);
 }

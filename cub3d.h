@@ -263,6 +263,7 @@ void		render_minimap(t_data *data);
 void		select_square_color(t_data *data, t_vec_i map, t_vec_i pix_pos);
 int			render_rect(t_image *img, t_rect rect);
 t_vec_i		calc_square(t_data *data);
+void		render_time(t_data *data);
 
 // raycast.c
 int			raycast(t_data *data);
