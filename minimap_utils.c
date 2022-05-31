@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minimap_utils.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 01:47:20 by alistair          #+#    #+#             */
-/*   Updated: 2022/05/27 20:50:58 by alkane           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+// !!!!!
 
 #include "cub3d.h"
 
@@ -47,7 +37,7 @@ t_vec_i	calc_square(t_data *data)
 	t_vec_i	square;
 
 	square.x = (SCREEN_WIDTH / 4) / data->map.x;
-	square.y = (SCREEN_WIDTH / 4) / data->map.y;
+	square.y = (SCREEN_HEIGHT / 4) / data->map.y;
 	if (data->map.x < data->map.y)
 		square.y = square.x;
 	else
