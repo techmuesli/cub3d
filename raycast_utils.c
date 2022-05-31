@@ -47,15 +47,20 @@ void	loop_vert_axis(t_data *data, t_rc *rc)
 {
 	while (++rc->px.y < SCREEN_HEIGHT)
 	{
+		// timer exclusion
+		if (rc->px.x > 38 && rc->px.x < 160 && rc->px.y > 28 && rc->px.y < 58)
+		{
+			if (rc->px.y >= rc->draw_start && rc->px.y <= rc->draw_end)
+				rc->tex_pos += rc->tex_step;
+			continue ;
+		}
 		if (rc->px.y < rc->draw_start)
 		{
 			rc->color = data->map.ceiling.r << 16 | data->map.ceiling.g << 8
 				| data->map.ceiling.b;
 		}
 		else if (rc->px.y >= rc->draw_start && rc->px.y <= rc->draw_end)
-		{
 			calc_wall_color(data, rc);
-		}
 		else
 		{
 			rc->color = data->map.flr.r << 16 | data->map.flr.g << 8

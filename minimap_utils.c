@@ -73,8 +73,5 @@ void	render_time(t_data *data)
 	// printf("%s\n",temp);
 	
 	mlx_set_font(data->mlx, data->window, "lucidasanstypewriter-bold-24");
-	mlx_string_put(data->mlx, data->window, 50, 50, 0x000000, temp);
-
-	mlx_set_font(data->mlx, data->window, "lucidasanstypewriter-bold-18");
-	mlx_string_put(data->mlx, data->window, 51, 48, 0xFFFFFF, temp);
+	mlx_string_put(data->mlx, data->window, 50, 50, 0xFFFFFF, temp);
 }

@@ -2,6 +2,15 @@
 
 #include "cub3d.h"
 
+static void	insert_total_games(t_data *data, t_server_data *server, int y_pos)
+{
+	char	temp[MAX_LEN];
+
+	sprintf(temp, "Total number of games: %d", server->num_of_games);
+	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) - 100, y_pos,
+		0x00FF00, temp);
+}
+
 static void	insert_top_score(t_data *data, t_server_data *server, int y_pos, int i)
 {
 	char	temp[1024];
@@ -56,10 +65,11 @@ void	render_scoreboard(t_data *data, t_server_data *server, t_client_data *clien
 		else
 			insert_top_score(data, server, y_pos, i);
 		i++;
-		y_pos += 50;
+		y_pos += 40;
 	}
 	if (current == 0)
-		insert_current_score(data, server, client, y_pos + 50);
+		insert_current_score(data, server, client, y_pos + 45);
+	insert_total_games(data, server, y_pos + 90);
 }
 
 void	server_fetch(t_data *data)

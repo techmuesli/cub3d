@@ -36,8 +36,8 @@ int	run_loop(void *param)
 		raycast(data);
 		update_fps(data);
 		update_sprites(data);
-		render_time(data);
 		mlx_put_image_to_window(data->mlx, data->window, data->image.img, 0, 0);
+		render_time(data);
 	}
 	return (0);
 }
