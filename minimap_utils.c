@@ -63,3 +63,15 @@ void	select_square_color(t_data *data, t_vec_i map, t_vec_i pix_pos)
 			color_rect(data, pix_pos, 0x800000);
 	}
 }
+
+void	render_time(t_data *data)
+{
+	char	temp[MAX_LEN];
+	u_int64_t	time;
+
+	time = get_time() - data->start.start_time;
+	sprintf(temp, "%lu.%lus", time / 1000, time % 1000);
+	printf("%s\n",temp);
+	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2 ),
+		0xFF0000, temp);
+}
