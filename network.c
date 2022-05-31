@@ -54,7 +54,7 @@ int	send_data(t_network *network, char *data, size_t size)
 int	recv_data(t_data *data, t_network *network, t_client_data *client)
 {
 	char			buf[BUFSIZE];
-	int				i;
+	// int				i;
 	int				size;
 	t_server_data	*server;
 
@@ -62,13 +62,13 @@ int	recv_data(t_data *data, t_network *network, t_client_data *client)
 	if (size <= 0)
 		return (-1);
 	server = (t_server_data *)buf;
-	printf("Number of total games: %d\n", server->num_of_games);
-	i = 0;
-	while (i < server->num_of_games && i < 10)
-	{
-		printf("%d. %s - %llu\n", i + 1, server->top[i].user_name, server->top[i].time);
-		i++;
-	}
+	// printf("Number of total games: %d\n", server->num_of_games);
+	// i = 0;
+	// while (i < server->num_of_games && i < 10)
+	// {
+	// 	printf("%d. %s - %llu\n", i + 1, server->top[i].user_name, server->top[i].time);
+	// 	i++;
+	// }
 	render_scoreboard(data, server, client);
 	return (0);
 }
