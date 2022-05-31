@@ -7,32 +7,30 @@ static void	insert_top_score(t_data *data, t_server_data *server, int y_pos, int
 	char	temp[1024];
 
 	sprintf(temp, "# %d", i + 1);
-	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) -200, y_pos,
+	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) -250, y_pos,
 		0xFFFFFF, temp);
-	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2), y_pos,
-		0xFFFFFF, server->top[i].user_name);
+	sprintf(temp, "%.20s", server->top[i].user_name);
+	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) - 50, y_pos,
+		0xFFFFFF, temp);
 	sprintf(temp, "%lu.%lus", server->top[i].time / 1000, server->top[i].time % 1000);
-	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) + 200, y_pos,
+	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) + 250, y_pos,
 		0xFFFFFF, temp);
 }
 
 static int	insert_current_score(t_data *data, t_server_data *server, t_client_data *client, int y_pos)
 {
 	char	temp[1024];
-	int		rank;
 
-	rank = server->rank;
-	sprintf(temp, "# %d", rank);
-	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) -200, y_pos,
+	sprintf(temp, "# %d", server->rank);
+	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) -250, y_pos,
 		0xFF0000, temp);
-	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2), y_pos,
-		0xFF0000, client->user_name);
+	sprintf(temp, "%.20s", client->user_name);
+	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) - 50, y_pos,
+		0xFF0000, temp);
 	sprintf(temp, "%lu.%lus", client->time / 1000, client->time % 1000);
-	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) + 200, y_pos,
+	mlx_string_put(data->mlx, data->window, (SCREEN_WIDTH / 2) + 250, y_pos,
 		0xFF0000, temp);
-	if (server->rank <= 10)
-		return (1);
-	return (0);
+	return (1);
 }
 
 void	render_scoreboard(t_data *data, t_server_data *server, t_client_data *client)
