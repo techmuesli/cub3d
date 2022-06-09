@@ -1,4 +1,14 @@
-// !!!!!
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_check.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 13:47:31 by dbrandtn          #+#    #+#             */
+/*   Updated: 2022/06/09 13:47:33 by dbrandtn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -80,8 +90,10 @@ static int	check_for_walls(int **map, int x, int y)
 			return (-1);
 		if (map[y][x - 1] == MAP_TYPE_NOTHINGNESS
 			|| map[y][x + 1] == MAP_TYPE_NOTHINGNESS
-			|| map[y - 1][x] == MAP_TYPE_NOTHINGNESS
-			|| map[y + 1][x] == MAP_TYPE_NOTHINGNESS)
+			|| (get_map_width(map[y - 1]) < x
+			|| map[y - 1][x] == MAP_TYPE_NOTHINGNESS)
+			|| (get_map_width(map[y + 1]) < x
+			|| map[y + 1][x] == MAP_TYPE_NOTHINGNESS))
 			return (-1);
 	}
 	return (0);

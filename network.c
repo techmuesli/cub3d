@@ -1,4 +1,14 @@
-// !!!!!
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   network.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 13:48:38 by dbrandtn          #+#    #+#             */
+/*   Updated: 2022/06/09 13:48:40 by dbrandtn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -44,12 +54,12 @@ int	connect_to_server(t_network *network)
 	return (0);
 }
 
-int	send_data(t_network *network, char *data, size_t size)
-{
-	if (send(network->socket, data, size, 0) != (int)size)
-		return (-1);
-	return (0);
-}
+// int	send_data(t_network *network, char *data, size_t size)
+// {
+// 	if (send(network->socket, data, size, 0) != (int)size)
+// 		return (-1);
+// 	return (0);
+// }
 
 int	recv_data(t_data *data, t_network *network, t_client_data *client)
 {

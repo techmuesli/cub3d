@@ -1,4 +1,14 @@
-// !!!!!
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 13:47:07 by dbrandtn          #+#    #+#             */
+/*   Updated: 2022/06/09 13:47:11 by dbrandtn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 
@@ -230,6 +240,7 @@ void		free_map(t_data *data);
 
 // input.c
 int			read_input_file(t_data *data, char *filename);
+int			get_map_width(int *line);
 
 // input_check.c
 int			check_input(t_data *data);
@@ -298,11 +309,12 @@ void		render_startscreen(t_data *data);
 t_network	*network_init(char *domain_name);
 void		network_cleanup(t_network *network);
 int			connect_to_server(t_network *network);
-int			send_data(t_network *network, char *data, size_t size);
+//int			send_data(t_network *network, char *data, size_t size);
 int			recv_data(t_data *data, t_network *network, t_client_data *client);
 
 // result.c
 void		server_fetch(t_data *data);
-void		render_scoreboard(t_data *data, t_server_data *server, t_client_data *client);
+void		render_scoreboard(t_data *data, t_server_data *server,
+				t_client_data *client);
 
 #endif

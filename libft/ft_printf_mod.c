@@ -6,7 +6,7 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 11:36:53 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/01/28 14:05:57 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/06/09 13:50:51 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,34 +45,20 @@ void	process_modifier_s(va_list *parguments, int *pchar_count)
 
 void	process_modifier_d(va_list *parguments, int *pchar_count)
 {
-	//char	*num;
 	int		n;
 
 	n = va_arg (*parguments, int);
 	ft_putnbr_fd(n, FD_STDOUT);
 	(*pchar_count) += get_length_of_number(n);
-	/*num = ft_itoa (n); !!!!!
-	if (num == NULL)
-		return ;
-	ft_putstr_fd (num, FD_STDOUT);
-	(*pchar_count) += ft_strlen (num);
-	free (num);*/
 }
 
 void	process_modifier_u(va_list *parguments, int *pchar_count)
 {
-	//char	*num;
 	int		ui;
 
 	ui = va_arg (*parguments, unsigned int);
 	ft_put_uint_fd(ui, FD_STDOUT);
 	(*pchar_count) += get_length_of_number(ui);
-	/*num = ft_utoa (n); !!!!!
-	if (num == NULL)
-		return ;
-	ft_putstr_fd (num, FD_STDOUT);
-	(*pchar_count) += ft_strlen (num);
-	free (num);*/
 }
 
 static int	get_length_of_number(int num)

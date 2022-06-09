@@ -1,4 +1,14 @@
-// !!!!!
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 13:47:53 by dbrandtn          #+#    #+#             */
+/*   Updated: 2022/06/09 13:47:53 by dbrandtn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -62,4 +72,14 @@ static int	process_file_content(t_data *data, int fd)
 		line = get_next_line(fd);
 	}
 	return (0);
+}
+
+int	get_map_width(int *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] != MAP_END_OF_LINE)
+		i++;
+	return (i);
 }
