@@ -6,11 +6,12 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:07 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 13:47:11 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:49:48 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
+# define CUB3D_H
 
 # include <fcntl.h>
 # include <math.h>
