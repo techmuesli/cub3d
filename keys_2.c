@@ -6,7 +6,7 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:48:02 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 13:48:03 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/06/10 12:59:42 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ void	key_f(t_data *data)
 	y = (int)data->pos.y;
 	if (data->map.data[y][x + 1] == MAP_TYPE_DOOR)
 		check_door(data, y, x + 1);
-	else if (data->map.data[y][x - 1] == MAP_TYPE_DOOR)
+	if (data->map.data[y][x - 1] == MAP_TYPE_DOOR)
 		check_door(data, y, x - 1);
-	else if (data->map.data[y + 1][x] == MAP_TYPE_DOOR)
+	if (data->map.data[y + 1][x] == MAP_TYPE_DOOR)
 		check_door(data, y + 1, x);
-	else if (data->map.data[y - 1][x] == MAP_TYPE_DOOR)
+	if (data->map.data[y - 1][x] == MAP_TYPE_DOOR)
 		check_door(data, y - 1, x);
 }
