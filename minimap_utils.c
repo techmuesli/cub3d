@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:48:23 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/13 17:21:28 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/06/13 18:18:38 by alkane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ t_vec_i	calc_square(t_data *data)
 
 void	select_square_color(t_data *data, t_vec_i map, t_vec_i pix_pos)
 {
-
 	if (data->map.info[map.y][map.x].visible == 1)
 	{
 		if (data->map.data[map.y][map.x] == MAP_TYPE_EMPTY_SPACE)
@@ -68,7 +67,6 @@ void	select_square_color(t_data *data, t_vec_i map, t_vec_i pix_pos)
 			color_rect(data, pix_pos, return_color(data, 0));
 		if (data->map.data[map.y][map.x] == MAP_TYPE_DOOR)
 			color_rect(data, pix_pos, return_color(data, 1));
-		else 
 		if (data->map.data[map.y][map.x] == MAP_TYPE_PORTAL)
 			color_rect(data, pix_pos, 0x00FF00);
 		if (data->map.data[map.y][map.x] == MAP_TYPE_EXIT)
