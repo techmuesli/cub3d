@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: alistair <alistair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:48:32 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 13:48:34 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/06/13 16:29:04 by alistair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	return_color(t_data *data, int flag)
+{
+	int	wall_color;
+	int	door_color;
+
+	wall_color = 0xFFFFFF;
+	door_color = 0xCC6600;
+	if (ft_strcmp(data->level, LEVEL_3) == 0)
+	{
+		wall_color = 0x000000;
+		door_color = 0x2B1D14;
+	}
+	if (flag == 1)
+		return (door_color);
+	return (wall_color);
+}
 
 static void	update_player_pos(t_data *data, t_vec_i square)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: alistair <alistair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:07 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 18:49:48 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/06/13 16:28:04 by alistair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@
 # include "libft/libft.h"
 # include "libft/vector.h"
 
-# define SCREEN_WIDTH 1280
-# define SCREEN_HEIGHT 720
+# define SCREEN_WIDTH 960
+# define SCREEN_HEIGHT 640
 
 # define TEX_WIDTH 256
 # define TEX_HEIGHT 256
 
-# define START_WIDTH 1000
-# define START_HEIGHT 600
+# define START_WIDTH 10
+# define START_HEIGHT 10
 # define SPRITE_COUNT 5
 
 # define LEVEL_1 "./maps/level1.cub"
@@ -268,6 +268,7 @@ void		ft_bzero64(void *s, size_t n);
 int			create_trgb(int t, int r, int g, int b);
 
 // minimap.c
+int			return_color(t_data *data, int flag);
 void		update_map(t_data *data);
 void		render_minimap(t_data *data);
 
