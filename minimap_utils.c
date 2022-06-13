@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: alistair <alistair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:48:23 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 13:48:24 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/06/13 16:27:34 by alistair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_vec_i	calc_square(t_data *data)
 
 void	select_square_color(t_data *data, t_vec_i map, t_vec_i pix_pos)
 {
+
 	if (data->map.info[map.y][map.x].visible == 1)
 	{
 		if (data->map.data[map.y][map.x] == MAP_TYPE_EMPTY_SPACE)
@@ -64,9 +65,10 @@ void	select_square_color(t_data *data, t_vec_i map, t_vec_i pix_pos)
 				data->map.flr.g, data->map.flr.b));
 		if (data->map.data[map.y][map.x] == MAP_TYPE_WALL || \
 			data->map.data[map.y][map.x] == MAP_TYPE_WALL_SPRITE)
-			color_rect(data, pix_pos, 0xFFFFFFF);
+			color_rect(data, pix_pos, return_color(data, 0));
 		if (data->map.data[map.y][map.x] == MAP_TYPE_DOOR)
-			color_rect(data, pix_pos, 0xCC6600);
+			color_rect(data, pix_pos, return_color(data, 1));
+		else 
 		if (data->map.data[map.y][map.x] == MAP_TYPE_PORTAL)
 			color_rect(data, pix_pos, 0x00FF00);
 		if (data->map.data[map.y][map.x] == MAP_TYPE_EXIT)
@@ -80,7 +82,7 @@ void	render_time(t_data *data)
 	u_int64_t	time;
 
 	time = get_time() - data->start.start_time;
-	sprintf(temp, "%llu.%llus", time / 1000, time % 1000);
-	mlx_set_font(data->mlx, data->window, "lucidasanstypewriter-bold-24");
+	sprintf(temp, "%lu.%lus", time / 1000, time % 1000);
+	// mlx_set_font(data->mlx, data->window, "lucidasanstypewriter-bold-24");
 	mlx_string_put(data->mlx, data->window, 50, 50, 0xFFFFFF, temp);
 }
