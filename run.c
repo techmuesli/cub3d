@@ -6,7 +6,7 @@
 /*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:49:12 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/13 17:32:55 by alkane           ###   ########.fr       */
+/*   Updated: 2022/06/16 16:48:51 by alkane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void	update_sprites(t_data *data)
 	int				y;
 
 	y = 0;
-	if (get_time() - data->start.start_time > 3000)
+	if (get_time() - data->start.start_time > 5000)
 		data->start.start_flag = 0;
 	while (data->map.data[y] != NULL)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alistair <alistair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:07 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/13 16:28:04 by alistair         ###   ########.fr       */
+/*   Updated: 2022/06/16 16:47:40 by alkane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 # define TEX_WIDTH 256
 # define TEX_HEIGHT 256
 
-# define START_WIDTH 10
-# define START_HEIGHT 10
+# define START_WIDTH 1000
+# define START_HEIGHT 600
 # define SPRITE_COUNT 5
 
 # define LEVEL_1 "./maps/level1.cub"
