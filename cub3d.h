@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:07 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/07/07 16:38:03 by alkane           ###   ########.fr       */
+/*   Updated: 2022/07/07 18:23:06 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,10 +282,8 @@ void		render_time(t_data *data);
 int			raycast(t_data *data);
 
 // raycast_utils.c
-void		loop_vert_axis(t_data *data, t_rc *rc);
+void		calc_wall_color(t_data *data, t_rc *rc);
 void		calc_move_speeds(t_data *data);
-
-// raycast_utils_2.c
 void		check_open_door(t_data *data, t_rc *rc);
 void		finish_game(t_data *data);
 
