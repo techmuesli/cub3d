@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:49:00 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 13:49:01 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/07/07 16:44:46 by alkane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	calc_hit(t_data *data, t_rc *rc)
 			rc->map.y += rc->step.y;
 			rc->side = 1;
 		}
-		data->map.info[rc->map.y][rc->map.x].visible = 1;
+		data->map.info[rc->map.y][rc->map.x].visible = 2;
 		if (data->map.data[rc->map.y][rc->map.x] > 0)
 		{
 			if (data->map.data[rc->map.y][rc->map.x] == MAP_TYPE_DOOR)

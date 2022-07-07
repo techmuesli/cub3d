@@ -2,7 +2,7 @@ NO ./textures/xpms/red_bricks.xpm
 SO ./textures/xpms/red_bricks.xpm
 WE ./textures/xpms/red_bricks.xpm
 EA ./textures/xpms/red_bricks.xpm
-F 0,0,0
+F 150,150,150
 C 204,204,255
 
         1111111211111121111112111

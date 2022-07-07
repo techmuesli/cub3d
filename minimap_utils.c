@@ -6,7 +6,7 @@
 /*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:48:23 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/13 18:18:38 by alkane           ###   ########.fr       */
+/*   Updated: 2022/07/07 16:54:28 by alkane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,18 @@ t_vec_i	calc_square(t_data *data)
 
 void	select_square_color(t_data *data, t_vec_i map, t_vec_i pix_pos)
 {
-	if (data->map.info[map.y][map.x].visible == 1)
+	if (data->map.info[map.y][map.x].visible >= 1)
 	{
-		if (data->map.data[map.y][map.x] == MAP_TYPE_EMPTY_SPACE)
+		if (data->map.data[map.y][map.x] == MAP_TYPE_EMPTY_SPACE \
+			&& data->map.info[map.y][map.x].visible == 1)
 			color_rect(data, pix_pos, create_trgb(0, data->map.flr.r, \
 				data->map.flr.g, data->map.flr.b));
+		if (data->map.info[map.y][map.x].visible == 2)
+		{
+			color_rect(data, pix_pos, create_trgb(0, data->map.flr.r / 2, \
+				data->map.flr.g / 2, data->map.flr.b / 2));
+			data->map.info[map.y][map.x].visible--;
+		}
 		if (data->map.data[map.y][map.x] == MAP_TYPE_WALL || \
 			data->map.data[map.y][map.x] == MAP_TYPE_WALL_SPRITE)
 			color_rect(data, pix_pos, return_color(data, 0));
@@ -80,7 +87,8 @@ void	render_time(t_data *data)
 	u_int64_t	time;
 
 	time = get_time() - data->start.start_time;
-	sprintf(temp, "%llu.%llus", time / 1000, time % 1000);
-	mlx_set_font(data->mlx, data->window, "lucidasanstypewriter-bold-24");
+	sprintf(temp, "%lu.%lus", time / 1000, time % 1000);
+	// mlx_set_font(data->mlx, data->window, "lucidasanstypewriter-bold-24");
+	
 	mlx_string_put(data->mlx, data->window, 50, 50, 0xFFFFFF, temp);
 }

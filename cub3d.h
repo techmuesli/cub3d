@@ -6,7 +6,7 @@
 /*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:07 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/16 16:47:40 by alkane           ###   ########.fr       */
+/*   Updated: 2022/07/07 16:38:03 by alkane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # include "libft/libft.h"
 # include "libft/vector.h"
 
-# define SCREEN_WIDTH 960
-# define SCREEN_HEIGHT 640
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 
 # define TEX_WIDTH 256
 # define TEX_HEIGHT 256
