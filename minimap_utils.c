@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:48:23 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/07/07 16:54:28 by alkane           ###   ########.fr       */
+/*   Updated: 2022/07/07 17:53:57 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,11 @@ void	render_time(t_data *data)
 	u_int64_t	time;
 
 	time = get_time() - data->start.start_time;
+#ifdef __linux__
 	sprintf(temp, "%lu.%lus", time / 1000, time % 1000);
-	// mlx_set_font(data->mlx, data->window, "lucidasanstypewriter-bold-24");
-	
+#elif __APPLE__
+	sprintf(temp, "%llu.%llus", time / 1000, time % 1000);
+	mlx_set_font(data->mlx, data->window, "lucidasanstypewriter-bold-24");
+#endif
 	mlx_string_put(data->mlx, data->window, 50, 50, 0xFFFFFF, temp);
 }

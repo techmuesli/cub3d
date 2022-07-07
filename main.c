@@ -6,7 +6,7 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:48:13 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 13:48:15 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/07/07 17:59:45 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ int	main(int argc, char *argv[])
 	}
 	mlx_loop(data->mlx);
 	cub3d_cleanup(&data);
-	return (0);
+	exit(0);
 }
