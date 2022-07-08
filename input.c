@@ -6,7 +6,7 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:53 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 13:47:53 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/07/08 13:58:50 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,30 @@
 static int	process_file_content(t_data *data, int fd);
 static int	open_input_file(char *filename);
 
-int	read_input_file(t_data *data, char *filename)
+int	read_input_file(t_data *data, int level)
 {
+	char	*map;
 	int		fd;
 
-	fd = open_input_file(filename);
-	if (fd < 0)
+	map = create_map_file(level);
+	if (map == NULL)
 		return (-1);
+	fd = open_input_file(map);
+	if (fd < 0)
+	{
+		free(map);
+		return (-1);
+	}
 	if (process_file_content(data, fd) != 0)
 	{
 		close(fd);
+		remove(map);
+		free(map);
 		return (-1);
 	}
 	close(fd);
+	remove(map);
+	free(map);
 	if (check_input(data) != 0)
 		return (-1);
 	return (0);
@@ -37,8 +48,8 @@ static int	open_input_file(char *filename)
 {
 	int	fd;
 
-	if (ft_strrcmp(filename, ".cub") != 0)
-		return (-1);
+	// if (ft_strrcmp(filename, ".cub") != 0) !!!!!
+	// 	return (-1);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (-1);

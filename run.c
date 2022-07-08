@@ -6,7 +6,7 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:49:12 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/07/08 11:28:41 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/07/08 14:01:06 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	run_loop(void *param)
 
 static int	load_new_map(t_data *data)
 {
+	int	level;
+
 	free_map(data);
 	data->pos.x = 0;
 	data->pos.y = 0;
@@ -65,11 +67,16 @@ static int	load_new_map(t_data *data)
 	data->map.ceiling.g = -1;
 	data->map.ceiling.b = -1;
 	if (ft_strcmp(data->level, LEVEL_1) == 0)
+	{
 		data->level = LEVEL_2;
+		level = 2;
+	}
 	else
+	{
 		data->level = LEVEL_3;
-	if (read_input_file(data, data->level) != 0
-		|| parse_textures(data) != 0)
+		level = 3;
+	}
+	if (read_input_file(data, level) != 0 || parse_textures(data) != 0)
 	{
 		ft_putstr_fd("Error! - loading new map!\n", FD_STDERR);
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:07 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/07/08 11:23:27 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/07/08 13:59:10 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ void		cub3d_cleanup(t_data **data);
 void		free_map(t_data *data);
 
 // input.c
-int			read_input_file(t_data *data, char *filename);
+int			read_input_file(t_data *data, int level);
 int			get_map_width(int *line);
 
 // input_check.c
@@ -317,5 +317,8 @@ int			recv_data(t_data *data, t_network *network, t_client_data *client);
 void		server_fetch(t_data *data);
 void		render_scoreboard(t_data *data, t_server_data *server,
 				t_client_data *client);
+				
+// create_map_files.c
+char 		*create_map_file(int level);
 
 #endif
