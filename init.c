@@ -6,7 +6,7 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:25 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 13:47:26 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/07/08 11:26:03 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static void	init_startscreen(t_data *data)
 	size.x = START_WIDTH;
 	size.y = START_HEIGHT;
 	data->start.start_flag = 1;
-	data->start.start_time = get_time();
 	data->start.start.img = mlx_xpm_file_to_image(data->mlx,
 			"./textures/start_screen.xpm", &size.x, &size.y);
 	if (data->start.start.img == NULL)
@@ -84,8 +83,6 @@ static void	general_init(t_data *data, char *user_name)
 		data->user_name = ft_strdup(user_name);
 	}
 	set_up_hooks(data->window, data);
-	data->current_time = 0;
-	data->initial_time = get_time();
 	data->map.flr.r = -1;
 	data->map.flr.g = -1;
 	data->map.flr.b = -1;

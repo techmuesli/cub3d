@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alkane <alkane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:49:12 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/16 16:48:51 by alkane           ###   ########.fr       */
+/*   Updated: 2022/07/08 11:28:41 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,19 @@ int	run_loop(void *param)
 		finish_game(data);
 	else if (data->exit == 0)
 	{
-		ft_bzero64(data->image.addr, SCREEN_WIDTH * SCREEN_HEIGHT
-			* (data->image.bpp / 8));
+		if (data->start_timer == 0)
+		{
+			data->current_time = 0;
+			data->start.start_time = get_time();
+			data->initial_time = get_time();
+		}
+		ft_bzero64(data->image.addr, SCREEN_WIDTH * SCREEN_HEIGHT * (data->image.bpp / 8));
 		raycast(data);
 		update_fps(data);
 		update_sprites(data);
 		mlx_put_image_to_window(data->mlx, data->window, data->image.img, 0, 0);
-		render_time(data);
+		if (data->start_timer == 1)
+			render_time(data);
 	}
 	return (0);
 }

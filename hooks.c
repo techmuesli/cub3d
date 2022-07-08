@@ -6,7 +6,7 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:17 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 13:47:19 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/07/08 11:23:36 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	key_cb(int keycode, void *param)
 	t_data	*data;
 
 	data = param;
+	data->start_timer = 1;
 	if (keycode == 65307)
 		end_loop(param);
 	else if (keycode == 65361)

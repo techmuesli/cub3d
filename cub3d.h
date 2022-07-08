@@ -6,7 +6,7 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:07 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/07/07 18:23:06 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/07/08 11:23:27 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,7 @@ typedef struct s_data
 	int			new_level;
 	int			exit;
 	int			frames;
+	int			start_timer;
 }				t_data;
 
 // init.c
