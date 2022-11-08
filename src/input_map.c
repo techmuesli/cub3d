@@ -6,11 +6,11 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:46 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 13:47:47 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:04:06 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 static void	trim_line_end(char *line);
 static int	*process_map_info(char *line, int *width);

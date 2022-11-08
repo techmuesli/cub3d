@@ -6,11 +6,11 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:25 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/07/08 11:26:03 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:03:55 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 static int	init_image(t_data *data, int width, int height);
 static void	general_init(t_data *data, char *user_name);

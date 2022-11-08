@@ -6,11 +6,11 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:49:28 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 13:49:30 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:04:41 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 static int	load_wall_textures(t_data *data, int width, int height);
 static int	load_torch_sprites(t_data *data, int width, int height);

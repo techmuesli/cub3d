@@ -6,11 +6,11 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:49:35 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 13:49:36 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:04:44 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 void	free_c_vector(char **vector)
 {

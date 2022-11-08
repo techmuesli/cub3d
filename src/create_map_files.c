@@ -2,7 +2,7 @@
 // create_map_files.c
 //
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 const char	*level1 = "NO ./textures/xpms/red_bricks.xpm\n\
 SO ./textures/xpms/red_bricks.xpm\n\

@@ -6,11 +6,11 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:48:13 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/07/08 14:20:55 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:01:07 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "include/cub3d.h"
 
 int	main(int argc, char *argv[])
 {

@@ -6,11 +6,11 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:53 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/07/08 13:58:50 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:04:09 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 static int	process_file_content(t_data *data, int fd);
 static int	open_input_file(char *filename);

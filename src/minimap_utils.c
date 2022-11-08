@@ -6,11 +6,11 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:48:23 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/07/07 17:53:57 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:04:15 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 static void	color_rect(t_data *data, t_vec_i pix_pos, int color)
 {

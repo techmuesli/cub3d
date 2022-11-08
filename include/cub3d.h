@@ -6,7 +6,7 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:07 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/07/08 13:59:10 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:05:16 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <sys/time.h>
 # include <stdint.h>
 # include <stdio.h>
-// !!!!! check for printfs -> change to ft_printf
 
 # include <sys/types.h>
 # include <sys/socket.h>
@@ -27,9 +26,9 @@
 # include <netdb.h>
 # include <arpa/inet.h>
 
-# include "minilibx/mlx.h"
-# include "libft/libft.h"
-# include "libft/vector.h"
+# include "../minilibx/mlx.h"
+# include "../libft/libft.h"
+# include "../libft/vector.h"
 
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080

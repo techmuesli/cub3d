@@ -6,11 +6,11 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:49:07 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/07/07 17:54:34 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:04:32 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 static void	insert_total_games(t_data *data, t_server_data *server, int y_pos)
 {

@@ -6,11 +6,11 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:47:17 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/07/08 11:23:36 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:03:53 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 static int	key_cb(int keycode, void *param);
 int			mouse_cb(int x, int y, t_data *data);

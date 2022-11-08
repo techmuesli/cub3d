@@ -6,11 +6,11 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:49:21 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 13:49:24 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:04:37 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 void	render_startscreen(t_data *data)
 {

@@ -6,11 +6,11 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:49:12 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/07/08 14:01:06 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:04:34 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 static int	load_new_map(t_data *data);
 static void	change_sprite_frames(t_data *data, int x, int y);

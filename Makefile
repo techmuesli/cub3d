@@ -1,7 +1,8 @@
 NAME := cub3D
-SRCFILES := main.c init.c cleanup.c run.c hooks.c input.c utils.c raycast.c keys.c \
-input_check.c input_info.c input_map.c textures.c minimap.c raycast_utils.c \
-minimap_utils.c startscreen.c network.c result.c create_map_files.c
+SRCFILES := main.c src/init.c src/cleanup.c src/run.c src/hooks.c src/input.c \
+src/utils.c src/raycast.c src/keys.c src/input_check.c src/input_info.c src/input_map.c \
+src/textures.c src/minimap.c src/raycast_utils.c src/minimap_utils.c src/startscreen.c \
+src/network.c src/result.c src/create_map_files.c
 
 CC ?= cc
 LD ?= cc

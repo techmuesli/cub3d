@@ -6,11 +6,11 @@
 /*   By: dbrandtn <dbrandtn@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:48:38 by dbrandtn          #+#    #+#             */
-/*   Updated: 2022/06/09 13:48:40 by dbrandtn         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:04:21 by dbrandtn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 static int	dns_look_up(t_network *network, char *domain_name);
 
